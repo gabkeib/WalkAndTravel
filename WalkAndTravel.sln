@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WalkAndTravel", "WalkAndTravel\WalkAndTravel.csproj", "{6935D925-D460-4887-8A8A-54B33EB9275A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WalkAndTravel", "WalkAndTravel\WalkAndTravel.csproj", "{F5493815-C274-4708-8458-695E7652CAC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6935D925-D460-4887-8A8A-54B33EB9275A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6935D925-D460-4887-8A8A-54B33EB9275A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6935D925-D460-4887-8A8A-54B33EB9275A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6935D925-D460-4887-8A8A-54B33EB9275A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5493815-C274-4708-8458-695E7652CAC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5493815-C274-4708-8458-695E7652CAC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5493815-C274-4708-8458-695E7652CAC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5493815-C274-4708-8458-695E7652CAC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {943495A9-9856-4E1A-B89A-A3314DFA2BAF}
+		SolutionGuid = {702BC179-DFF5-4DAA-A1EC-89B10299F810}
 	EndGlobalSection
 EndGlobal
