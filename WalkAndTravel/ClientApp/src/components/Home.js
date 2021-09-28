@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Home.css';
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import RoutingMachine from "./RoutingMachine";
 
 export class Home extends Component {
   static displayName = Home.name;
@@ -27,7 +28,7 @@ export class Home extends Component {
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-
+                <RoutingMachine/>
             </MapContainer>
         </div>
     );
