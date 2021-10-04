@@ -9,26 +9,18 @@ namespace WalkAndTravel.ClassLibrary
     {
         private double length;
 
-        private List<Marker> markers = new();
+        private List<Marker> markers;
 
-        public void SetLength(double length)
+        public double Length
         {
-            this.length = length;
+            get { return length; }
+            set { length = value; }
         }
 
-        public double GetLength()
+        public List<Marker> Markers
         {
-            return this.length;
-        }
-
-        public void SetMarkers(List<Marker> markers)
-        {
-            this.markers = markers;
-        }
-
-        public List<Marker> GetMarkers()
-        {
-            return this.markers;
+            get { return markers; }
+            set { markers = value; }
         }
 
         public void AddMarker(Marker marker)

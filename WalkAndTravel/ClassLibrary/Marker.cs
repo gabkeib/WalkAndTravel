@@ -15,24 +15,17 @@ namespace WalkAndTravel.ClassLibrary
             this.lat = lat; this.lng = lng;
         }
 
-        public void SetLatitude(double lat)
+        public double Latitude
         {
-            this.lat = lat;
+            get { return lat; }
+            set { lat = value; }
         }
 
-        public double GetLatitude()
+        public double Longitude
         {
-            return this.lat;
+            get { return lng; }
+            set { lng = value; }
         }
 
-        public void SetLongitude(double lng)
-        {
-            this.lng = lng;
-        }
-
-        public double GetLongitude()
-        {
-            return this.lng;
-        }
     }
 }

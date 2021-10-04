@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace WalkAndTravel.ClassLibrary
 {
+
     public class Levels
     {
         private int experience;
@@ -16,45 +17,37 @@ namespace WalkAndTravel.ClassLibrary
             level = 1;
         }
 
-        public int GetExperience()
+        public int Experience
         {
-            return this.experience;
+            get { return experience; }
+            set { experience = value; }
         }
 
-        public void SetExperience(int experience)
+        public int Level
         {
-            this.experience = experience;
-        }
-
-        public int GetLevel()
-        {
-            return this.level;
-        }
-
-        public void GetLevel(int level)
-        {
-            this.level = level;
+            get { return level; }
+            set { level = value; }
         }
 
         public void AddExperience(int exp)
         {
-            this.experience += exp;
+            experience += exp;
         }
 
         public void LevelUp()
         {
-            this.level += 1;
-            this.experience = 0;
+            level += 1;
+            experience = 0;
         }
 
-        public void CompleteTrail()
+        public void CompleteTrail(int exp)
         {
-            this.experience += 50;
+            experience += exp;
         }
 
-        public void CreateTrail()
+        public void CreateTrail(int exp)
         {
-            this.experience += 30;
+            experience += exp;
         }
     }
 }
