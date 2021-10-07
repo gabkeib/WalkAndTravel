@@ -1,14 +1,13 @@
 ﻿import L from "leaflet"
 import { createControlComponent } from "@react-leaflet/core";
 import "leaflet-routing-machine";
+import 'leaflet-routing-machine/dist/leaflet-routing-machine.css'
 import "leaflet-control-geocoder";
 
 const createRoutingMachineLayer = (props) => {
+    const { waypoints } = props;
     const instance = L.Routing.control({
-        waypoints: [
-            L.latLng(54.6866, 25.2865),
-            L.latLng(54.6902, 25.2764)
-        ],
+        waypoints,
         lineOptions: {
             styles: [{ color: "#6FA1EC", weight: 4 }]
         },
