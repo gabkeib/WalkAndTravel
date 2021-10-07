@@ -7,6 +7,7 @@ namespace WalkAndTravel.ClassLibrary
 {
     public class Marker
     {
+
         private double lat;
         private double lng;
 
