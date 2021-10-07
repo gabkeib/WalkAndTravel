@@ -8,6 +8,7 @@ namespace WalkAndTravel.ClassLibrary
     public class Route
     {
         private double length;
+        private string name;
 
         private List<Marker> markers;
 
@@ -21,6 +22,12 @@ namespace WalkAndTravel.ClassLibrary
         {
             get { return markers; }
             set { markers = value; }
+        }
+
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
         }
 
         public void AddMarker(Marker marker)
