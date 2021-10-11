@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Map from "./Map";
-import SideBar from './Sidebar';
+import SideBar from './sidebar/Sidebar';
 
 import './Home.css';
 

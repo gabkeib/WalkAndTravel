@@ -9,7 +9,7 @@ import './Sidebar.css';
 
 export default props => {
     return (
-        <Menu right width={450}>
+        <Menu noOverlay right width={450}>
             <Form.Control size="lg" type="text" placeholder="Search trail by street name" />
             
             <div className="mb-2">
@@ -34,7 +34,7 @@ export default props => {
                         as={ButtonGroup}
                         key={idx}
                         id={`dropdown-button-drop-${idx}`}
-                        title="Include sites worth visitting?"
+                        title="Include sites worth visiting?"
                     >
                         <Dropdown.Item eventKey="1">Yes</Dropdown.Item>
                         <Dropdown.Item eventKey="2">No</Dropdown.Item>
