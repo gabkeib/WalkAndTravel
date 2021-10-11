@@ -5,7 +5,6 @@ import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
 import "leaflet-geosearch/dist/geosearch.css";
 import "leaflet-contextmenu";
 import "leaflet-contextmenu/dist/leaflet.contextmenu.css";
-import { LatLng, point } from "leaflet";
 
 function SearchField() {
 

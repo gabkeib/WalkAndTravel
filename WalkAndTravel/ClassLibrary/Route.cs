@@ -7,10 +7,18 @@ namespace WalkAndTravel.ClassLibrary
 {
     public class Route
     {
+        private string _name;
+
         private double length;
         private string name;
 
         private List<Marker> markers;
+
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; }
+        }
 
         public double Length
         {
