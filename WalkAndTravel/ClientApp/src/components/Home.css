@@ -13,6 +13,12 @@
     height: 90vh;
 }
 
+.ListItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 html,
 body {
     margin: 0;
