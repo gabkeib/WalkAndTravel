@@ -9,21 +9,35 @@ namespace WalkAndTravel.ClassLibrary
 {
     public class RoutesIO
     {
-        public void WriteRouteToFile(List<Route> routes, string path)
-        {
-            string Json = JsonConvert.SerializeObject(routes);
 
-            File.WriteAllText(path, Json);
+        /*
+         * Writes a list of routes to json file
+         */
+
+        public static void WriteRoutesToFile(List<Route> routes, string path)
+        {
+            using (var streamWriter = new StreamWriter(path))
+            {
+                var json = JsonConvert.SerializeObject(routes);
+                streamWriter.Write(json);
+            }
         }
 
-        public List<Route> ReadRoutesFromFile(string path)
+        /*
+         * Reads from a json file and returns routes list 
+         */
+
+        public static List<Route> ReadRoutesFromFile(string path)
         {
             List<Route> Routes = new();
 
             if (File.Exists(path))
             {
-                var route = File.ReadAllText(path);
-                Routes = JsonConvert.DeserializeObject<List<Route>>(route);
+                using (var streamReader = new StreamReader(path))
+                {
+                    var json = streamReader.ReadToEnd();
+                    Routes = JsonConvert.DeserializeObject<List<Route>>(json);
+                }
             }
 
             return Routes;
