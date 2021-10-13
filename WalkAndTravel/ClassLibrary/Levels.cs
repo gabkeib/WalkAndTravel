@@ -8,46 +8,46 @@ namespace WalkAndTravel.ClassLibrary
 
     public class Levels
     {
-        private int experience;
-        private int level;
+        private int _experience;
+        private int _level;
 
         public Levels()
         {
-            experience = 0;
-            level = 1;
+            _experience = 0;
+            _level = 1;
         }
 
         public int Experience
         {
-            get { return experience; }
-            set { experience = value; }
+            get { return _experience; }
+            set { _experience = value; }
         }
 
         public int Level
         {
-            get { return level; }
-            set { level = value; }
+            get { return _level; }
+            set { _level = value; }
         }
 
         public void AddExperience(int exp)
         {
-            experience += exp;
+            _experience += exp;
         }
 
         public void LevelUp()
         {
-            level += 1;
-            experience = 0;
+            _level += 1;
+            _experience = 0;
         }
 
         public void CompleteTrail(int exp)
         {
-            experience += exp;
+            _experience += exp;
         }
 
         public void CreateTrail(int exp)
         {
-            experience += exp;
+            _experience += exp;
         }
     }
 }

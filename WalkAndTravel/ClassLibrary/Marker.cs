@@ -8,24 +8,24 @@ namespace WalkAndTravel.ClassLibrary
     public class Marker
     {
 
-        private double lat;
-        private double lng;
+        private double _lat;
+        private double _lng;
 
         public Marker(double lat, double lng)
         {
-            this.lat = lat; this.lng = lng;
+            _lat = lat; _lng = lng;
         }
 
         public double Latitude
         {
-            get { return lat; }
-            set { lat = value; }
+            get { return _lat; }
+            set { _lat = value; }
         }
 
         public double Longitude
         {
-            get { return lng; }
-            set { lng = value; }
+            get { return _lng; }
+            set { _lng = value; }
         }
 
     }
