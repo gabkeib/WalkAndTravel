@@ -22,6 +22,11 @@ namespace WalkAndTravel.Controllers
             return list;
         }
 
+        public List<double[]> generateRouteCoordinates()
+        {
+            return Route.markersListToArray(generateRoute()); 
+        }
+
 
         [HttpGet]
         public IEnumerable<Route> Get()
@@ -31,6 +36,7 @@ namespace WalkAndTravel.Controllers
             {
                 Name = "Route" + index,
                 Markers = generateRoute(),
+                Coordinates = generateRouteCoordinates(),
                 Length = (rng.Next(1, 5) + rng.NextDouble())
             }
             ).ToArray();

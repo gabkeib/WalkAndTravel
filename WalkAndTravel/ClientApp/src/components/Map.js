@@ -47,13 +47,23 @@ const points2 = [
 ];
 
 const Map = (props) => {
+    const [prevRoute, setPrevRoute] = useState(null);
+    const { waypoints } = props;
+    useEffect(() => {
+        if (prevRoute !== waypoints) {
+            setPoints(waypoints);
+            setPrevRoute(waypoints);
+        }
+    },[prevRoute, waypoints])
+
     const rMachine = useRef();
-    const [points, setPoints] = useState(points1);
-    
+    const [points, setPoints] = useState(waypoints);
+
     useEffect(() => {
         if (rMachine.current) {
             rMachine.current.setWaypoints(points);
         }
+        props.handleClick(points);
     }, [points, rMachine]);
 
     function addWaypoint(e) {
@@ -93,6 +103,10 @@ const Map = (props) => {
         let waypoints = rMachine.current.getWaypoints();
         setPoints([...waypoints, latlng])
     };
+
+    const changeRoute = (route) => {
+        setPoints(prevv => route);
+    }
 
     return (
         <MapContainer className="map"

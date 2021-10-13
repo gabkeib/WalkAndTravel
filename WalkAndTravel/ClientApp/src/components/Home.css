@@ -37,9 +37,9 @@ body {
     transition: color 0.2s;
 }
 
-.bm-item:hover {
-    color: white;
-}
+/*.bm-item:hover {
+    color: black;
+}*/
 
 .bm-burger-button {
     position: relative;
@@ -79,7 +79,5 @@ body {
     color: #b8b7ad;
 }
 
-.bm-overlay {
-    background: rgba(0, 0, 0, 0.3);
-}
+
 

@@ -2,6 +2,7 @@ import React, { Component, memo, PureComponent } from 'react';
 import Map from "./Map";
 import Sidebar from './sidebar/Sidebar';
 import { FixedSizeList as ReactList, areEqual } from 'react-window';
+import memoize from 'memoize-one';
 
 import './Home.css';
 
@@ -17,20 +18,54 @@ import './Home.css';
         )
 };*/
 
+const points1 = [
+    [54.6866, 25.2880],
+    [54.6902, 25.2764]
+];
+
+
 class ItemRenderer extends PureComponent {
     render() {
         const item = this.props.data[this.props.index];
         console.log(this.props.data);
         return (
-            <div className={'ListItem'} style={this.props.style} onClick={() => passRoute(item)}>
+            <div className={'ListItem'} style={this.props.style} onClick={() => Home.passRoute(item)}>
                 {item.name} {this.props.index}
             </div>
         );
     }
 }
 
-function passRoute(route) {
-    alert(route.name);
+const Row = memo(({ data, index, style }) => {
+    const { items, toggleSelectedRoute } = data;
+    const item = items[index];
+
+    return (
+        <div onClick={() => toggleSelectedRoute(index)} style = { style }>
+            {item.name} {index}
+        </div>
+    );
+}, areEqual);
+
+const createItemData = memoize((items, toggleSelectedRoute) => ({
+    items,
+    toggleSelectedRoute,
+}));
+
+function CreateList({ items, toggleSelectedRoute }) {
+    const itemData = createItemData(items, toggleSelectedRoute);
+    return (
+        <ReactList
+            className="RList"
+            height={150}
+            itemCount={items.length}
+            itemData={itemData}
+            itemSize={35}
+            width={300}
+        >
+            {Row}
+        </ReactList>
+    )
 }
 
 
@@ -39,13 +74,32 @@ export class Home extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { routes: [], loading: true };
+        this.state = { routes: [], currentRoute: points1, loading: true };
+        this.passRoute = this.passRoute.bind(this);
     }
 
     componentDidMount() {
         this.populateRouteData();
     }
-   
+
+    passRoute(route) {
+        alert(route.name);
+        
+    }
+
+    handleClick = (route) => {
+        this.setState({ currentRoute: route});
+    }
+
+    toggleSelectedRoute = index =>
+        this.setState(prevState => {
+            const item = prevState.routes[index];
+            const routess = prevState.routes;
+            const loads = prevState.loading
+            const currentRouteNew = item.coordinates;
+            console.log(currentRouteNew);
+            return { routes: routess, currentRoute:currentRouteNew, loading:loads };
+        });
 
     static renderRoutesTable(routes) {
         return (
@@ -88,13 +142,13 @@ export class Home extends Component {
     render() {
         let contents = this.state.loading
         ? <p><em>Loading...</em></p>
-        : Home.renderList(this.state.routes);
+            : <Sidebar handleClick={this.handleClick} data={this.state.routes} selectedRoute={[]} />
 
         return (
             <div id = "Home">
                 {contents}
-                <Sidebar />
-                <Map /> 
+                
+                <Map handleClick={this.handleClick} waypoints={this.state.currentRoute} />
             </div>
         );
     }
@@ -102,6 +156,6 @@ export class Home extends Component {
     async populateRouteData() {
         const response = await fetch('routelist');
         const data = await response.json();
-        this.setState({ routes: data, loading: false });
+        this.setState({ routes: data, currentRoute: points1, loading: false });
     }
 }

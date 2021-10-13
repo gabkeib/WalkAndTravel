@@ -14,6 +14,8 @@ namespace WalkAndTravel.ClassLibrary
 
         private List<Marker> markers;
 
+        private List<double[]> coordinates;
+
         public string Name
         {
             get { return _name; }
@@ -32,15 +34,38 @@ namespace WalkAndTravel.ClassLibrary
             set { markers = value; }
         }
 
-        public string Name
+        public List<double[]> Coordinates
         {
-            get { return name; }
-            set { name = value; }
+            get { return coordinates; }
+            set { coordinates = value; }
         }
 
         public void AddMarker(Marker marker)
         {
             markers.Add(marker);
+            AddCoordinate(marker);
+        }
+
+        public void AddCoordinate(Marker marker)
+        {
+            double lat = marker.Latitude;
+            double lng = marker.Longitude;
+            double[] coord = new double[] { lat, lng };
+            coordinates.Add(coord);
+        }
+
+
+        public static List<double[]> markersListToArray(List<Marker> list)
+        {
+            var newList = new List<double[]>();
+            foreach (var marker in list)
+            {
+                double lat = marker.Latitude;
+                double lng = marker.Longitude;
+                double[] coord = new double[] { lat, lng };
+                newList.Add(coord);
+            }
+            return newList;
         }
     }
 }
