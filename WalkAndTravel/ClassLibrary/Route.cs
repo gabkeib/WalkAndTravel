@@ -15,6 +15,8 @@ namespace WalkAndTravel.ClassLibrary
 
         private List<double[]> _coordinates;
 
+        private LengthType _type;
+
         public string Name
         {
             get { return _name; }
@@ -39,6 +41,12 @@ namespace WalkAndTravel.ClassLibrary
             set { _coordinates = value; }
         }
 
+        public LengthType Type
+        {
+            get { return _type; }
+            set { _type = value; }
+        }
+
         public void AddMarker(Marker marker)
         {
             _markers.Add(marker);
@@ -54,7 +62,7 @@ namespace WalkAndTravel.ClassLibrary
         }
 
 
-        public static List<double[]> markersListToArray(List<Marker> list)
+        public static List<double[]> MarkersListToArray(List<Marker> list)
         {
             var newList = new List<double[]>();
             foreach (var marker in list)
@@ -65,6 +73,26 @@ namespace WalkAndTravel.ClassLibrary
                 newList.Add(coord);
             }
             return newList;
+        }
+
+        public LengthType PickLengthType()
+        {
+            if(_length <= 0.5)
+            {
+                return LengthType.Short;
+            }
+            else if(_length < 1.3)
+            {
+                return LengthType.Medium;
+            }
+            else if(_length < 3)
+            {
+                return LengthType.Long;
+            }
+            else
+            {
+                return LengthType.VeryLong;
+            }
         }
     }
 }
