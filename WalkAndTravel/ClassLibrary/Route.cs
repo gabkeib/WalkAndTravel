@@ -9,11 +9,11 @@ namespace WalkAndTravel.ClassLibrary
     {
         private string _name;
 
-        private double length;
+        private double _length;
 
-        private List<Marker> markers;
+        private List<Marker> _markers;
 
-        private List<double[]> coordinates;
+        private List<double[]> _coordinates;
 
         public string Name
         {
@@ -23,25 +23,25 @@ namespace WalkAndTravel.ClassLibrary
 
         public double Length
         {
-            get { return length; }
-            set { length = value; }
+            get { return _length; }
+            set { _length = value; }
         }
 
         public List<Marker> Markers
         {
-            get { return markers; }
-            set { markers = value; }
+            get { return _markers; }
+            set { _markers = value; }
         }
 
         public List<double[]> Coordinates
         {
-            get { return coordinates; }
-            set { coordinates = value; }
+            get { return _coordinates; }
+            set { _coordinates = value; }
         }
 
         public void AddMarker(Marker marker)
         {
-            markers.Add(marker);
+            _markers.Add(marker);
             AddCoordinate(marker);
         }
 
@@ -50,7 +50,7 @@ namespace WalkAndTravel.ClassLibrary
             double lat = marker.Latitude;
             double lng = marker.Longitude;
             double[] coord = new double[] { lat, lng };
-            coordinates.Add(coord);
+            _coordinates.Add(coord);
         }
 
 
