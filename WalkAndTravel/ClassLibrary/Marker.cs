@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WalkAndTravel.ClassLibrary
 {
-    public class Marker
+    public struct Marker
     {
 
         private double _lat;
