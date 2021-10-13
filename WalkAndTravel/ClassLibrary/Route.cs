@@ -10,7 +10,6 @@ namespace WalkAndTravel.ClassLibrary
         private string _name;
 
         private double length;
-        private string name;
 
         private List<Marker> markers;
 
