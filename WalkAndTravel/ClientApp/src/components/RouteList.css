@@ -1,0 +1,7 @@
+﻿.ListItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F8F8F7;
+    color: black;
+}

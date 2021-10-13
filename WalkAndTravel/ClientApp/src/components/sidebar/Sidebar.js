@@ -1,13 +1,33 @@
-﻿import React from 'react';
+﻿import React, { useState } from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import { Button } from 'react-bootstrap';
 import { Form } from 'react-bootstrap';
 import { Dropdown } from 'react-bootstrap';
 import { DropdownButton } from 'react-bootstrap';
 import { ButtonGroup } from 'react-bootstrap';
+import  RouteList from '../RouteList';
 import './Sidebar.css';
+import { useEffect } from 'react';
 
-export default props => {
+ const Sidebar = (props) => {
+     const routeData = props.data;
+     const [prevRoute, setPrevRoute] = useState(null);
+     const [currRoute, setCurrentRoute] = useState(null);
+     useEffect(() => {
+         if (currRoute !== prevRoute) {
+             newRoute();
+             setPrevRoute(currRoute);
+         }
+     }, [currRoute, prevRoute])
+
+     const sendRoute = (route) => {
+         setCurrentRoute(prev => route);
+     }
+
+     const newRoute = () => {
+         props.handleClick(currRoute);
+     }
+
     return (
         <Menu noOverlay right width={450}>
             <Form.Control size="lg" type="text" placeholder="Search trail by street name" />
@@ -49,11 +69,19 @@ export default props => {
                 </Button>
             </div>
 
-            <div>
-                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
-                    <Button className="Button"> Link Button </Button>
-                </a>
+            <br>
+                </br>
+
+            <h2 className="RouteListName" style={{ color: 'black' }}>
+                Route List
+                </h2>
+
+            <div >
+                <RouteList className="RouteList" sendRoute={sendRoute} data={routeData} />
             </div>
+           
         </Menu>
     );
 };
+
+export default Sidebar;
