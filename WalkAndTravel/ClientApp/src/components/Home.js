@@ -48,3 +48,4 @@ export class Home extends Component {
         this.setState({ routes: data, currentRoute: points1, loading: false });
     }
 }
+export default Home;
