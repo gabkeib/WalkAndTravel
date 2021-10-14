@@ -1,6 +1,6 @@
 import React, { Component, memo, PureComponent } from 'react';
-import Map from "./Map";
-import Sidebar from './sidebar/Sidebar';
+import Map from "./map/Map";
+import Sidebar from './sidebarMenu/SidebarMenu';
 import { FixedSizeList as ReactList, areEqual } from 'react-window';
 import memoize from 'memoize-one';
 
