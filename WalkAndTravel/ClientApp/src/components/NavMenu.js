@@ -27,7 +27,7 @@ export class NavMenu extends Component {
         <header>
             <Navbar className="navbar-light navbar-expand-sm navbar-toggleable-sm">
             <Container>
-                <NavbarBrand tag={Link} size="40px" to="/">WalkAndTravel</NavbarBrand>
+                <NavbarBrand tag={Link} to="/">WalkAndTravel</NavbarBrand>
                 <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
                 <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
                     <ul className="navbar-nav flex-grow">
