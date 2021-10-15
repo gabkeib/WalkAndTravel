@@ -49,10 +49,5 @@ namespace WalkAndTravel.ClassLibrary
         {
             experience += exp;
         }
-
-        public double Widening(int exp)
-        {
-            return (double)exp;
-        }
     }
 }
