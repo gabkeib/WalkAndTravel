@@ -1,8 +1,6 @@
 import React, { Component, memo, PureComponent } from 'react';
 import Map from "./Map";
 import Sidebar from './sidebar/Sidebar';
-import { FixedSizeList as ReactList, areEqual } from 'react-window';
-import memoize from 'memoize-one';
 
 import './Home.css';
 
@@ -28,6 +26,10 @@ export class Home extends Component {
         this.setState({ currentRoute: route});
     }
 
+    handleGetRoute = (route) => {
+        console.log(route);
+    }
+
     render() {
         let contents = this.state.loading
         ? <p><em>Loading...</em></p>
@@ -36,8 +38,8 @@ export class Home extends Component {
         return (
             <div id = "Home">
                 {contents}
-                
-                <Map handleClick={this.handleClick} waypoints={this.state.currentRoute} />
+
+                <Map handleClick={this.handleClick} waypoints={this.state.currentRoute} handleGetRoute={this.handleGetRoute} />
             </div>
         );
     }

@@ -62,6 +62,7 @@ const Map = (props) => {
     useEffect(() => {
         if (rMachine.current) {
             rMachine.current.setWaypoints(points);
+            sendCurrentMarkers(rMachine.current.getWaypoints());
         }
         props.handleClick(points);
     }, [points, rMachine]);
@@ -76,6 +77,11 @@ const Map = (props) => {
 
     function changeEndingElement(e) {
         changeEndingPoint(e.latlng);
+    }
+
+    const sendCurrentMarkers = () => {
+        let waypoints = rMachine.current.getWaypoints();
+        props.handleGetRoute(waypoints);
     }
 
     const changeStartingPoint = (latlng) => {
