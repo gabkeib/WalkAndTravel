@@ -14,7 +14,7 @@ namespace WalkAndTravel.ClassLibrary
          * Writes a list of routes to json file
          */
 
-        public static void WriteRoutesToFile(List<Route> routes, string path)
+        public static void WriteRoutesToFile<T>(T routes, string path)
         {
             using (var streamWriter = new StreamWriter(path))
             {
@@ -27,16 +27,16 @@ namespace WalkAndTravel.ClassLibrary
          * Reads from a json file and returns routes list 
          */
 
-        public static List<Route> ReadRoutesFromFile(string path)
+        public static List<T> ReadRoutesFromFile<T>(string path)
         {
-            List<Route> Routes = new();
+            List<T> Routes = new();
 
             if (File.Exists(path))
             {
                 using (var streamReader = new StreamReader(path))
                 {
                     var json = streamReader.ReadToEnd();
-                    Routes = JsonConvert.DeserializeObject<List<Route>>(json);
+                    Routes = JsonConvert.DeserializeObject<List<T>>(json);
                 }
             }
 
