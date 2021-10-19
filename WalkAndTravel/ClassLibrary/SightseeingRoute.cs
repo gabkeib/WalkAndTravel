@@ -22,5 +22,18 @@ namespace WalkAndTravel.ClassLibrary
             StartingPoint = startingPoint;
             DistanceFromStart = distanceFromPoint;
         }
+
+        public void GenerateRoute()
+        {
+            POIList poiList = new POIList();
+            poiList.SelectPOI(Amenity.Restaurant);
+            var markers = new List<Marker>();
+            markers.Add(StartingPoint);
+            for (int i = 0; i < 2; i++)
+            {
+                markers.Add(poiList[i].Marker);
+            }
+            markers.Add(StartingPoint);
+        }
     }
 }
