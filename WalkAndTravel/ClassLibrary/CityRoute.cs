@@ -7,7 +7,10 @@ namespace WalkAndTravel.ClassLibrary
 {
     public class CityRoute : Route
     {
-
+        public bool GetToStart
+        {
+            get; set;
+        }
         public int DistanceFromStart
         {
             get; set;
@@ -23,11 +26,12 @@ namespace WalkAndTravel.ClassLibrary
             get; set;
         }
 
-        public CityRoute(Marker startingPoint, int distanceFromPoint, int markersCount = 3)
+        public CityRoute(Marker startingPoint, int distanceFromPoint, int markersCount = 3, bool getToStart = true)
         {
             StartingPoint = startingPoint;
             DistanceFromStart = distanceFromPoint;
             MarkersCount = markersCount;
+            GetToStart = getToStart;
         }
 
         public void GenerateRoute()
@@ -41,6 +45,11 @@ namespace WalkAndTravel.ClassLibrary
             {
                 current = current.CalculateNextMarker(averageDistance, bearing);
                 markers.Add(current);
+                bearing = rnd.Next(30, 359) + rnd.NextDouble();
+            }
+            if (GetToStart)
+            {
+                markers.Add(StartingPoint);
             }
             Markers = markers;
         }
