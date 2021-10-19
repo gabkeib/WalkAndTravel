@@ -45,6 +45,7 @@ export class Home extends Component {
     async populateRouteData() {
         const response = await fetch('routelist');
         const data = await response.json();
+        console.log(data);
         this.setState({ routes: data, currentRoute: points1, loading: false });
     }
 }
