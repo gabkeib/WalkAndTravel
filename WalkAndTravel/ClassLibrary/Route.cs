@@ -23,7 +23,10 @@ namespace WalkAndTravel.ClassLibrary
         public string Name
         {
             get { return _name; }
-            set { _name = value; }
+            set { 
+                if (NameValidator.isValid(value))
+                    _name = value;
+            }
         }
 
         public double Length
