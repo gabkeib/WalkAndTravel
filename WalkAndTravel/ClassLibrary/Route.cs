@@ -17,6 +17,10 @@ namespace WalkAndTravel.ClassLibrary
 
         private LengthType _type;
 
+        public Route()
+        {
+
+        }
         public Route( double length, List<Marker> markers, List<double[]> coords = null, string name = "None", LengthType type = LengthType.None)
         { _name = name; _length = length; _markers = markers; _coordinates = coords; _type = type; }
 

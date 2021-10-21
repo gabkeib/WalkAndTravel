@@ -33,7 +33,7 @@ namespace WalkAndTravel.Controllers
             var rng = new Random();
             var route = new SightseeingRoute(new Marker(54.6859564, 25.2861464), rng.Next(3, 10));
             route.GenerateRoute();
-            route.Coordinates = Route.markersListToArray(route.Markers);
+            route.Coordinates = Route.MarkersListToArray(route.Markers);
             return route;
         }
 
@@ -43,7 +43,7 @@ namespace WalkAndTravel.Controllers
             var rng = new Random();
             var route = new CityRoute(new Marker(54.6859564, 25.2861464), rng.Next(3,10));
             route.GenerateRoute();
-            route.Coordinates = Route.markersListToArray(route.Markers);
+            route.Coordinates = Route.MarkersListToArray(route.Markers);
             return route;
         }
 
@@ -52,13 +52,6 @@ namespace WalkAndTravel.Controllers
         public IEnumerable<Route> Get()
         {
             List<Route> routes = RoutesIO.ReadRoutesFromFile<Route>("Data/routes.json");
-            /*var routes1 = new List<Route>();
-            foreach(var route in routes)
-            {
-                route.Coordinates = Route.MarkersListToArray(route.Markers);
-                routes1.Add(route);
-            }*/
-
             routes.Sort();
             return routes.Select(route => route
             ).ToArray();
