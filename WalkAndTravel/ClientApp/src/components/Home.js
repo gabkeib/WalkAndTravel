@@ -26,6 +26,14 @@ export class Home extends Component {
         this.setState({ currentRoute: route});
     }
 
+    handleRandomRouteRequest = () => {
+        this.getRandomRoute();
+    }
+
+    handleRandomPOIRouteRequest = () => {
+        this.getRandomPOIRoute();
+    }
+
     handleGetRoute = (route) => {
         console.log(route);
     }
@@ -33,7 +41,7 @@ export class Home extends Component {
     render() {
         let contents = this.state.loading
         ? <p><em>Loading...</em></p>
-            : <Sidebar handleClick={this.handleClick} data={this.state.routes} selectedRoute={[]} />
+            : <Sidebar handleClick={this.handleClick} data={this.state.routes} handleRandomRouteRequest={this.handleRandomRouteRequest} handleRandomPOIRouteRequest={this.handleRandomPOIRouteRequest} selectedRoute={[]} />
 
         return (
             <div id = "Home">
@@ -49,6 +57,20 @@ export class Home extends Component {
         const data = await response.json();
         console.log(data);
         this.setState({ routes: data, currentRoute: points1, loading: false });
+    }
+
+    async getRandomRoute() {
+        const response = await fetch('routelist/GetRandomRoute');
+        const route = await response.json();
+        console.log(route);
+        this.setState({ currentRoute: route.coordinates });
+    }
+
+    async getRandomPOIRoute() {
+        const response = await fetch('routelist/GetRandomPOIRoute');
+        const route = await response.json();
+        console.log(route);
+        this.setState({ currentRoute: route.coordinates });
     }
 }
 export default Home;
