@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WalkAndTravel.ClassLibrary
 {
-    public class Route
+    public class Route : IComparable<Route>
     {
         private string _name;
 
@@ -16,6 +16,9 @@ namespace WalkAndTravel.ClassLibrary
         private List<double[]> _coordinates;
 
         private LengthType _type;
+
+        public Route( double length, List<Marker> markers, List<double[]> coords = null, string name = "None", LengthType type = LengthType.None)
+        { _name = name; _length = length; _markers = markers; _coordinates = coords; _type = type; }
 
         public string Name
         {
@@ -75,24 +78,45 @@ namespace WalkAndTravel.ClassLibrary
             return newList;
         }
 
-        public LengthType PickLengthType()
+        public void PickLengthType()
         {
             if(_length <= 0.5)
             {
-                return LengthType.Short;
+                _type = LengthType.Short;
             }
             else if(_length < 1.3)
             {
-                return LengthType.Medium;
+                _type = LengthType.Medium;
             }
             else if(_length < 3)
             {
-                return LengthType.Long;
+                _type = LengthType.Long;
             }
             else
             {
-                return LengthType.VeryLong;
+                _type = LengthType.VeryLong;
             }
+        }
+
+        public int CompareTo(Route other)
+        {
+            if (_type == other.Type)
+            {
+                if (_length == other.Length)
+                {
+                    return _name.CompareTo(other.Name);
+                }
+                else if(_length < other.Length)
+                {
+                    return -1;
+                }
+                else return 1;
+            }
+            else if(_type < other.Type)
+            {
+                return -1;
+            }
+            else return 1;
         }
     }
 }
