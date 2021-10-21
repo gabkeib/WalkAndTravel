@@ -16,29 +16,31 @@ namespace WalkAndTravel.Controllers
         public List<Marker> generateRoute()
         {
             List<Marker> list = new();
-            list.Add(new Marker(54.6866, 25.2865));
-            list.Add(new Marker(54.6902, 25.2764));
+            list.Add(new Marker(lat: 54.6866, lng: 25.2865));
+            list.Add(new Marker(lat: 54.6902, lng: 25.2764));
 
             return list;
         }
 
         public List<double[]> generateRouteCoordinates()
         {
-            return Route.markersListToArray(generateRoute()); 
+            return Route.MarkersListToArray(generateRoute()); 
         }
 
 
         [HttpGet]
         public IEnumerable<Route> Get()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 3).Select(index => new Route
+            List<Route> routes = RoutesIO.ReadRoutesFromFile<Route>("Data/routes.json");
+            /*var routes1 = new List<Route>();
+            foreach(var route in routes)
             {
-                Name = "Route" + index,
-                Markers = generateRoute(),
-                Coordinates = generateRouteCoordinates(),
-                Length = (rng.Next(1, 5) + rng.NextDouble())
-            }
+                route.Coordinates = Route.MarkersListToArray(route.Markers);
+                routes1.Add(route);
+            }*/
+
+            routes.Sort();
+            return routes.Select(route => route
             ).ToArray();
         }
     }
