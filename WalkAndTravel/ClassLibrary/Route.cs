@@ -70,15 +70,22 @@ namespace WalkAndTravel.ClassLibrary
 
         public static List<double[]> MarkersListToArray(List<Marker> list)
         {
-            var newList = new List<double[]>();
-            foreach (var marker in list)
+            if (list.Count > 0)
             {
-                double lat = marker.Latitude;
-                double lng = marker.Longitude;
-                double[] coord = new double[] { lat, lng };
-                newList.Add(coord);
+                var newList = new List<double[]>();
+                foreach (var marker in list)
+                {
+                    double lat = marker.Latitude;
+                    double lng = marker.Longitude;
+                    double[] coord = new double[] { lat, lng };
+                    newList.Add(coord);
+                }
+                return newList;
             }
-            return newList;
+            else
+            {
+                return new List<double[]>();
+            }
         }
 
         public void PickLengthType()

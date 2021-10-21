@@ -25,8 +25,9 @@ namespace WalkAndTravel.ClassLibrary
 
         public void GenerateRoute()
         {
-            POIList poiList = new POIList();
-            poiList.SelectPOI(Amenity.Restaurant);
+            POISelector poiSelector = new POISelector();
+            POIList poiList = poiSelector.SelectPOI();
+            System.Diagnostics.Debug.WriteLine(poiList[1].Marker.Latitude);
             var markers = new List<Marker>();
             markers.Add(StartingPoint);
             for (int i = 0; i < 2; i++)
@@ -34,6 +35,7 @@ namespace WalkAndTravel.ClassLibrary
                 markers.Add(poiList[i].Marker);
             }
             markers.Add(StartingPoint);
+            Markers = markers;
         }
     }
 }

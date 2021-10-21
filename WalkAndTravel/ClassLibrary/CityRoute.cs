@@ -26,7 +26,7 @@ namespace WalkAndTravel.ClassLibrary
             get; set;
         }
 
-        public CityRoute(Marker startingPoint, int distanceFromPoint, int markersCount = 3, bool getToStart = true)
+        public CityRoute(Marker startingPoint, int distanceFromPoint, int markersCount = 4, bool getToStart = true)
         {
             StartingPoint = startingPoint;
             DistanceFromStart = distanceFromPoint;
