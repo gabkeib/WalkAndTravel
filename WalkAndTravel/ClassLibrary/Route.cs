@@ -17,13 +17,20 @@ namespace WalkAndTravel.ClassLibrary
 
         private LengthType _type;
 
+        public Route()
+        {
+
+        }
         public Route( double length, List<Marker> markers, List<double[]> coords = null, string name = "None", LengthType type = LengthType.None)
         { _name = name; _length = length; _markers = markers; _coordinates = coords; _type = type; }
 
         public string Name
         {
             get { return _name; }
-            set { _name = value; }
+            set { 
+                if (NameValidator.isValid(value))
+                    _name = value;
+            }
         }
 
         public double Length
@@ -67,15 +74,22 @@ namespace WalkAndTravel.ClassLibrary
 
         public static List<double[]> MarkersListToArray(List<Marker> list)
         {
-            var newList = new List<double[]>();
-            foreach (var marker in list)
+            if (list.Count > 0)
             {
-                double lat = marker.Latitude;
-                double lng = marker.Longitude;
-                double[] coord = new double[] { lat, lng };
-                newList.Add(coord);
+                var newList = new List<double[]>();
+                foreach (var marker in list)
+                {
+                    double lat = marker.Latitude;
+                    double lng = marker.Longitude;
+                    double[] coord = new double[] { lat, lng };
+                    newList.Add(coord);
+                }
+                return newList;
             }
-            return newList;
+            else
+            {
+                return new List<double[]>();
+            }
         }
 
         public void PickLengthType()
