@@ -8,7 +8,7 @@ namespace WalkAndTravel.ClassLibrary
 {
     public static class NameValidator
     {
-        public static Boolean isValid(string name)
+        public static bool isValid(string name)
         {
             Regex regex = new Regex(@"^[\s\w.#-]+$");
             return regex.IsMatch(name);

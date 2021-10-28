@@ -36,7 +36,7 @@ namespace WalkAndTravel.ClassLibrary
 
         public void GenerateRoute()
         {
-            var averageDistance = (double)DistanceFromStart / (double)MarkersCount;
+            var averageDistance = (double)DistanceFromStart / MarkersCount;
             var rnd = new Random();
             var bearing = rnd.Next(30, 359) + rnd.NextDouble();
             var current = StartingPoint;
