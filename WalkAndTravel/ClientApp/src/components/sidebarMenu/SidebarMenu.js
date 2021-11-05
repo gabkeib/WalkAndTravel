@@ -28,6 +28,14 @@ import { useEffect } from 'react';
          props.handleClick(currRoute);
      }
 
+     const randomRouteRequest = () => {
+         props.handleRandomRouteRequest();
+     }
+
+     const randomPOIRouteRequest = () => {
+         props.handleRandomPOIRouteRequest();
+     }
+
     return (
         <Menu noOverlay right width={450}>
             <Form.Control size="lg" type="text" placeholder="Search trail by street name" />
@@ -78,6 +86,21 @@ import { useEffect } from 'react';
 
             <div >
                 <RouteList className="RouteList" sendRoute={sendRoute} data={routeData} />
+            </div>
+
+            <br>
+            </br>
+
+            <div className="d-grid gap-2">
+                <Button className="VerticalBlock" onClick={randomRouteRequest} variant="primary" vertical block >
+                    Generate random route
+                </Button>
+            </div>
+
+            <div className="d-grid gap-2">
+                <Button className="VerticalBlock" onClick={randomPOIRouteRequest} variant="primary" vertical block >
+                    Generate random POI route
+                </Button>
             </div>
            
         </Menu>

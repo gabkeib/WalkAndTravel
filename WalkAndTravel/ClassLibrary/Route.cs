@@ -5,43 +5,61 @@ using System.Threading.Tasks;
 
 namespace WalkAndTravel.ClassLibrary
 {
-    public class Route
+    public class Route : IComparable<Route>
     {
         private string _name;
 
-        private double length;
+        private double _length;
 
-        private List<Marker> markers;
+        private List<Marker> _markers;
 
-        private List<double[]> coordinates;
+        private List<double[]> _coordinates;
+
+        private LengthType _type;
+
+        public Route()
+        {
+
+        }
+        public Route( double length, List<Marker> markers, List<double[]> coords = null, string name = "None", LengthType type = LengthType.None)
+        { _name = name; _length = length; _markers = markers; _coordinates = coords; _type = type; }
 
         public string Name
         {
             get { return _name; }
-            set { _name = value; }
+            set { 
+                if (NameValidator.isValid(value))
+                    _name = value;
+            }
         }
 
         public double Length
         {
-            get { return length; }
-            set { length = value; }
+            get { return _length; }
+            set { _length = value; }
         }
 
         public List<Marker> Markers
         {
-            get { return markers; }
-            set { markers = value; }
+            get { return _markers; }
+            set { _markers = value; }
         }
 
         public List<double[]> Coordinates
         {
-            get { return coordinates; }
-            set { coordinates = value; }
+            get { return _coordinates; }
+            set { _coordinates = value; }
+        }
+
+        public LengthType Type
+        {
+            get { return _type; }
+            set { _type = value; }
         }
 
         public void AddMarker(Marker marker)
         {
-            markers.Add(marker);
+            _markers.Add(marker);
             AddCoordinate(marker);
         }
 
@@ -50,21 +68,69 @@ namespace WalkAndTravel.ClassLibrary
             double lat = marker.Latitude;
             double lng = marker.Longitude;
             double[] coord = new double[] { lat, lng };
-            coordinates.Add(coord);
+            _coordinates.Add(coord);
         }
 
 
-        public static List<double[]> markersListToArray(List<Marker> list)
+        public static List<double[]> MarkersListToArray(List<Marker> list)
         {
-            var newList = new List<double[]>();
-            foreach (var marker in list)
+            if (list.Count > 0)
             {
-                double lat = marker.Latitude;
-                double lng = marker.Longitude;
-                double[] coord = new double[] { lat, lng };
-                newList.Add(coord);
+                var newList = new List<double[]>();
+                foreach (var marker in list)
+                {
+                    double lat = marker.Latitude;
+                    double lng = marker.Longitude;
+                    double[] coord = new double[] { lat, lng };
+                    newList.Add(coord);
+                }
+                return newList;
             }
-            return newList;
+            else
+            {
+                return new List<double[]>();
+            }
+        }
+
+        public void PickLengthType()
+        {
+            if(_length <= 0.5)
+            {
+                _type = LengthType.Short;
+            }
+            else if(_length < 1.3)
+            {
+                _type = LengthType.Medium;
+            }
+            else if(_length < 3)
+            {
+                _type = LengthType.Long;
+            }
+            else
+            {
+                _type = LengthType.VeryLong;
+            }
+        }
+
+        public int CompareTo(Route other)
+        {
+            if (_type == other.Type)
+            {
+                if (_length == other.Length)
+                {
+                    return _name.CompareTo(other.Name);
+                }
+                else if(_length < other.Length)
+                {
+                    return -1;
+                }
+                else return 1;
+            }
+            else if(_type < other.Type)
+            {
+                return -1;
+            }
+            else return 1;
         }
     }
 }

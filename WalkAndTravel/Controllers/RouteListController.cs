@@ -16,29 +16,44 @@ namespace WalkAndTravel.Controllers
         public List<Marker> generateRoute()
         {
             List<Marker> list = new();
-            list.Add(new Marker(54.6866, 25.2865));
-            list.Add(new Marker(54.6902, 25.2764));
+            list.Add(new Marker(lat: 54.6866, lng: 25.2865));
+            list.Add(new Marker(lat: 54.6902, lng: 25.2764));
 
             return list;
         }
 
         public List<double[]> generateRouteCoordinates()
         {
-            return Route.markersListToArray(generateRoute()); 
+            return Route.MarkersListToArray(generateRoute()); 
+        }
+
+        [HttpGet("GetRandomPOIRoute")]
+        public Route GetRandomPOIRoute()
+        {
+            var rng = new Random();
+            var route = new SightseeingRoute(new Marker(54.6859564, 25.2861464), rng.Next(3, 10));
+            route.GenerateRoute();
+            route.Coordinates = Route.MarkersListToArray(route.Markers);
+            return route;
+        }
+
+        [HttpGet("GetRandomRoute")]
+        public Route GetRandomRoute()
+        {
+            var rng = new Random();
+            var route = new CityRoute(new Marker(54.6859564, 25.2861464), rng.Next(3,10));
+            route.GenerateRoute();
+            route.Coordinates = Route.MarkersListToArray(route.Markers);
+            return route;
         }
 
 
         [HttpGet]
         public IEnumerable<Route> Get()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 3).Select(index => new Route
-            {
-                Name = "Route" + index,
-                Markers = generateRoute(),
-                Coordinates = generateRouteCoordinates(),
-                Length = (rng.Next(1, 5) + rng.NextDouble())
-            }
+            List<Route> routes = RoutesIO.ReadRoutesFromFile<Route>("Data/routes.json");
+            routes.Sort();
+            return routes.Select(route => route
             ).ToArray();
         }
     }
