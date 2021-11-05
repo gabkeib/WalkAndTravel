@@ -1,5 +1,6 @@
 ﻿.Progress-bar {
-    justify-content: center;
+    position: relative;
+    top: 15px;
 }
 
 .profile-container1 {
@@ -12,14 +13,14 @@
 
 .profile-container2 {
     position: relative;
-    top: 10px;
+    top: 15px;
     background-color: Highlight;
     font-size: x-large;
 }
 
 .profile-container3 {
     position: relative;
-    top: 15px;
+    top: 25px;
     background-color: mediumslateblue;
     font-size: x-large;
 }
