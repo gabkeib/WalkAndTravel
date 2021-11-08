@@ -34,7 +34,7 @@ namespace WalkAndTravel.ClassLibrary
             GetToStart = getToStart;
         }
 
-        public void GenerateRoute()
+        public void GenerateRoute(Func<double> bearingCalclulator)
         {
             var averageDistance = (double)DistanceFromStart / MarkersCount;
             var rnd = new Random();
@@ -43,9 +43,16 @@ namespace WalkAndTravel.ClassLibrary
             var markers = new List<Marker>() { current };
             for (int i = 0; i < MarkersCount; i++)
             {
-                current = current.CalculateNextMarker(averageDistance, bearing);
+                try
+                {
+                    current = current.CalculateNextMarker(averageDistance, bearing);
+                } catch (Exceptions.IllegalLatLngException ex)
+                {
+                    System.Diagnostics.Debug.WriteLine(ex);
+                    current = StartingPoint;
+                }
                 markers.Add(current);
-                bearing = rnd.Next(30, 359) + rnd.NextDouble();
+                bearing = bearingCalclulator();
             }
             if (GetToStart)
             {
