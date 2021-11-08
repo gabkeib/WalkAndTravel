@@ -37,19 +37,13 @@ body {
     transition: color 0.2s;
 }
 
-/*.bm-item:hover {
-    color: black;
-}*/
-
 .bm-burger-button {
     position: relative;
-    width: 36px;
-    height: 30px;
-    right: 10px;
-    top: 0px;
-    /* right: 0; */
+    width: 34px;
+    height: 25px;
+    right: 30px;
+    top: 8px;
     float: right;
-    /*background-color: #f0f8ff !important;*/
 }
 
 .bm-burger-bars {
@@ -79,5 +73,13 @@ body {
     color: #b8b7ad;
 }
 
+.profile-sidebar-button {
+    position: relative;
+    width: 50px;
+    height: 42px;
+    right: 50px;
+    top: 0px;
+    float: right;
+}
 
 

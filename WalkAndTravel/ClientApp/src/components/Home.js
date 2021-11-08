@@ -1,14 +1,21 @@
 import React, { Component, memo, PureComponent } from 'react';
-import Map from "./Map";
-import Sidebar from './sidebar/Sidebar';
+import Map from "./map/Map";
+import Sidebar from './sidebarMenu/SidebarMenu';
+import { FixedSizeList as ReactList, areEqual } from 'react-window';
+import memoize from 'memoize-one';
+import SidebarProfile from './sidebarProfile/SidebarProfile.js';
 
 import './Home.css';
+
 
 const points1 = [
     [54.6866, 25.2880],
     [54.6902, 25.2764]
 ];
 
+const burgerBars = {
+    background: 'white'
+}
 
 export class Home extends Component {
     static displayName = Home.name;
@@ -46,7 +53,7 @@ export class Home extends Component {
         return (
             <div id = "Home">
                 {contents}
-
+                <SidebarProfile />
                 <Map handleClick={this.handleClick} waypoints={this.state.currentRoute} handleGetRoute={this.handleGetRoute} />
             </div>
         );

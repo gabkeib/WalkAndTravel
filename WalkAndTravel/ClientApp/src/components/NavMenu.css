@@ -1,6 +1,9 @@
 ﻿a.navbar-brand {
+    position: relative;
+    top: 8px;
+    font-size: xx-large;
+    font-weight: bold;
     white-space: normal;
-    text-align: center;
     word-break: break-all;
 }
 
