@@ -15,7 +15,7 @@ export class Home extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { routes: [], currentRoute: points1, loading: true };
+        this.state = { routes: [], currentRoute: points1, routeToSave:points1, loading: true };
     }
 
     componentDidMount() {
@@ -35,13 +35,19 @@ export class Home extends Component {
     }
 
     handleGetRoute = (route) => {
+        this.setState({ routeToSave: route });
         console.log(route);
+    }
+
+    handleNewRoute = (name) => {
+        console.log(name);
+        this.sendNewRoute(name);
     }
 
     render() {
         let contents = this.state.loading
         ? <p><em>Loading...</em></p>
-            : <Sidebar handleClick={this.handleClick} data={this.state.routes} handleRandomRouteRequest={this.handleRandomRouteRequest} handleRandomPOIRouteRequest={this.handleRandomPOIRouteRequest} selectedRoute={[]} />
+            : <Sidebar handleClick={this.handleClick} data={this.state.routes} handleRandomRouteRequest={this.handleRandomRouteRequest} handleRandomPOIRouteRequest={this.handleRandomPOIRouteRequest} handleNewRoute={this.handleNewRoute} selectedRoute={[]} />
 
         return (
             <div id = "Home">
@@ -71,6 +77,33 @@ export class Home extends Component {
         const route = await response.json();
         console.log(route);
         this.setState({ currentRoute: route.coordinates });
+    }
+
+    async sendNewRoute(name) {
+        //let routePath = [].concat(...this.state.routeToSave);
+        let routePath = [];
+
+        for (var i = 0; i < this.state.routeToSave.length; i++) {
+            routePath = routePath.concat(this.state.routeToSave[i].latLng.lat);
+            routePath = routePath.concat(this.state.routeToSave[i].latLng.lng);
+        }
+        let newRoute = {
+            name: name,
+            route: routePath
+        }
+        let body = JSON.stringify(newRoute);
+        const response = await fetch('routelist/SaveNewRoute', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newRoute)
+        }).then(response => response.json())
+            .then(route => this.setState({routes: route}));
+        console.log(JSON.stringify(newRoute));
+
+        //console.log(response);
     }
 }
 export default Home;
