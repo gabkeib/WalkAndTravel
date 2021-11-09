@@ -23,4 +23,3 @@ namespace WalkAndTravel.ClassLibrary.Exceptions
         }
     }
 }
-}
