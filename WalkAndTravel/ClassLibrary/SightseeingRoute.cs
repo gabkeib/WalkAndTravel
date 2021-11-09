@@ -7,6 +7,7 @@ namespace WalkAndTravel.ClassLibrary
 {
     public class SightseeingRoute : Route
     {
+        private IPOISelector _poiSelector;
         public int DistanceFromStart
         {
             get;
@@ -17,16 +18,16 @@ namespace WalkAndTravel.ClassLibrary
             get; set;
         }
 
-        public SightseeingRoute(Marker startingPoint, int distanceFromPoint)
+        public SightseeingRoute(IPOISelector POISelector, Marker startingPoint, int distanceFromPoint)
         {
             StartingPoint = startingPoint;
             DistanceFromStart = distanceFromPoint;
+            _poiSelector = POISelector;
         }
 
         public void GenerateRoute()
         {
-            POISelector poiSelector = new POISelector();
-            POIList poiList = poiSelector.SelectPOI();
+            POIList poiList = _poiSelector.SelectPOI();
             System.Diagnostics.Debug.WriteLine(poiList[1].Marker.Latitude);
             var markers = new List<Marker>();
             markers.Add(StartingPoint);

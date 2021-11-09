@@ -59,7 +59,7 @@ namespace WalkAndTravel.Controllers
         public Route GetRandomPOIRoute()
         {
             var rng = new Random();
-            var route = new SightseeingRoute(new Marker(54.6859564, 25.2861464), rng.Next(3, 10));
+            var route = new SightseeingRoute(new POISelector(), new Marker(54.6859564, 25.2861464), rng.Next(3, 10));
             route.GenerateRoute();
             route.Coordinates = Route.MarkersListToArray(route.Markers);
             Log(this, new ClassLibrary.Logging.LogEventArgs("Generate route", "Sightseeing", "NoName"));
