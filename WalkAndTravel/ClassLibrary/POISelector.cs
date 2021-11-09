@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WalkAndTravel.ClassLibrary
 {
-    public class POISelector
+    public class POISelector : IPOISelector
     {
         private Lazy<POIData> _data;
         public POISelector()
