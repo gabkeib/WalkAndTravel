@@ -42,7 +42,7 @@ namespace WalkAndTravel.ClassLibrary
 
         public void CompleteTrail(float routeLength)    // routeLength in km with two numbers after point
         {
-            experience += exp;
+            _experience += (int) routeLength * 100;
         }
 
         public void CreateTrail(int exp)
