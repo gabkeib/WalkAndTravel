@@ -43,17 +43,23 @@ namespace WalkAndTravel.Controllers
             Route newRoute = new Route();
             newRoute.Name = routes.Name;
             newRoute.Coordinates = new List<double[]>();
+            newRoute.Markers = new List<Marker>();
             for (int i = 0; i < routes.Route.Length; i += 2)
             {
-            
+                Marker marker = new(latitude: routes.Route[i], longitude: routes.Route[i + 1]);
+                newRoute.Markers.Add(marker);
                 newRoute.Coordinates.Add(new double[] { routes.Route[i], routes.Route[i + 1] });
             }
             newRoute.Length = 2.3;
-            List<Route> allRoutes = RoutesIO.ReadRoutesFromFile<Route>("Data/routes.json");
-            allRoutes.Add(newRoute);
-            RoutesIO.WriteRoutesToFile<Route>(allRoutes, "Data/routes.json");
-            Log(this, new ClassLibrary.Logging.LogEventArgs("Save route", "Custom", newRoute.Name));
-            return Ok(allRoutes);
+            newRoute.PickLengthType();
+            using (var context = new RoutesContext())
+            {
+                context.Routes.Add(newRoute);
+                context.SaveChanges();
+
+                Log(this, new ClassLibrary.Logging.LogEventArgs("Save route", "Custom", newRoute.Name));
+                return Ok(context.Routes);
+            }
         }
 
         [HttpGet("GetRandomPOIRoute")]
