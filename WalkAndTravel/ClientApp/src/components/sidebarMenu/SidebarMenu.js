@@ -9,31 +9,40 @@ import  RouteList from './RouteList';
 import './SidebarMenu.css';
 import { useEffect } from 'react';
 
- const Sidebar = (props) => {
-     const routeData = props.data;
-     const [prevRoute, setPrevRoute] = useState(null);
-     const [currRoute, setCurrentRoute] = useState(null);
-     useEffect(() => {
-         if (currRoute !== prevRoute) {
-             newRoute();
-             setPrevRoute(currRoute);
-         }
-     }, [currRoute, prevRoute])
+const Sidebar = (props) => {
+    const routeData = props.data;
+    const [prevRoute, setPrevRoute] = useState(null);
+    const [currRoute, setCurrentRoute] = useState(null);
+    useEffect(() => {
+        if (currRoute !== prevRoute) {
+            newRoute();
+            setPrevRoute(currRoute);
+        }
+    }, [currRoute, prevRoute])
+    const [routeName, setRouteName] = useState(" ");
 
-     const sendRoute = (route) => {
-         setCurrentRoute(prev => route);
-     }
+    const sendRoute = (route) => {
+        setCurrentRoute(prev => route);
+    }
 
-     const newRoute = () => {
-         props.handleClick(currRoute);
-     }
+    const newRoute = () => {
+        props.handleClick(currRoute);
+    }
 
-     const randomRouteRequest = () => {
-         props.handleRandomRouteRequest();
-     }
+    const randomRouteRequest = () => {
+        props.handleRandomRouteRequest();
+    }
 
-     const randomPOIRouteRequest = () => {
-         props.handleRandomPOIRouteRequest();
+    const randomPOIRouteRequest = () => {
+        props.handleRandomPOIRouteRequest();
+    }
+
+    const handleRouteName = (e) => {
+        setRouteName(e.target.value);
+    }
+
+     const sendRouteName = () => {
+         props.handleNewRoute(routeName);
      }
 
     return (
@@ -100,6 +109,18 @@ import { useEffect } from 'react';
             <div className="d-grid gap-2">
                 <Button className="VerticalBlock" onClick={randomPOIRouteRequest} variant="primary" vertical block >
                     Generate random POI route
+                </Button>
+            </div>
+
+            <br> 
+                </br>
+            <Form.Control className="routeNameInput" size="lg" type="text" placeholder="Enter route name" value={routeName} onChange={handleRouteName} />
+
+            <br>
+                </br>
+            <div className="d-grid gap-2">
+                <Button className="VerticalBlock" onClick={sendRouteName} variant="primary" vertical block >
+                    Save current route
                 </Button>
             </div>
            

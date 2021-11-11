@@ -14,6 +14,15 @@ namespace WalkAndTravel.ClassLibrary
         public Marker(double lat, double lng)
         {
             _lat = lat; _lng = lng;
+            if (_lat > 90 || _lat < -90)
+            {
+                throw new Exceptions.IllegalLatLngException("Illegal latitude. Must be in interval [-90, 90]");
+            }
+            if (_lng > 180 || _lng < -180)
+            {
+                throw new Exceptions.IllegalLatLngException("Illegal longitude. Must be in interval [-180, 180]");
+            }
+
         }
 
         public double Latitude
