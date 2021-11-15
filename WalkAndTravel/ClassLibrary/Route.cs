@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -24,6 +25,9 @@ namespace WalkAndTravel.ClassLibrary
         public Route( double length, List<Marker> markers, List<double[]> coords = null, string name = "None", LengthType type = LengthType.None)
         { _name = name; _length = length; _markers = markers; _coordinates = coords; _type = type; }
 
+        [Column("Id")]
+        public int RouteId { get; set; }
+
         public string Name
         {
             get { return _name; }
@@ -45,6 +49,7 @@ namespace WalkAndTravel.ClassLibrary
             set { _markers = value; }
         }
 
+        [NotMapped]
         public List<double[]> Coordinates
         {
             get { return _coordinates; }

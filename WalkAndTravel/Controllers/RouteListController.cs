@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WalkAndTravel.ClassLibrary;
+using WalkAndTravel.DataAccess;
 
 namespace WalkAndTravel.Controllers
 {
@@ -23,8 +24,8 @@ namespace WalkAndTravel.Controllers
         public List<Marker> generateRoute()
         {
             List<Marker> list = new();
-            list.Add(new Marker(lat: 54.6866, lng: 25.2865));
-            list.Add(new Marker(lat: 54.6902, lng: 25.2764));
+            list.Add(new Marker(latitude: 54.6866, longitude: 25.2865));
+            list.Add(new Marker(latitude: 54.6902, longitude: 25.2764));
 
             return list;
         }
@@ -42,17 +43,23 @@ namespace WalkAndTravel.Controllers
             Route newRoute = new Route();
             newRoute.Name = routes.Name;
             newRoute.Coordinates = new List<double[]>();
+            newRoute.Markers = new List<Marker>();
             for (int i = 0; i < routes.Route.Length; i += 2)
             {
-            
+                Marker marker = new(latitude: routes.Route[i], longitude: routes.Route[i + 1]);
+                newRoute.Markers.Add(marker);
                 newRoute.Coordinates.Add(new double[] { routes.Route[i], routes.Route[i + 1] });
             }
             newRoute.Length = 2.3;
-            List<Route> allRoutes = RoutesIO.ReadRoutesFromFile<Route>("Data/routes.json");
-            allRoutes.Add(newRoute);
-            RoutesIO.WriteRoutesToFile<Route>(allRoutes, "Data/routes.json");
-            Log(this, new ClassLibrary.Logging.LogEventArgs("Save route", "Custom", newRoute.Name));
-            return Ok(allRoutes);
+            newRoute.PickLengthType();
+            using (var context = new RoutesContext())
+            {
+                context.Routes.Add(newRoute);
+                context.SaveChanges();
+
+                Log(this, new ClassLibrary.Logging.LogEventArgs("Save route", "Custom", newRoute.Name));
+                return Ok(context.Routes);
+            }
         }
 
         [HttpGet("GetRandomPOIRoute")]
@@ -82,11 +89,49 @@ namespace WalkAndTravel.Controllers
             return route;
         }
 
+        public List<Route> RoutesSelector()
+        {
+            List<Route> routes = new();
+            using (var context = new RoutesContext())
+            {
+                
+                foreach (var route in context.Routes)
+                {
+                    route.Markers = new List<Marker>();
+
+                    using (var contextt = new RoutesContext())
+                    {
+                        foreach (var marker in contextt.Markers)
+                        {
+                            if (marker.RouteId == route.RouteId)
+                            {
+                                route.Markers.Add(marker);
+                            }
+                        }
+                    }
+                    route.Coordinates = Route.MarkersListToArray(route.Markers);
+                    routes.Add(route);
+    
+                }
+            }
+
+            return routes;
+         }
+
+        public async Task<List<Route>> GetRoutesAsync()
+        {
+            List<Route> routes = await Task.Run(()=> RoutesSelector());
+
+            return routes;
+        } 
+
 
         [HttpGet]
-        public IEnumerable<Route> Get()
+        public async Task<IEnumerable<Route>> Get()
         {
-            List<Route> routes = RoutesIO.ReadRoutesFromFile<Route>("Data/routes.json");
+            var routes = await GetRoutesAsync();
+
+            //List<Route> routes = RoutesIO.ReadRoutesFromFile<Route>("Data/routes.json");
             routes.Sort();
             return routes.Select(route => route
             ).ToArray();

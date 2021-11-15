@@ -31,13 +31,26 @@ namespace WalkAndTravel.ClassLibrary
 
         public void AddExperience(int exp)
         {
-            _experience += exp;
+            if((_experience + exp) < (_level * 100 * 1.25))
+            {
+                _experience += exp;
+            }
+            else
+            {
+                int experience = _experience + exp;
+                while (experience >= (_level * 100 * 1.25))
+                {
+                    experience -= (int)(_level * 100 * 1.25);
+                    LevelUp();
+                }
+                _experience = experience;
+            }
         }
 
         public void LevelUp()
         {
             _level += 1;
-            _experience = 0;
+            //_experience = 0;
         }
 
         public void CompleteTrail(float routeLength)    // routeLength in km with two numbers after point

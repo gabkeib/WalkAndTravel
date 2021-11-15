@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 
 namespace WalkAndTravel.ClassLibrary
 {
-    public struct Marker
+    public class Marker
     {
 
         private double _lat;
         private double _lng;
 
-        public Marker(double lat, double lng)
+        public Marker(double latitude, double longitude)
         {
-            _lat = lat; _lng = lng;
+            _lat = latitude; _lng = longitude;
             if (_lat > 90 || _lat < -90)
             {
                 throw new Exceptions.IllegalLatLngException("Illegal latitude. Must be in interval [-90, 90]");
@@ -24,6 +24,10 @@ namespace WalkAndTravel.ClassLibrary
             }
 
         }
+
+        public int Id { get; set; }
+
+        public int RouteId { get; set; }
 
         public double Latitude
         {
