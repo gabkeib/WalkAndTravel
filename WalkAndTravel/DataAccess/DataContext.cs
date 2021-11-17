@@ -4,32 +4,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WalkAndTravel.ClassLibrary;
+using WalkAndTravel.Models;
 
 namespace WalkAndTravel.DataAccess
 {
-    public class RoutesContext : DbContext
+    public class DataContext : DbContext
     {
-
-        //public RoutesContext(DbContextOptions<RoutesContext> options)
-        //    : base(options)
-        //{
-        //}
-
         private const string ConnectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=WAT_DataBase;Integrated Security=True;";
 
         public DbSet<Route> Routes { get; set; }
         public DbSet<Marker> Markers { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseSqlServer(ConnectionString);
         }
-
-        /*protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Route>().ToTable("Route");
-            modelBuilder.Entity<Marker>().ToTable("Marker");
-        }*/
     }
 }
