@@ -22,7 +22,7 @@ export class Home extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { routes: [], currentRoute: points1, routeToSave:points1, loading: true };
+        this.state = { routes: [], currentRoute: [], routeToSave:[], loading: true };
     }
 
     componentDidMount() {
@@ -51,10 +51,14 @@ export class Home extends Component {
         this.sendNewRoute(name);
     }
 
+    handleFarmExp = () => {
+        this.gainExp();
+    }
+
     render() {
         let contents = this.state.loading
-        ? <p><em>Loading...</em></p>
-            : <Sidebar handleClick={this.handleClick} data={this.state.routes} handleRandomRouteRequest={this.handleRandomRouteRequest} handleRandomPOIRouteRequest={this.handleRandomPOIRouteRequest} handleNewRoute={this.handleNewRoute} selectedRoute={[]} />
+            ? <p><em>Loading...</em></p>
+            : <Sidebar handleClick={this.handleClick} data={this.state.routes} handleRandomRouteRequest={this.handleRandomRouteRequest} handleFarmExp={this.handleFarmExp} handleRandomPOIRouteRequest={this.handleRandomPOIRouteRequest} handleNewRoute={this.handleNewRoute} selectedRoute={[]} />
 
         return (
             <div id = "Home">
@@ -66,27 +70,48 @@ export class Home extends Component {
     }
 
     async populateRouteData() {
-        const response = await fetch('routelist');
+        const response = await fetch('route/Route');
         const data = await response.json();
         console.log(data);
         this.setState({ routes: data, currentRoute: points1, loading: false });
     }
 
     async getRandomRoute() {
-        const response = await fetch('routelist/GetRandomRoute');
+        const response = await fetch('route/RandomRoute');
         const route = await response.json();
         console.log(route);
         this.setState({ currentRoute: route.coordinates });
     }
 
     async getRandomPOIRoute() {
-        const response = await fetch('routelist/GetRandomPOIRoute');
+        const response = await fetch('route/RandomPOIRoute');
         const route = await response.json();
         console.log(route);
         this.setState({ currentRoute: route.coordinates });
     }
 
+    async gainExp() {
+        const response = await fetch('user/farm', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            //console.log(response.json()
+            if (response.ok) {
+                console.log("ok");
+                console.log(response.json());
+            }
+            else {
+                console.log("oh no");
+                alert("Whyy");
+            }
+        });
+    }
+
     async sendNewRoute(name) {
+        console.log(this.state.routeToSave);
         //let routePath = [].concat(...this.state.routeToSave);
         let routePath = [];
 
@@ -99,16 +124,25 @@ export class Home extends Component {
             route: routePath
         }
         let body = JSON.stringify(newRoute);
-        const response = await fetch('routelist/SaveNewRoute', {
+        const response = await fetch('route/SaveNewRoute', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(newRoute)
-        }).then(response => response.json())
-            .then(route => this.setState({routes: route}));
-        console.log(JSON.stringify(newRoute));
+        }).then(response =>
+        {
+            //console.log(response.json()
+            if (response.ok) {
+                console.log("ok");
+            }
+            else {
+                console.log("oh no");
+                alert("This route name already exists. Change it!");
+            }
+        });
+        //console.log(JSON.stringify(newRoute));
 
         //console.log(response);
     }

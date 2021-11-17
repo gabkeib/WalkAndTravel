@@ -43,7 +43,11 @@ const Sidebar = (props) => {
 
      const sendRouteName = () => {
          props.handleNewRoute(routeName);
-     }
+    }
+
+    const farmExp = () => {
+        props.handleFarmExp();
+    }
 
     return (
         <Menu noOverlay right width={450}>
@@ -121,6 +125,14 @@ const Sidebar = (props) => {
             <div className="d-grid gap-2">
                 <Button className="VerticalBlock" onClick={sendRouteName} variant="primary" vertical block >
                     Save current route
+                </Button>
+            </div>
+
+            <br>
+            </br>
+            <div className="d-grid gap-2">
+                <Button className="VerticalBlock" onClick={farmExp} variant="primary" vertical block >
+                    Gain experience
                 </Button>
             </div>
            
