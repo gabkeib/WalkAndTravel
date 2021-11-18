@@ -19,7 +19,7 @@ const Sidebar = (props) => {
             setPrevRoute(currRoute);
         }
     }, [currRoute, prevRoute])
-    const [routeName, setRouteName] = useState(" ");
+    const [routeName, setRouteName] = useState("");
 
     const sendRoute = (route) => {
         setCurrentRoute(prev => route);
