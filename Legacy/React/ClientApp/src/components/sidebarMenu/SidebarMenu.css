@@ -1,0 +1,46 @@
+﻿.Button {
+    position: relative;
+    font-size: 20px;
+    width: 100px;
+    height: 80px;
+    top: 100px;
+}
+
+.DropDownButton1 {
+    position: relative;
+    font-size: 30px;
+    width: 10px;
+    height: 50px;
+    top: 10px;
+}
+
+.DropDownButton2 {
+    position: relative;
+    font-size: 30px;
+    width: 10px;
+    height: 50px;
+    right: -145px;
+    top: 10px;
+}
+
+.VerticalBlock {
+    position: relative;
+    font-size: 25px;
+    justify-content: center;
+    align-content: center; 
+    width: 395px;
+    height: 45px;
+    top: 20px;
+    left: 0px;
+}
+
+.RouteList {
+    position: relative;
+    top: 60px;
+    background-color:aquamarine;
+    display:block;
+}
+
+.RouteListName{
+    color:black;
+}
