@@ -65,7 +65,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       Align(
                         alignment: Alignment.center,
                         child: Image.asset(
-                            "assets/images/WATLogin2.png",
+                            "assets/images/WATLogo.png",
                             width: MediaQuery.of(context).size.width,
                             height: MediaQuery.of(context).size.height/6,
                             fit: BoxFit.contain
@@ -180,7 +180,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 decoration: TextDecoration.underline,
                               ),
                               recognizer: TapGestureRecognizer()..onTap = (){
-                                Navigator.pushNamed(context, "/");
+                                Navigator.pushNamed(context, "/login");
                               },
                             ),
                           ]

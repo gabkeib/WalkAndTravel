@@ -69,8 +69,8 @@ class _OSMMapState extends State<OSMMap> {
           height: 80.0,
           point: coords,
           builder: (ctx) =>
-              Container(
-                child: FlutterLogo(),
+              Image.asset(
+                  "assets/images/MapPointer.png",
               ),
         );
         markers.add(m);
@@ -121,7 +121,9 @@ class _OSMMapState extends State<OSMMap> {
       point: latlng,
       builder: (ctx) =>
           Container(
-            child: FlutterLogo(),
+            child: Image.asset(
+              "assets/images/MapPointer.png",
+          ),
           ),
     );
     setState((){
