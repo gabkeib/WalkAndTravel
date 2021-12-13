@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using WalkAndTravel.ClassLibrary.Repositories;
 using WalkAndTravel.ClassLibrary.Services;
 using WalkAndTravel.DataAccess;
 
+
 namespace WalkAndTravel.Controllers
 {
     [ApiController]
@@ -16,13 +18,16 @@ namespace WalkAndTravel.Controllers
     {
 
         public event EventHandler<ClassLibrary.Logging.LogEventArgs> Log;
+        private readonly ILogger<RouteController> _logger;
 
         private IRouteServices _routeServices;
 
-        public RouteController()
+        public RouteController(ILogger<RouteController> logger)
         {
             Log += ClassLibrary.Logging.Logger.Log;
+            _logger = logger;
             _routeServices = new RouteServices(new RouteRepository());
+
         }
 
         [HttpPost("SaveNewRoute")]
