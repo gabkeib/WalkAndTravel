@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,8 @@ namespace WalkAndTravel.Controllers
     {
         private readonly JwtService _jwtService;
         private readonly IUserServices _userServices;
+
+        private readonly ILogger<UserController> _logger;
 
         // [Authorize]
         [HttpPost("farm")]
@@ -47,9 +50,10 @@ namespace WalkAndTravel.Controllers
 
         }
 
-        public UserController()
+        public UserController(ILogger<UserController> logger)
         {
             _userServices = new UserServices(new UserRepository());
+            _logger = logger;
         }
 
         [HttpPost("register")]
