@@ -1,12 +1,16 @@
 import 'dart:convert';
 
+import 'package:geocoding/geocoding.dart';
+import 'package:geojson/geojson.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 import 'package:latlong2/latlong.dart';
+import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:walk_and_travel/widgets/osmmap.dart';
 import 'models/route.dart' as a;
+import 'models/location_marker.dart';
 import 'models/minimal_route.dart' as b;
 
 void main() {
@@ -58,11 +62,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final List<LocationMarker> _locations = [];
   final List<a.Route> _routes = [];
   a.Route _currentRoute = a.Route(
       "newRoute", 2.3, [LatLng(54.6866, 25.2865), LatLng(54.6902, 25.2764)], 0);
   final PanelController _panelController = PanelController();
   bool createRouteWindow = false;
+  LatLng centerPosition = LatLng(54.68585, 25.28647);
+
+  final FloatingSearchBarController _floatingSearchBarController = FloatingSearchBarController();
 
   @override
   void initState() {
@@ -107,7 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void getRoutes() async {
     var url = Uri.parse("http://10.0.2.2:5000/route/route");
     http.Response response = await http.get(url);
-    print(response.body);
+    //print(response.body);
     var value = jsonDecode(response.body);
     var elements = value.length;
     setState(() {
@@ -168,11 +176,11 @@ class _MyHomePageState extends State<MyHomePage> {
             return const Divider();
           }
           final int index = i ~/ 2;
-          return _buildRow(_routes[index]);
+          return _buildRow(_routes[index], index);
         });
   }
 
-  Widget _buildRow(a.Route route) {
+  Widget _buildRow(a.Route route, int index) {
     return ListTile(
       title: Text(route.name),
       subtitle: Text(
@@ -182,20 +190,59 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _buildListCreator() {
-    return ListView.builder(
-        itemCount: _currentRoute.coordinates.length * 2,
+    return ReorderableListView.builder(
+        itemCount: _currentRoute.coordinates.length,
         itemBuilder: (BuildContext _context, int i) {
-          if (i.isOdd) {
-            return const Divider();
-          }
-          final int index = i ~/ 2;
+          final int index = i;
           return _buildRowCreator(_currentRoute.coordinates[index], index);
+        },
+      onReorder: (int oldIndex, int newIndex) {
+        setState(() {
+          if (oldIndex < newIndex) {
+            newIndex -= 1;
+          }
+          final LatLng item = _currentRoute.coordinates.removeAt(oldIndex);
+          _currentRoute.coordinates.insert(newIndex, item);
         });
+      },);
   }
+
+  Future<String?> _geocodeMarker(LatLng marker) async{
+    List<Placemark> placemarks = await placemarkFromCoordinates(marker.latitude, marker.longitude);
+    var place = placemarks[0];
+    return (place.street);
+  }
+
 
   Widget _buildRowCreator(LatLng marker, int index) {
     return ListTile(
-      title: Text("ID: $index, Marker: ${marker.latitude} ${marker.longitude}"),
+      key: Key('$index'),
+      leading: IconButton(
+          icon: const Icon(
+              Icons.close,
+              color: Colors.red
+          ),
+          onPressed: () {
+            setState(() {
+              _currentRoute.coordinates.removeAt(index);
+            });
+          }
+      ),
+      title: FutureBuilder<String?>(
+        future: _geocodeMarker(marker),
+        builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
+          if (snapshot.hasData){
+            return Text("ID: $index, Marker: " + (snapshot.data ?? "${marker.longitude} ${marker.latitude}"));
+          }
+          else {
+            return Text("ID: $index, Marker: ${marker.longitude} ${marker.latitude}");
+          }
+        }
+
+      ),
+      trailing: const Icon(
+        Icons.drag_indicator_rounded,
+      ),
       //subtitle: Text("Length: ${route.length}, number of waypoints: ${route.coordinates.length}"),
       //onTap: () => _updateCurrentRoute(route),
     );
@@ -317,6 +364,83 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  Widget buildFloatingSearchBar() {
+    final isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
+
+    void _getLocations(String query) async{
+      var url = Uri.parse("https://photon.komoot.io/api/?q=" + query + "&limit=7");
+      var response = await http.get(url);
+      print(response.body);
+      _locations.clear();
+      Map<String, dynamic> value = jsonDecode(response.body);
+      for (var x in value['features']){
+        var coords = x['geometry']['coordinates'];
+        LatLng place = LatLng(coords[1], coords[0]);
+        String name = x['properties']['name'];
+        String country = x['properties']['country'];
+        _locations.add(LocationMarker(name, country, place));
+      }
+    }
+
+    return FloatingSearchBar(
+      controller: _floatingSearchBarController,
+      hint: 'Search...',
+      scrollPadding: const EdgeInsets.only(top: 16, bottom: 56),
+      transitionDuration: const Duration(milliseconds: 800),
+      transitionCurve: Curves.easeInOut,
+      physics: const BouncingScrollPhysics(),
+      axisAlignment: isPortrait ? 0.0 : -1.0,
+      openAxisAlignment: 0.0,
+      width: isPortrait ? 600 : 500,
+      debounceDelay: const Duration(milliseconds: 500),
+      onQueryChanged: (query) {
+        // Call your model, bloc, controller here.
+      },
+      onSubmitted: (query){
+        print(query);
+        setState(() {
+          _getLocations(query);
+        });
+
+      }
+      ,
+      // Specify a custom transition to be used for
+      // animating between opened and closed stated.
+      transition: CircularFloatingSearchBarTransition(),
+      actions: [
+        FloatingSearchBarAction(
+          showIfOpened: false,
+          child: CircularButton(
+            icon: const Icon(Icons.place),
+            onPressed: () {},
+          ),
+        ),
+        FloatingSearchBarAction.searchToClear(
+          showIfClosed: false,
+        ),
+      ],
+      builder: (context, transition) {
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Material(
+            color: Colors.white,
+            elevation: 4.0,
+            child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: _locations.map((location) {
+                return InkWell(
+                       child: Container(height: 112, child: Text(location.name)),
+                       onTap: () => setState(() { centerPosition = location.coordinates; _floatingSearchBarController.close();})
+
+
+                );
+                }).toList(),
+          ),
+        ));
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     BorderRadiusGeometry roundingRadius = const BorderRadius.only(
@@ -348,9 +472,16 @@ class _MyHomePageState extends State<MyHomePage> {
             child: (!createRouteWindow)
                 ? _browsingWindow()
                 : _creatingRouteWindow()),
-        body: Center(
-            child: OSMMap(
-                currentRoute: _currentRoute, creationMode: createRouteWindow, callbackRoute: callbackRoute, callbackSaveRoute: callbackSaveRoute)),
+        body: Stack(
+            fit: StackFit.expand,
+            children: [
+            OSMMap(
+                currentRoute: _currentRoute, creationMode: createRouteWindow, callbackRoute: callbackRoute, callbackSaveRoute: callbackSaveRoute, centerPosition: centerPosition,
+            ),
+            buildFloatingSearchBar(),
+            ]
+            ),
+
         // This trailing comma makes auto-formatting nicer for build methods.
       ),
       floatingActionButton: (!createRouteWindow)

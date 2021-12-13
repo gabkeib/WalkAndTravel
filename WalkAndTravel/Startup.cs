@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
+using WalkAndTravel.ClassLibrary.Middleware;
 
 namespace WalkAndTravel
 {
@@ -19,10 +21,18 @@ namespace WalkAndTravel
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            Log.Logger = new LoggerConfiguration()
+                 .WriteTo.File("log-.txt", rollingInterval: RollingInterval.Day)
+                 .CreateLogger();
 
             services.AddControllersWithViews();
-
+            services.AddSingleton(x => Log.Logger);
         }
+
+       /* public void ConfigureContainer(ContainerBuilder builder)
+        {
+
+        }*/
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -40,6 +50,8 @@ namespace WalkAndTravel
 
             app.UseRouting();
             app.UseHttpsRedirection();
+
+            app.UseMiddleware<LoggingMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

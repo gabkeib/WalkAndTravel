@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WalkAndTravel.ClassLibrary.Models;
 using WalkAndTravel.ClassLibrary.Repositories;
 
 namespace WalkAndTravel.ClassLibrary.Services
@@ -29,6 +30,21 @@ namespace WalkAndTravel.ClassLibrary.Services
             ).ToArray();
         }
 
+        public async Task<IEnumerable<Route>> GetPagingRouteList(int page, int elements)
+        {
+            var routes = await _routeRepository.GetPagingRouteList(page, elements);
+            routes.Sort();
+            return routes.Select(route => route
+            ).ToArray();
+        }
+
+        public async Task<IEnumerable<RoutesCounter>> GetRoutesNumbers()
+        {
+            var statistics = await _routeRepository.GetRoutesNumbers();
+            statistics.Sort();
+            return statistics.ToArray();
+        }
+
         public Route GetRandomRoute()
         {
             return _routeRepository.GetRandomRoute();
@@ -39,6 +55,10 @@ namespace WalkAndTravel.ClassLibrary.Services
             return _routeRepository.SaveNewRoute(routes);
         }
 
-        
+        public int DeleteRoute(int id)
+        {
+            return _routeRepository.DeleteRoute(id);
+        }
+
     }
 }

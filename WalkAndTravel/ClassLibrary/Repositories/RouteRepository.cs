@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WalkAndTravel.ClassLibrary.Models;
 using WalkAndTravel.DataAccess;
 
 namespace WalkAndTravel.ClassLibrary.Repositories
@@ -73,6 +74,36 @@ namespace WalkAndTravel.ClassLibrary.Repositories
             return routes;
         }
 
+        public async Task<List<Route>> GetPagingRouteList(int page, int elements)
+        {
+            return await Task.Run(() => PagingRouteList(page, elements));
+        }
+
+        private List<Route> PagingRouteList(int page, int elements)
+        {
+            List<Route> routes = new();
+            using (var context = new DataContext())
+            {
+                var currentRoutes = context.Routes.Skip(page * elements).Take(elements).ToList();
+                foreach (var route in currentRoutes)
+                {
+                    route.Markers = new List<Marker>();
+
+                    foreach (var marker in context.Markers)
+                    {
+                        if (marker.RouteId == route.RouteId)
+                        {
+                            route.Markers.Add(marker);
+                        }
+                    }
+                    route.Coordinates = Route.MarkersListToArray(route.Markers);
+                    routes.Add(route);
+
+                }
+            }
+            return routes;
+        }
+
         public int SaveNewRoute(RouteMinimal routes)
         {
             System.Diagnostics.Debug.WriteLine("here");
@@ -93,7 +124,7 @@ namespace WalkAndTravel.ClassLibrary.Repositories
             {
                 int id = 0;
                 context.Routes.Add(newRoute);
-                try 
+                try
                 {
                     context.SaveChanges();
                 }
@@ -116,7 +147,7 @@ namespace WalkAndTravel.ClassLibrary.Repositories
             }
         }
 
-        public void DeleteRoute(int Id)
+        public int DeleteRoute(int Id)
         {
             using (var context = new DataContext())
             {
@@ -131,6 +162,28 @@ namespace WalkAndTravel.ClassLibrary.Repositories
                 }
                 context.SaveChanges();
             }
+            return 0;
+        }
+
+
+        public async Task<List<RoutesCounter>> GetRoutesNumbers()
+        {
+            return await Task.Run(() => CalculateRoutesNumbers());
+        }
+        private List<RoutesCounter> CalculateRoutesNumbers()
+        {
+            List<RoutesCounter> routeNumbers = new();
+            using (var context = new DataContext())
+            {
+                var results = context.Routes.GroupBy(l => l.Type).Select(lg => new { Type = lg.Key, Routes = lg.Count() });
+                foreach (var x in results)
+                {
+                    var type = x.Type.ToString();
+                    routeNumbers.Add(new RoutesCounter(type, x.Routes));
+                }
+
+            }
+            return routeNumbers;
         }
     }
 }
