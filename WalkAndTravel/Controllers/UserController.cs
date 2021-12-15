@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -35,13 +36,6 @@ namespace WalkAndTravel.Controllers
             _jwtService = new JwtService();
         }
 
-        [HttpPost("farm")]
-        public async Task<IActionResult> FarmExp(ExpDto dto)
-        {
-            var user = await _userServices.GetByEmail(dto.Email);
-            var user1 = await _userServices.EarnExp(user.Id, dto.Exp);
-            return Ok(user1);
-        }
 
         [HttpPost("register")]
         public IActionResult Register(RegisterDto dto)
@@ -62,6 +56,8 @@ namespace WalkAndTravel.Controllers
             _userServices.CreateNewUser(user);
             return Ok(new { message = "Success" });
         }
+
+
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto dto)
