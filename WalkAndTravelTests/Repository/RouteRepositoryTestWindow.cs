@@ -30,6 +30,23 @@ namespace WalkAndTravelTests.Controllers
             sqliteRouteRepositoryTest.RouteRepository_GetPagingRouteList_ReturnsCorrectNumberOfRoutes(page, pageSize);
         }
 
+        [Theory]
+        [InlineData("Route", 3)]
+        [InlineData("Route1", 1)]
+        [InlineData("Route2", 1)]
+        public void RouteRepository_SearchRoute_ReturnsCorrectRoutes(string keyword, int result)
+        {
+            sqliteRouteRepositoryTest.RouteRepository_SearchRoutes_ReturnsCorrectRoutes(keyword, result);
+        }
+
+        [Theory]
+        [InlineData(1, "Route1")]
+        [InlineData(2, "Route2")]
+        public void RouteRepository_SearchRouteById_ReturnsCorrectRoute(int id, string name)
+        {
+            sqliteRouteRepositoryTest.RouteRepository_SearchRouteByID_ReturnsCorrectRoute(id, name);
+        }
+
         [Fact]
         public void RouteRepository_SaveNewRoute_InsertsUserCorrectly()
         {

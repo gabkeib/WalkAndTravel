@@ -141,7 +141,7 @@ namespace WalkAndTravel.ClassLibrary.Repositories
             }
 
             //Log(this, new ClassLibrary.Logging.LogEventArgs("Save route", "Custom", newRoute.Name));
-             return id;
+                return id;
         }
 
         public Route DeleteRoute(int Id)
@@ -178,14 +178,13 @@ namespace WalkAndTravel.ClassLibrary.Repositories
 
         public List<Route> SearchRoutes(string keyword)
         {
-
-           if (keyword == null)
+           if(keyword == null)
             {
                 return RoutesSelector();
             }
             List<Route> routes = new();
             var searchRoute = context.Routes.Where(e => e.Name.ToLower().Trim().Contains(keyword.ToLower().Trim())).ToList();
-            foreach (var route in searchRoute)
+            foreach(var route in searchRoute)
             {
                 route.Markers = new List<Marker>();
                 foreach (var marker in context.Markers)
@@ -206,9 +205,9 @@ namespace WalkAndTravel.ClassLibrary.Repositories
             Route searchRoute = new();
             searchRoute = context.Routes.FirstOrDefault(e => e.RouteId == Id);
             searchRoute.Markers = new List<Marker>();
-            foreach (var marker in context.Markers)
+            foreach(var marker in context.Markers)
             {
-                if (searchRoute.RouteId == marker.RouteId)
+                if(searchRoute.RouteId == marker.RouteId)
                 {
                     searchRoute.Markers.Add(marker);
                 }

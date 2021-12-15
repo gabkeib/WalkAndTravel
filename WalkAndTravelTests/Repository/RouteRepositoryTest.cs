@@ -142,5 +142,29 @@ namespace WalkAndTravelTests.Controllers
                 Assert.Equal(1, route[2].Count);
             }
         }
+
+        public void RouteRepository_SearchRoutes_ReturnsCorrectRoutes(string keyword, int result)
+        {
+            using (var context = new DataContext(ContextOptions))
+            {
+                var repository = new RouteRepository(context);
+
+                var route = repository.SearchRoutes(keyword);
+
+                Assert.Equal(result, route.Count);
+            }
+        }
+
+        public void RouteRepository_SearchRouteByID_ReturnsCorrectRoute(int id, string name)
+        {
+            using (var context = new DataContext(ContextOptions))
+            {
+                var repository = new RouteRepository(context);
+
+                var route = repository.SearchRouteByID(id);
+
+                Assert.Equal(name, route.Name);
+            }
+        }
     }
 }
