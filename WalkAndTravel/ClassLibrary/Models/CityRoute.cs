@@ -40,8 +40,13 @@ namespace WalkAndTravel.ClassLibrary
             var rnd = new Random();
             var bearing = rnd.Next(30, 359) + rnd.NextDouble();
             var current = StartingPoint;
+            if (MarkersCount == 0)
+            {
+                Markers = new List<Marker>();
+                return;
+            }
             var markers = new List<Marker>() { current };
-            for (int i = 0; i < MarkersCount; i++)
+            for (int i = 0; i < MarkersCount - 1; i++)
             {
                 try
                 {
