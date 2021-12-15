@@ -36,5 +36,34 @@ namespace WalkAndTravelTests
             var distance2 = marker1.CalculateDistanceBetweenMarkers(marker2);
             Assert.Equal(100, distance2, 0);
         }
+
+        [Fact]
+        public void Markers_Markers_ThrowsIllegalLatLngException_Latitude()
+        {
+            var exceptionData = Assert.Throws<WalkAndTravel.ClassLibrary.Exceptions.IllegalLatLngException>(() => new Marker(92, 65));
+            Assert.Equal("Illegal latitude. Must be in interval [-90, 90]", exceptionData.Message);
+        }
+
+        [Fact]
+        public void Markers_Markers_ThrowsIllegalLatLngException_Longitude()
+        {
+            var exceptionData = Assert.Throws<WalkAndTravel.ClassLibrary.Exceptions.IllegalLatLngException>(() => new Marker(65, 200));
+            Assert.Equal("Illegal longitude. Must be in interval [-180, 180]", exceptionData.Message);
+        }
+        [Fact]
+        public void Markers_Markers_ThrowsIllegalLatLngException_SettingLatitude()
+        {
+            var marker = new Marker(65.5, 13.84);
+            var exceptionData = Assert.Throws<WalkAndTravel.ClassLibrary.Exceptions.IllegalLatLngException>(() => marker.Latitude = 200);
+            Assert.Equal("Illegal latitude. Must be in interval [-90, 90]", exceptionData.Message);
+        }
+
+        [Fact]
+        public void Markers_Markers_ThrowsIllegalLatLngException_SettingLongitude()
+        {
+            var marker = new Marker(65.5, 13.84);
+            var exceptionData = Assert.Throws<WalkAndTravel.ClassLibrary.Exceptions.IllegalLatLngException>(() => marker.Longitude = 200);
+            Assert.Equal("Illegal longitude. Must be in interval [-180, 180]", exceptionData.Message);
+        }
     }
 }
