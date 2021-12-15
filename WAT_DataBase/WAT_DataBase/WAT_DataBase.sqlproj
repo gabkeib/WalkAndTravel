@@ -69,4 +69,7 @@
   <ItemGroup>
     <None Include="PublishLocations\WAT_DataBase1.publish.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="WAT_DataBase.refactorlog" />
+  </ItemGroup>
 </Project>

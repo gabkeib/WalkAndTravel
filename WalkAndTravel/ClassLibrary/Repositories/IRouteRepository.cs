@@ -21,5 +21,9 @@ namespace WalkAndTravel.ClassLibrary.Repositories
         int SaveNewRoute(RouteMinimal routes);
 
         int DeleteRoute(int id);
+
+        List<Route> SearchRoutes(string keyword);
+
+        public Route SearchRouteByID(int Id);
     }
 }

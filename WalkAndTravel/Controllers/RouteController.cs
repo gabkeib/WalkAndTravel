@@ -62,5 +62,17 @@ namespace WalkAndTravel.Controllers
         {
             return await _routeServices.GetRoutes();
         }
+
+        [HttpGet("Search/{id?}")]
+        public IEnumerable<Route> GetByKeyword(string id)
+        {
+            return _routeServices.SearchRoutes(id);
+        }
+
+        [HttpGet("{id}")]
+        public Route GetById(int Id)
+        {
+            return _routeServices.SearchRouteByID(Id);
+        }
     }
 }
