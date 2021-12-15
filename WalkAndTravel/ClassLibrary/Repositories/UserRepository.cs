@@ -21,7 +21,7 @@ namespace WalkAndTravel.ClassLibrary.Repositories
             System.Diagnostics.Debug.WriteLine(user);
             int id = 0;
             context.Users.Add(user);
-            try
+            try 
             {
                 context.SaveChanges();
             }
@@ -42,11 +42,12 @@ namespace WalkAndTravel.ClassLibrary.Repositories
             return id;
         }
 
-        public void DeleteUser(int Id)
+        public User DeleteUser(int Id)
         {
             var userDelete = context.Users.FirstOrDefault(e => e.Id == Id);
-            context.Users.Remove(userDelete);
+            var user = context.Users.Remove(userDelete);
             context.SaveChanges();
+            return userDelete;
         }
 
         public async Task<User> GetByEmail(string email)
@@ -58,8 +59,13 @@ namespace WalkAndTravel.ClassLibrary.Repositories
             return await context.Users.FirstOrDefaultAsync(e => e.Id == id);
         }
 
+        public async Task<List<User>> GetUsers()
+        {
+            return await context.Users.ToListAsync();
+        }
         public async Task<User> EarnExp(int id, int exp)
         {
+            return await context.Users.ToListAsync();
                 var user = await context.Users.FirstOrDefaultAsync(e => e.Id == id);
                 Levels level = new Levels();
                 level.Exp = user.Exp;
