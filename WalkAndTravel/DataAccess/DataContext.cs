@@ -16,6 +16,10 @@ namespace WalkAndTravel.DataAccess
         public DbSet<Marker> Markers { get; set; }
         public DbSet<User> Users { get; set; }
 
-        public DataContext(DbContextOptions<DataContext> options) : base(options){}
+        public DataContext(DbContextOptions<DataContext> options)
+            : base(options)
+        {
+        }
+
     }
 }
