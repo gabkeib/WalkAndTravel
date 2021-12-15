@@ -20,6 +20,7 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -69,6 +70,8 @@ class _MyHomePageState extends State<MyHomePage> {
   final PanelController _panelController = PanelController();
   bool createRouteWindow = false;
   LatLng centerPosition = LatLng(54.68585, 25.28647);
+  String query = '';
+  String searchString = "";
 
   final FloatingSearchBarController _floatingSearchBarController = FloatingSearchBarController();
 
@@ -151,6 +154,29 @@ class _MyHomePageState extends State<MyHomePage> {
           body: jsonEncode(newRoute)
       );
       print('Response status: ${response.statusCode}');
+  }
+
+  void searchRoutes(String searchString) async{
+    var url = Uri.parse("http://10.0.2.2:5000/route/Search/$searchString");
+    http.Response response = await http.get(url);
+    print(response.body);
+    var value = jsonDecode(response.body);
+    var elements = value.length;
+    setState(() {
+      _routes.clear();
+      for (var i = 0; i < elements; i++) {
+        String routeName = value[i]['name'];
+        num length = value[i]['length'];
+        List<LatLng> coordinates = [];
+        for (var marker in value[i]['coordinates']) {
+          LatLng coordinate = LatLng(marker[0], marker[1]);
+          coordinates.add(coordinate);
+        }
+        int type = value[i]['type'];
+        a.Route route = a.Route(routeName, length, coordinates, type);
+        _routes.add(route);
+      }
+    });
   }
 
   void _exitCreationWindow() {
@@ -318,36 +344,41 @@ class _MyHomePageState extends State<MyHomePage> {
         ]);
   }
 
+
   Widget _browsingWindow() {
     return Column(
-      // Column is also a layout widget. It takes a list of children and
-      // arranges them vertically. By default, it sizes itself to fit its
-      // children horizontally, and tries to be as tall as its parent.
-      //
-      // Invoke "debug painting" (press "p" in the console, choose the
-      // "Toggle Debug Paint" action from the Flutter Inspector in Android
-      // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-      // to see the wireframe for each widget.
-      //
-      // Column has various properties to control how it sizes itself and
-      // how it positions its children. Here we use mainAxisAlignment to
-      // center the children vertically; the main axis here is the vertical
-      // axis because Columns are vertical (the cross axis would be
-      // horizontal).
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        const SizedBox(
-          height: 80,
-          child: Padding(
-            padding: EdgeInsets.all(1.0),
-            child: Text("Browse routes", style: TextStyle(fontSize: 40)),
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            child: TextField(
+              onChanged: (value) {
+                setState(() {
+                  searchRoutes(value);
+                });
+              },
+              decoration: const InputDecoration(
+                labelText: 'Search',
+                suffixIcon: Icon(Icons.search),
+              ),
+            ),
           ),
-        ),
-        //Expanded(
-        //child:
-        SizedBox(height: 150.0, child: _buildList()),
-        // ),
-      ],
+          const SizedBox(height: 10),
+          Expanded(
+            child: FutureBuilder(
+              initialData: const SizedBox(
+                height: 80,
+                child: Padding(
+                  padding: EdgeInsets.all(1.0),
+                  child: Text("Browse routes", style: TextStyle(fontSize: 40)),
+                ),
+              ), builder: (BuildContext context, AsyncSnapshot<SizedBox> snapshot) { return SizedBox(height: 150.0, child: _buildList());  },
+            ),
+          ),
+        ],
     );
   }
 
