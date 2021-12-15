@@ -185,5 +185,53 @@ namespace WalkAndTravel.ClassLibrary.Repositories
             }
             return routeNumbers;
         }
+
+        public List<Route> SearchRoutes(string keyword)
+        {
+           if(keyword == null)
+            {
+                return RoutesSelector();
+            }
+            List<Route> routes = new();
+            using (var context = new DataContext())
+            {
+                var searchRoute = context.Routes.Where(e => e.Name.ToLower().Trim().Contains(keyword.ToLower().Trim())).ToList();
+                foreach(var route in searchRoute)
+                {
+                    route.Markers = new List<Marker>();
+                    foreach (var marker in context.Markers)
+                    {
+                        if (route.RouteId == marker.RouteId)
+                        {
+                            route.Markers.Add(marker);
+                        }
+                    }
+                    routes.Add(route);
+                    route.Coordinates = Route.MarkersListToArray(route.Markers);
+                }
+            }
+            return routes;
+        }
+
+        public Route SearchRouteByID(int Id)
+        {
+            Route searchRoute = new();
+            using (var context = new DataContext())
+            {
+                searchRoute = context.Routes.FirstOrDefault(e => e.RouteId == Id);
+                searchRoute.Markers = new List<Marker>();
+                foreach(var marker in context.Markers)
+                {
+                    if(searchRoute.RouteId == marker.RouteId)
+                    {
+                        searchRoute.Markers.Add(marker);
+                    }
+                }
+                searchRoute.Coordinates = Route.MarkersListToArray(searchRoute.Markers);
+            }
+            return searchRoute;
+        }
+
+
     }
 }

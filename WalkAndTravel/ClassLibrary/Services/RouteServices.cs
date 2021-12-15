@@ -60,5 +60,15 @@ namespace WalkAndTravel.ClassLibrary.Services
             return _routeRepository.DeleteRoute(id);
         }
 
+        public List<Route> SearchRoutes(string keyword)
+        {
+            return _routeRepository.SearchRoutes(keyword);
+        }
+
+        public Route SearchRouteByID(int Id)
+        {
+            return _routeRepository.SearchRouteByID(Id);
+        }
+
     }
 }
