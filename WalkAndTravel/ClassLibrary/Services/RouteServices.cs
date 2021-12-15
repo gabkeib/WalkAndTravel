@@ -41,7 +41,6 @@ namespace WalkAndTravel.ClassLibrary.Services
         public async Task<IEnumerable<RoutesCounter>> GetRoutesNumbers()
         {
             var statistics = await _routeRepository.GetRoutesNumbers();
-            statistics.Sort();
             return statistics.ToArray();
         }
 
