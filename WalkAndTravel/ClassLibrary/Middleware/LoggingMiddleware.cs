@@ -29,10 +29,12 @@ namespace WalkAndTravel.ClassLibrary.Middleware
 
             var controllerName = controllerActionDescriptor.ControllerName;
             var actionName = controllerActionDescriptor.ActionName;
+            var request = context.Request;
+            var response = context.Response;
 
             await _next(context);
 
-            _logger.Information($"Action {actionName} invoked in controller {controllerName}");
+            _logger.Information($"Request type: {request.Path}, response type: {response.ContentType}. Action {actionName} invoked in controller {controllerName}");
         }
     }
 }

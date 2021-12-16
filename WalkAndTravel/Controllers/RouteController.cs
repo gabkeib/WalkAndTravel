@@ -17,13 +17,12 @@ namespace WalkAndTravel.Controllers
     public class RouteController : ControllerBase
     {
 
-        public event EventHandler<ClassLibrary.Logging.LogEventArgs> Log;
         private IRouteServices _routeServices;
 
         public RouteController(IRouteServices routeServices)
         {
-            Log += ClassLibrary.Logging.Logger.Log;
             _routeServices = routeServices;
+
         }
 
         [HttpPost("SaveNewRoute")]
@@ -34,21 +33,18 @@ namespace WalkAndTravel.Controllers
             {
                 return BadRequest();
             }
-            Log(this, new ClassLibrary.Logging.LogEventArgs("Save route", "Custom", routes.Name));
             return Ok(route);
         }
 
         [HttpGet("RandomPOIRoute")]
         public Route GetRandomPOIRoute()
         {
-            Log(this, new ClassLibrary.Logging.LogEventArgs("Generate route", "Sightseeing", "NoName"));
             return _routeServices.GetRandomPOIRoute();
         }
 
         [HttpGet("RandomRoute")]
         public Route GetRandomRoute()
         {
-            Log(this, new ClassLibrary.Logging.LogEventArgs("Generate route", "City", "NoName"));
             return _routeServices.GetRandomRoute();
         }
 
