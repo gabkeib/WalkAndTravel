@@ -65,7 +65,6 @@ namespace WalkAndTravel.ClassLibrary.Repositories
         }
         public async Task<User> EarnExp(int id, int exp)
         {
-            return await context.Users.ToListAsync();
                 var user = await context.Users.FirstOrDefaultAsync(e => e.Id == id);
                 Levels level = new Levels();
                 level.Exp = user.Exp;

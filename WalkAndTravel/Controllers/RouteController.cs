@@ -30,7 +30,7 @@ namespace WalkAndTravel.Controllers
         public IActionResult SaveNewRoute([FromBody] RouteMinimal routes)
         {
             var route = _routeServices.SaveNewRoute(routes);
-            if(route == -1)
+            if (route == -1)
             {
                 return BadRequest();
             }

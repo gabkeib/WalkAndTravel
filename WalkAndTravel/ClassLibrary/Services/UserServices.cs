@@ -17,13 +17,6 @@ namespace WalkAndTravel.ClassLibrary.Services
             _userRepository = userRepository;
         }
 
-        public async Task<IEnumerable<User>> GetUsers()
-        {
-            var users = await _userRepository.GetUsers();
-            return users.Select(user => user
-            ).ToArray();
-        }
-
         public int CreateNewUser(User user)
         {
             return _userRepository.CreateNewUser(user);

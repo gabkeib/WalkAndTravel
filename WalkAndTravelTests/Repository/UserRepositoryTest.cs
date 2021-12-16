@@ -31,7 +31,7 @@ namespace WalkAndTravelTests.Repository
                 user1.Email = "mail@gmai.com";
                 user1.Age = 20;
                 user1.Name = "Kazimeras";
-                user1.Nickname = "Kazys";
+                user1.Username = "Kazys";
                 user1.Password = "50F694693F42F1823689BCB4C2D994AF3DDB2D9F551E9DD4FC8727F4E79F5F4F";
 
                 User user2 = new User();

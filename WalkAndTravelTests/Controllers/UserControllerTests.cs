@@ -16,7 +16,7 @@ namespace WalkAndTravelTests.Controllers
     public class UserControllerTests
     {
         [Fact]
-        public async void UserController_Register_CreatesUser()
+        public void UserController_Register_CreatesUser()
         {
             var userService = new Mock<IUserServices>();
 
@@ -30,17 +30,14 @@ namespace WalkAndTravelTests.Controllers
             user2.Name = "Jurgita";
             user2.Password = "9878A9C30DE5A9B48D2506D3628E4F4BA86FA5BC17244BE86406FEB68CCE1AC9";
 
-            var response = await controller.Register(user2);
+            var response = controller.Register(user2);
            
-            var okObjectResult = response as CreatedResult;
+            var okObjectResult = response as OkObjectResult;
             Assert.NotNull(okObjectResult);
-
-            var actual = okObjectResult.Value;
-            Assert.Equal(1, actual);
         }
 
         [Fact]
-        public async void UserController_Register_CreatesSameUser()
+        public void UserController_Register_CreatesSameUser()
         {
             var userService = new Mock<IUserServices>();
 
@@ -59,7 +56,7 @@ namespace WalkAndTravelTests.Controllers
             user2.Name = "Jin";
             user2.Password = "B571746DDC21C2C46A71711101B298DD4316E1EA1BEE7C0A128E354B7E5625C9";
 
-            var response = await controller.Register(user2);
+            var response = controller.Register(user2);
 
             Assert.IsType<BadRequestObjectResult>(response);
         }
