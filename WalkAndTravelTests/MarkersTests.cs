@@ -65,5 +65,23 @@ namespace WalkAndTravelTests
             var exceptionData = Assert.Throws<WalkAndTravel.ClassLibrary.Exceptions.IllegalLatLngException>(() => marker.Longitude = 200);
             Assert.Equal("Illegal longitude. Must be in interval [-180, 180]", exceptionData.Message);
         }
+
+        [Fact]
+        public void Markers_Latitude_SetsCorrectLatitude()
+        {
+            var marker = new Marker(65.5, 13.84);
+            marker.Latitude = 80;
+            Assert.Equal(80, marker.Latitude);
+            Assert.Equal(13.84, marker.Longitude);
+        }
+
+        [Fact]
+        public void Markers_Longitude_SetsCorrectLongitude()
+        {
+            var marker = new Marker(65.5, 13.84);
+            marker.Longitude = -80;
+            Assert.Equal(-80, marker.Longitude);
+            Assert.Equal(65.5, marker.Latitude);
+        }
     }
 }

@@ -36,8 +36,6 @@ namespace WalkAndTravel.Controllers
             _jwtService = new JwtService();
         }
 
-        }
-
         [HttpPost("register")]
         public IActionResult Register(RegisterDto dto)
         {

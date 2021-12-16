@@ -75,7 +75,7 @@ namespace WalkAndTravelTests.Services
             List<Marker> markers1 = new List<Marker> { new Marker(54.6866, 25.288), new Marker(54.6902, 25.2764) };
             List<double[]> markersC1 = new List<double[]> { new double[] { 54.6866, 25.288 }, new double[] { 54.6902, 25.2764 } };
             var route1 = new Route(3.2, markers1, markersC1, name: "Route1", LengthType.Medium);
-            var route2 = new Route(3.2, markers1, markersC1, name: "Route1", LengthType.Medium);
+            var route2 = new Route(3.2, markers1, markersC1, name: "Route2", LengthType.Medium);
             var routesList = new List<Route> { route1, route2 };
 
 
@@ -85,8 +85,28 @@ namespace WalkAndTravelTests.Services
             var routes = await service.GetRoutes();
             var routesNewList = routes.ToList();
             Assert.Equal(2, routesNewList.Count);
-
         }
+
+        [Fact]
+        public void RouteService_SearchRoutes_ReturnsCorrectSize()
+        {
+            var repository = new Mock<IRouteRepository>();
+
+            List<Marker> markers1 = new List<Marker> { new Marker(54.6866, 25.288), new Marker(54.6902, 25.2764) };
+            List<double[]> markersC1 = new List<double[]> { new double[] { 54.6866, 25.288 }, new double[] { 54.6902, 25.2764 } };
+            var route1 = new Route(3.2, markers1, markersC1, name: "Route1", LengthType.Medium);
+            var route2 = new Route(3.2, markers1, markersC1, name: "Route2", LengthType.Medium);
+            var routesList = new List<Route> { route1, route2 };
+
+
+            repository.Setup(mr => mr.SearchRoutes(It.IsAny<string>())).Returns(routesList);
+            var service = new RouteServices(repository.Object);
+
+            var routes = service.SearchRoutes("rout");
+            var routesNewList = routes.ToList();
+            Assert.Equal(2, routesNewList.Count);
+        }
+
         [Fact]
         public async void RouteService_GetRoutesNumbers_ReturnsCorrectSize()
         {
@@ -101,6 +121,56 @@ namespace WalkAndTravelTests.Services
             var routes = await service.GetRoutesNumbers();
             var routesNewList = routes.ToList();
             Assert.Equal(2, routesNewList.Count);
+
+        }
+        [Fact]
+        public void RouteService_SaveNewRoute_ReturnsNumber()
+        {
+            List<Marker> markers = new List<Marker> { new Marker(54.6866, 25.288), new Marker(54.717755, 25.221089) };
+            double[] markersC = new double[] { 54.6866, 25.288, 54.717755, 25.221089 };
+            var route4 = new RouteMinimal();
+
+            var repository = new Mock<IRouteRepository>();
+            repository.Setup(mr => mr.SaveNewRoute(It.IsAny<RouteMinimal>())).Returns(1);
+            
+            var service = new RouteServices(repository.Object);
+            var response = service.SaveNewRoute(route4);
+
+            Assert.Equal(1, response);
+
+        }
+
+        [Fact]
+        public void RouteService_DeleteRoute_ReturnsRoute()
+        {
+            List<Marker> markers1 = new List<Marker> { new Marker(54.6866, 25.288), new Marker(54.6902, 25.2764) };
+            List<double[]> markersC1 = new List<double[]> { new double[] { 54.6866, 25.288 }, new double[] { 54.6902, 25.2764 } };
+            var route1 = new Route(3.2, markers1, markersC1, name: "Route1", LengthType.Medium);
+
+            var repository = new Mock<IRouteRepository>();
+            repository.Setup(mr => mr.DeleteRoute(It.IsAny<int>())).Returns(route1);
+
+            var service = new RouteServices(repository.Object);
+            var response = service.DeleteRoute(4);
+
+            Assert.Equal("Route1", response.Name);
+
+        }
+
+        [Fact]
+        public void RouteService_SearchRouteById_ReturnsRoute()
+        {
+            List<Marker> markers1 = new List<Marker> { new Marker(54.6866, 25.288), new Marker(54.6902, 25.2764) };
+            List<double[]> markersC1 = new List<double[]> { new double[] { 54.6866, 25.288 }, new double[] { 54.6902, 25.2764 } };
+            var route1 = new Route(3.2, markers1, markersC1, name: "Route1", LengthType.Medium);
+
+            var repository = new Mock<IRouteRepository>();
+            repository.Setup(mr => mr.SearchRouteByID(It.IsAny<int>())).Returns(route1);
+
+            var service = new RouteServices(repository.Object);
+            var response = service.SearchRouteByID(4);
+
+            Assert.Equal("Route1", response.Name);
 
         }
     }

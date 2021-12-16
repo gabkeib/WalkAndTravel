@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WalkAndTravel.ClassLibrary;
+using WalkAndTravel.ClassLibrary.Models;
 using WalkAndTravel.ClassLibrary.Repositories;
 using WalkAndTravel.ClassLibrary.Services;
 using WalkAndTravel.DataAccess;
@@ -43,11 +44,16 @@ namespace WalkAndTravel.Controllers
         }
 
         [HttpGet("RandomRoute")]
-        public Route GetRandomRoute()
+        public Route GetRoutes()
         {
             return _routeServices.GetRandomRoute();
         }
 
+        [HttpGet("Routes/{page?}/{size?}")]
+        public Task<IEnumerable<Route>> GetPagingRouteList(int page, int size)
+        {
+            return _routeServices.GetPagingRouteList(page, size);
+        }
 
         [HttpGet("Route")]
         public async Task<IEnumerable<Route>> Get()
@@ -59,6 +65,18 @@ namespace WalkAndTravel.Controllers
         public IEnumerable<Route> GetByKeyword(string id)
         {
             return _routeServices.SearchRoutes(id);
+        }
+
+        [HttpDelete("Delete/{id?}")]
+        public Route DeleteById(int id)
+        {
+            return _routeServices.DeleteRoute(id);
+        }
+
+        [HttpGet("Statistics")]
+        public async Task<IEnumerable<RoutesCounter>> GetStatistics()
+        {
+            return await _routeServices.GetRoutesNumbers();
         }
 
         [HttpGet("{id}")]
