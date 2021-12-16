@@ -8,12 +8,12 @@ namespace WalkAndTravel.ClassLibrary.Repositories
 {
     public interface IUserRepository
     {
-        Task<List<User>> GetUsers();
-
         int CreateNewUser(User user);
 
         Task<User> GetByEmail(string email);
 
         Task<User> GetById(int id);
+
+        Task<User> EarnExp(int id, int exp);
     }
 }

@@ -40,6 +40,10 @@ dependencies:
   flutter_map_marker_popup: any
   material_floating_search_bar: any
 
+#Login code start --------------------
+  api_cache_manager: ^1.0.2
+  snippet_coder_utils: ^1.0.9
+#Login code end -----------------------
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -68,8 +72,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/images/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -10,6 +10,12 @@ namespace WalkAndTravel.ClassLibrary.Repositories
 {
     public class RouteRepository : IRouteRepository
     {
+        private DataContext context;
+        public RouteRepository(DataContext context)
+        {
+            this.context = context;
+        }
+
         public Route GetRandomPOIRoute()
         {
             var rng = new Random();
@@ -44,24 +50,20 @@ namespace WalkAndTravel.ClassLibrary.Repositories
         private List<Route> RoutesSelector()
         {
             List<Route> routes = new();
-            using (var context = new DataContext())
+
+            foreach (var route in context.Routes.ToList())
             {
+                route.Markers = new List<Marker>();
 
-                foreach (var route in context.Routes.ToList())
+                foreach (var marker in context.Markers)
                 {
-                    route.Markers = new List<Marker>();
-
-                    foreach (var marker in context.Markers)
+                    if (marker.RouteId == route.RouteId)
                     {
-                        if (marker.RouteId == route.RouteId)
-                        {
-                            route.Markers.Add(marker);
-                        }
+                        route.Markers.Add(marker);
                     }
-                    route.Coordinates = Route.MarkersListToArray(route.Markers);
-                    routes.Add(route);
-
                 }
+                route.Coordinates = Route.MarkersListToArray(route.Markers);
+                routes.Add(route);
             }
 
             return routes;
@@ -82,24 +84,21 @@ namespace WalkAndTravel.ClassLibrary.Repositories
         private List<Route> PagingRouteList(int page, int elements)
         {
             List<Route> routes = new();
-            using (var context = new DataContext())
+
+            var currentRoutes = context.Routes.Skip(page * elements).Take(elements).ToList();
+            foreach (var route in currentRoutes)
             {
-                var currentRoutes = context.Routes.Skip(page * elements).Take(elements).ToList();
-                foreach (var route in currentRoutes)
+                route.Markers = new List<Marker>();
+
+                foreach (var marker in context.Markers)
                 {
-                    route.Markers = new List<Marker>();
-
-                    foreach (var marker in context.Markers)
+                    if (marker.RouteId == route.RouteId)
                     {
-                        if (marker.RouteId == route.RouteId)
-                        {
-                            route.Markers.Add(marker);
-                        }
+                        route.Markers.Add(marker);
                     }
-                    route.Coordinates = Route.MarkersListToArray(route.Markers);
-                    routes.Add(route);
-
                 }
+                route.Coordinates = Route.MarkersListToArray(route.Markers);
+                routes.Add(route);
             }
             return routes;
         }
@@ -120,49 +119,43 @@ namespace WalkAndTravel.ClassLibrary.Repositories
             }
             newRoute.Length = 2.3;
             newRoute.PickLengthType();
-            using (var context = new DataContext())
+            int id = 0;
+            context.Routes.Add(newRoute);
+            try
             {
-                int id = 0;
-                context.Routes.Add(newRoute);
-                try
-                {
-                    context.SaveChanges();
-                }
-                catch (DbUpdateException e)
-                {
-                    return -1;
-                }
-
-                foreach (var route in context.Routes)
-                {
-                    if (route.Name == newRoute.Name)
-                    {
-                        id = route.RouteId;
-                        break;
-                    }
-                }
-
-                //Log(this, new ClassLibrary.Logging.LogEventArgs("Save route", "Custom", newRoute.Name));
-                return id;
-            }
-        }
-
-        public int DeleteRoute(int Id)
-        {
-            using (var context = new DataContext())
-            {
-                var routeDelete = context.Routes.FirstOrDefault(e => e.RouteId == Id);
-                context.Routes.Remove(routeDelete);
-                foreach (var markerDelete in context.Markers)
-                {
-                    if (markerDelete.RouteId == Id)
-                    {
-                        context.Markers.Remove(markerDelete);
-                    }
-                }
                 context.SaveChanges();
             }
-            return 0;
+            catch (DbUpdateException e)
+            {
+                return -1;
+            }
+
+            foreach (var route in context.Routes)
+            {
+                if (route.Name == newRoute.Name)
+                {
+                    id = route.RouteId;
+                    break;
+                }
+            }
+
+            //Log(this, new ClassLibrary.Logging.LogEventArgs("Save route", "Custom", newRoute.Name));
+            return id;
+        }
+
+        public Route DeleteRoute(int Id)
+        {
+            var routeDelete = context.Routes.FirstOrDefault(e => e.RouteId == Id);
+            context.Routes.Remove(routeDelete);
+            foreach (var markerDelete in context.Markers)
+            {
+                if (markerDelete.RouteId == Id)
+                {
+                    context.Markers.Remove(markerDelete);
+                }
+            }
+            context.SaveChanges();
+            return routeDelete;
         }
 
 
@@ -173,42 +166,36 @@ namespace WalkAndTravel.ClassLibrary.Repositories
         private List<RoutesCounter> CalculateRoutesNumbers()
         {
             List<RoutesCounter> routeNumbers = new();
-            using (var context = new DataContext())
+            var results = context.Routes.GroupBy(l => l.Type).Select(lg => new { Type = lg.Key, Routes = lg.Count() });
+            foreach (var x in results)
             {
-                var results = context.Routes.GroupBy(l => l.Type).Select(lg => new { Type = lg.Key, Routes = lg.Count() });
-                foreach (var x in results)
-                {
-                    var type = x.Type.ToString();
-                    routeNumbers.Add(new RoutesCounter(type, x.Routes));
-                }
-
+                var type = x.Type.ToString();
+                routeNumbers.Add(new RoutesCounter(type, x.Routes));
             }
             return routeNumbers;
         }
 
         public List<Route> SearchRoutes(string keyword)
         {
-           if(keyword == null)
+
+           if (keyword == null)
             {
                 return RoutesSelector();
             }
             List<Route> routes = new();
-            using (var context = new DataContext())
+            var searchRoute = context.Routes.Where(e => e.Name.ToLower().Trim().Contains(keyword.ToLower().Trim())).ToList();
+            foreach (var route in searchRoute)
             {
-                var searchRoute = context.Routes.Where(e => e.Name.ToLower().Trim().Contains(keyword.ToLower().Trim())).ToList();
-                foreach(var route in searchRoute)
+                route.Markers = new List<Marker>();
+                foreach (var marker in context.Markers)
                 {
-                    route.Markers = new List<Marker>();
-                    foreach (var marker in context.Markers)
+                    if (route.RouteId == marker.RouteId)
                     {
-                        if (route.RouteId == marker.RouteId)
-                        {
-                            route.Markers.Add(marker);
-                        }
+                        route.Markers.Add(marker);
                     }
-                    routes.Add(route);
-                    route.Coordinates = Route.MarkersListToArray(route.Markers);
                 }
+                routes.Add(route);
+                route.Coordinates = Route.MarkersListToArray(route.Markers);
             }
             return routes;
         }
@@ -216,22 +203,18 @@ namespace WalkAndTravel.ClassLibrary.Repositories
         public Route SearchRouteByID(int Id)
         {
             Route searchRoute = new();
-            using (var context = new DataContext())
+            searchRoute = context.Routes.FirstOrDefault(e => e.RouteId == Id);
+            searchRoute.Markers = new List<Marker>();
+            foreach (var marker in context.Markers)
             {
-                searchRoute = context.Routes.FirstOrDefault(e => e.RouteId == Id);
-                searchRoute.Markers = new List<Marker>();
-                foreach(var marker in context.Markers)
+                if (searchRoute.RouteId == marker.RouteId)
                 {
-                    if(searchRoute.RouteId == marker.RouteId)
-                    {
-                        searchRoute.Markers.Add(marker);
-                    }
+                    searchRoute.Markers.Add(marker);
                 }
-                searchRoute.Coordinates = Route.MarkersListToArray(searchRoute.Markers);
             }
+            searchRoute.Coordinates = Route.MarkersListToArray(searchRoute.Markers);
             return searchRoute;
         }
-
-
     }
 }
+

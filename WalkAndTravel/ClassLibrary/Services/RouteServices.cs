@@ -55,7 +55,7 @@ namespace WalkAndTravel.ClassLibrary.Services
             return _routeRepository.SaveNewRoute(routes);
         }
 
-        public int DeleteRoute(int id)
+        public Route DeleteRoute(int id)
         {
             return _routeRepository.DeleteRoute(id);
         }

@@ -20,7 +20,7 @@ namespace WalkAndTravel.ClassLibrary.Services
 
         int SaveNewRoute(RouteMinimal routes);
 
-        int DeleteRoute(int id);
+        Route DeleteRoute(int id);
 
         List<Route> SearchRoutes(string keyword);
 

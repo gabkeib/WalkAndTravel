@@ -9,7 +9,6 @@ using WalkAndTravel.ClassLibrary.Repositories;
 using WalkAndTravel.ClassLibrary.Services;
 using WalkAndTravel.DataAccess;
 
-
 namespace WalkAndTravel.Controllers
 {
     [ApiController]
@@ -18,16 +17,12 @@ namespace WalkAndTravel.Controllers
     {
 
         public event EventHandler<ClassLibrary.Logging.LogEventArgs> Log;
-        private readonly ILogger<RouteController> _logger;
-
         private IRouteServices _routeServices;
 
-        public RouteController(ILogger<RouteController> logger)
+        public RouteController(IRouteServices routeServices)
         {
             Log += ClassLibrary.Logging.Logger.Log;
-            _logger = logger;
-            _routeServices = new RouteServices(new RouteRepository());
-
+            _routeServices = routeServices;
         }
 
         [HttpPost("SaveNewRoute")]
