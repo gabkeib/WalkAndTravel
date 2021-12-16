@@ -16,14 +16,6 @@ namespace WalkAndTravel.DataAccess
         public DbSet<Marker> Markers { get; set; }
         public DbSet<User> Users { get; set; }
 
-        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer(ConnectionString);
-        }*/
-        public DataContext(DbContextOptions<DataContext> options) : base(options)
-        {
-
-        }
+        public DataContext(DbContextOptions<DataContext> options) : base(options){}
     }
 }

@@ -17,7 +17,6 @@ namespace WalkAndTravel.Controllers
     {
 
         public event EventHandler<ClassLibrary.Logging.LogEventArgs> Log;
-
         private IRouteServices _routeServices;
 
         public RouteController(IRouteServices routeServices)

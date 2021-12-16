@@ -19,6 +19,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
+
 namespace WalkAndTravel.Controllers
 {
     [ApiController]
@@ -27,8 +28,6 @@ namespace WalkAndTravel.Controllers
     {
         private readonly JwtService _jwtService;
         private readonly IUserServices _userServices;
-        // [Authorize]
-
 
         public UserController(IUserServices services)
         {
@@ -63,8 +62,6 @@ namespace WalkAndTravel.Controllers
             _userServices.CreateNewUser(user);
             return Ok(new { message = "Success" });
         }
-
-
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto dto)

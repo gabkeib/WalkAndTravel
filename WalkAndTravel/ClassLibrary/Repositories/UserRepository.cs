@@ -17,6 +17,7 @@ namespace WalkAndTravel.ClassLibrary.Repositories
             this.context = context;
         }
 
+
         public int CreateNewUser(User user)
         {
             System.Diagnostics.Debug.WriteLine("here");

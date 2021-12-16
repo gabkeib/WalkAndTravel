@@ -38,12 +38,8 @@ namespace WalkAndTravel
             services.AddScoped<IUserServices, UserServices>();
             services.AddScoped<IRouteRepository, RouteRepository>();
             services.AddScoped<IRouteServices, RouteServices>();
-            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            //    .AddCookie(options => { options.EventsType = typeof(CustomCookieAuthEvents); });
-            //services.AddScoped<CustomCookieAuthEvents>();
             services.AddSingleton(x => Log.Logger);
         }
-
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -61,7 +57,6 @@ namespace WalkAndTravel
 
             app.UseRouting();
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
 
             //app.UseMiddleware<LoggingMiddleware>();

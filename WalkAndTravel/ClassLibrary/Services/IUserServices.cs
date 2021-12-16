@@ -15,5 +15,6 @@ namespace WalkAndTravel.ClassLibrary.Services
         Task<User> GetById(int id);
 
         Task<User> EarnExp(int id, int exp);
+
     }
 }

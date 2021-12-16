@@ -15,6 +15,7 @@ namespace WalkAndTravel.ClassLibrary.Repositories
         {
             this.context = context;
         }
+
         public Route GetRandomPOIRoute()
         {
             var rng = new Random();
@@ -63,7 +64,6 @@ namespace WalkAndTravel.ClassLibrary.Repositories
                 }
                 route.Coordinates = Route.MarkersListToArray(route.Markers);
                 routes.Add(route);
-
             }
 
             return routes;
@@ -99,7 +99,6 @@ namespace WalkAndTravel.ClassLibrary.Repositories
                 }
                 route.Coordinates = Route.MarkersListToArray(route.Markers);
                 routes.Add(route);
-
             }
             return routes;
         }
@@ -178,7 +177,8 @@ namespace WalkAndTravel.ClassLibrary.Repositories
 
         public List<Route> SearchRoutes(string keyword)
         {
-            if (keyword == null)
+
+           if (keyword == null)
             {
                 return RoutesSelector();
             }
@@ -215,7 +215,6 @@ namespace WalkAndTravel.ClassLibrary.Repositories
             searchRoute.Coordinates = Route.MarkersListToArray(searchRoute.Markers);
             return searchRoute;
         }
-
-
     }
 }
+
