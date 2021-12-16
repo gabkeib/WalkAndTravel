@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/coveragereport
+/WalkAndTravel/log-20211215.txt
+/WalkAndTravel/log-20211216.txt
