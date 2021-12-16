@@ -32,13 +32,26 @@ namespace WalkAndTravel.ClassLibrary
         public double Latitude
         {
             get { return _lat; }
-            set { _lat = value; }
+            set {
+                if (value> 90 || value < -90)
+                {
+                    throw new Exceptions.IllegalLatLngException("Illegal latitude. Must be in interval [-90, 90]");
+                }
+                else _lat = value; 
+            }
         }
 
         public double Longitude
         {
             get { return _lng; }
-            set { _lng = value; }
+            set {
+                if (value > 180 || value < -180)
+                {
+                    throw new Exceptions.IllegalLatLngException("Illegal longitude. Must be in interval [-180, 180]");
+                }
+                else 
+                    _lng = value; 
+            }
         }
 
     }

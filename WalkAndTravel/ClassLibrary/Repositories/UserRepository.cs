@@ -11,13 +11,10 @@ namespace WalkAndTravel.ClassLibrary.Repositories
     public class UserRepository : IUserRepository
     {
         private DataContext context;
-
-        public UserRepository (DataContext context)
+        public UserRepository(DataContext context)
         {
             this.context = context;
         }
-
-
         public int CreateNewUser(User user)
         {
             System.Diagnostics.Debug.WriteLine("here");
@@ -41,25 +38,31 @@ namespace WalkAndTravel.ClassLibrary.Repositories
                     break;
                 }
             }
+            //Log(this, new ClassLibrary.Logging.LogEventArgs("Save route", "Custom", newRoute.Name));
             return id;
         }
 
-        public void DeleteUser(int Id)
+        public User DeleteUser(int Id)
         {
-                var userDelete = context.Users.FirstOrDefault(e => e.Id == Id);
-                context.Users.Remove(userDelete);
-                context.SaveChanges();
+            var userDelete = context.Users.FirstOrDefault(e => e.Id == Id);
+            var user = context.Users.Remove(userDelete);
+            context.SaveChanges();
+            return userDelete;
         }
 
         public async Task<User> GetByEmail(string email)
         {
-                return await context.Users.FirstOrDefaultAsync(e => e.Email == email);
+            return await context.Users.FirstOrDefaultAsync(e => e.Email == email);
         }
         public async Task<User> GetById(int id)
         {
-                return await context.Users.FirstOrDefaultAsync(e => e.Id == id);
+            return await context.Users.FirstOrDefaultAsync(e => e.Id == id);
         }
 
+        public async Task<List<User>> GetUsers()
+        {
+            return await context.Users.ToListAsync();
+        }
         public async Task<User> EarnExp(int id, int exp)
         {
                 var user = await context.Users.FirstOrDefaultAsync(e => e.Id == id);
@@ -71,7 +74,7 @@ namespace WalkAndTravel.ClassLibrary.Repositories
                 user.Level = level.Level;
                 context.Users.Update(user);
                 context.SaveChanges();
-                return user; 
+                return user;
         }
     }
 }

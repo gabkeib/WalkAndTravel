@@ -20,10 +20,11 @@ namespace WalkAndTravel.ClassLibrary
 
         public Route()
         {
-
+            _coordinates = new List<double[]>();
+            _markers = new List<Marker>();
         }
         public Route( double length, List<Marker> markers, List<double[]> coords = null, string name = "None", LengthType type = LengthType.None)
-        { _name = name; _length = length; _markers = markers; _coordinates = coords; _type = type; }
+        { _name = name; _length = length; _markers = markers; _coordinates = coords; _type = type; _coordinates = new List<double[]>(); _markers = new List<Marker>(); }
 
         [Column("Id")]
         public int RouteId { get; set; }
