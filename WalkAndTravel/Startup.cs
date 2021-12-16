@@ -1,9 +1,18 @@
+using Flurl.Http.Configuration;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
+using WalkAndTravel.ClassLibrary.Middleware;
+using WalkAndTravel.ClassLibrary.Repositories;
+using WalkAndTravel.ClassLibrary.Services;
+using WalkAndTravel.DataAccess;
 
 namespace WalkAndTravel
 {
@@ -19,15 +28,22 @@ namespace WalkAndTravel
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            Log.Logger = new LoggerConfiguration()
+                 .WriteTo.File("log-.txt", rollingInterval: RollingInterval.Day)
+                 .CreateLogger();
 
             services.AddControllersWithViews();
-
-            // In production, the React files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/build";
-            });
+            services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserServices, UserServices>();
+            services.AddScoped<IRouteRepository, RouteRepository>();
+            services.AddScoped<IRouteServices, RouteServices>();
+            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            //    .AddCookie(options => { options.EventsType = typeof(CustomCookieAuthEvents); });
+            //services.AddScoped<CustomCookieAuthEvents>();
+            services.AddSingleton(x => Log.Logger);
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -42,9 +58,13 @@ namespace WalkAndTravel
             }
 
             app.UseStaticFiles();
-            app.UseSpaStaticFiles();
 
             app.UseRouting();
+            app.UseHttpsRedirection();
+
+            app.UseAuthorization();
+
+            //app.UseMiddleware<LoggingMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
@@ -53,15 +73,7 @@ namespace WalkAndTravel
                     pattern: "{controller}/{action=Index}/{id?}");
             });
 
-            app.UseSpa(spa =>
-            {
-                spa.Options.SourcePath = "ClientApp";
 
-                if (env.IsDevelopment())
-                {
-                    spa.UseReactDevelopmentServer(npmScript: "start");
-                }
-            });
         }
     }
 }

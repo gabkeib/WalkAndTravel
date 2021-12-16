@@ -64,8 +64,12 @@
     <Build Include="Tables\Routes.sql" />
     <Build Include="Tables\Markers.sql" />
     <Build Include="Views\FullRoute.sql" />
+    <Build Include="Tables\Users.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PublishLocations\WAT_DataBase1.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="WAT_DataBase.refactorlog" />
   </ItemGroup>
 </Project>
