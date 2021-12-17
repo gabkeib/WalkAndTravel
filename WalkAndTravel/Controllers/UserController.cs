@@ -92,5 +92,15 @@ namespace WalkAndTravel.Controllers
             Response.Cookies.Delete("jwt");
             return Ok(new { message = "Success" });
         }
+
+        [HttpPost("farm")]
+        public async Task<IActionResult> FarmExp([FromBody] ExpDto dto)
+        { 
+
+            var user = await _userServices.GetByEmail(dto.Email);
+            var user1 = await _userServices.EarnExp(user.Id, dto.Exp);
+            return Ok(user1);
+
+        }
     }
 }

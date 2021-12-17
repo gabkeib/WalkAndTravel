@@ -7,7 +7,12 @@ import 'package:latlong2/latlong.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
+import 'package:walk_and_travel/models/experience_gainer.dart';
 import 'package:walk_and_travel/models/location_marker.dart';
+import 'package:walk_and_travel/models/route_with_id.dart';
+import 'package:walk_and_travel/models/route_with_id.dart';
+import 'package:walk_and_travel/models/route_with_id.dart';
+import 'package:walk_and_travel/models/route_with_id.dart';
 import 'package:walk_and_travel/services/api_service.dart';
 import 'package:walk_and_travel/services/shared_service.dart';
 import 'package:walk_and_travel/widgets/osmmap.dart';
@@ -25,6 +30,12 @@ class MyHomePage2 extends StatefulWidget {
 }
 
 class _MyHomePage2State extends State<MyHomePage2> {
+  int userId = 6;
+  String username = "User";
+  String email = "";
+  int level = 0;
+  int exp = 0;
+  int _EndExp = 0;
   final List<LocationMarker> _locations = [];
   final List<a.Route> _routes = [];
   a.Route _currentRoute = a.Route(
@@ -33,11 +44,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
   bool createRouteWindow = false;
   LatLng centerPosition = LatLng(54.68585, 25.28647);
   String searchString = "";
-  int userId = 0;
-  String username = "User";
-  int level = 10;
-  int exp = 200;
-  int _EndExp = 0;
+
   final FloatingSearchBarController _floatingSearchBarController = FloatingSearchBarController();
 
   @override
@@ -49,7 +56,6 @@ class _MyHomePage2State extends State<MyHomePage2> {
 
   void _incrementCounter() {
     setState(() {
-      setUserDetails();
       getRoutes();
     });
   }
@@ -105,8 +111,10 @@ class _MyHomePage2State extends State<MyHomePage2> {
       convCoordinates.add(pos.latitude);
       convCoordinates.add(pos.longitude);
     }
-    b.MinimalRoute newRoute = b.MinimalRoute(route.name, convCoordinates);
-    var url = Uri.parse("http://10.0.2.2:5000/route/SaveNewRoute");
+    print(convCoordinates);
+    RouteWithId newRoute = RouteWithId(route.name, userId, convCoordinates);
+    print(newRoute.coords);
+    var url = Uri.parse("http://10.0.2.2:5000/route/SaveRouteWithId");
     http.Response response = await http.post(
         url,
         headers: <String, String>{
@@ -114,6 +122,20 @@ class _MyHomePage2State extends State<MyHomePage2> {
           'Content-Type': 'application/json'
         },
         body: jsonEncode(newRoute)
+    );
+    print('Response status: ${response.statusCode}');
+  }
+
+  void sendExp() async {
+    ExperienceGainer experienceGainer = ExperienceGainer(email, 50);
+    var url = Uri.parse("http://10.0.2.2:5000/user/farm");
+    http.Response response = await http.post(
+        url,
+        headers: <String, String>{
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: jsonEncode(experienceGainer)
     );
     print('Response status: ${response.statusCode}');
   }
@@ -435,11 +457,16 @@ class _MyHomePage2State extends State<MyHomePage2> {
   }
 
   void setUserDetails(){
-    APIService.getUser(widget.tokenMain).then((response) {
-      level: response.level;
-      exp: response.exp;
-      username: response.username;
-      _EndExp: response.level*125;
+    setState(() {
+      APIService.getUser(widget.tokenMain).then((response) {
+        level = response.level;
+        exp = response.exp;
+        email = response.email;
+        username = response.username;
+        _EndExp = response.level*125;
+        userId = response.id;
+    });
+
     });
   }
 
@@ -502,8 +529,8 @@ class _MyHomePage2State extends State<MyHomePage2> {
               backgroundColor: Colors.grey[200],
             ),
             Container(
-              child: const Center(
-                child: Text('Level 5', style: TextStyle(fontStyle: FontStyle.italic, color: Colors.black, fontSize: 30)),
+              child: Center(
+                child: Text('Level $level', style: TextStyle(fontStyle: FontStyle.italic, color: Colors.black, fontSize: 30)),
               ),
               padding: const EdgeInsets.all(8),
             ),
@@ -519,7 +546,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
             ),
             ElevatedButton(
               style: style,
-              onPressed: () => _getRandomRoute(),
+              onPressed: () { sendExp(); setUserDetails ;},
               child: const Text("Get experience"),
             ),
           ],
