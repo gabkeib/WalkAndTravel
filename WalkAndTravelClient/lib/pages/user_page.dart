@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+/*import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 import 'package:walk_and_travel/models/logout_response.dart';
@@ -19,7 +19,7 @@ class _UserPageState extends State<UserPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Flutter+node+jwt"),
+        title: Text("Logged In"),
         elevation: 0,
         actions:[
           IconButton(
@@ -66,4 +66,4 @@ class _UserPageState extends State<UserPage> {
       }
     );
   }
-}
+}*/

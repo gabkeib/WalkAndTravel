@@ -8,6 +8,7 @@ import 'package:walk_and_travel/models/login_response.dart';
 import 'package:walk_and_travel/models/register_request.dart';
 import 'package:walk_and_travel/models/register_response.dart';
 import 'package:walk_and_travel/models/logout_response.dart';
+import 'package:walk_and_travel/models/user_response.dart';
 import 'package:walk_and_travel/services/shared_service.dart';
 
 class APIService {
@@ -27,7 +28,7 @@ class APIService {
     );
 
     if(response.statusCode == 200){
-      //await SharedService.setLoginDetails(loginResponse((response.body)));
+      await SharedService.setLoginDetails(loginResponse((response.body)));
       print(response.body);
       return loginResponse(response.body);
     } else{
@@ -50,8 +51,8 @@ class APIService {
     return registerResponse(response.body);
   }
 
-  static Future<String> getUser(String token) async{
-    //var loginDetails = await SharedService.loginDetails();
+  static Future<UserResponse> getUser(String token) async{
+    var loginDetails = await SharedService.loginDetails();
 
     Map<String, String> requestHeaders = {
       'Content-Type': 'application/json',
@@ -62,13 +63,7 @@ class APIService {
 
     http.Response response = await http.get(url);
 
-    if(response.statusCode == 200){
-      print(response.body);
-      return response.body;
-    } else{
-      print(response.body);
-      return "";
-    }
+      return userResponse(response.body);
   }
 
   static Future<bool> gainExp(FarmRequest model) async{
