@@ -19,32 +19,32 @@ namespace WalkAndTravelTests.Controllers
     public class RouteControllerTests
     {
         [Fact]
-        public void RouteController_SaveNewRoute_ReturnsCorrectResponseWhenError()
+        public async void RouteController_SaveNewRoute_ReturnsCorrectResponseWhenError()
         {
             var service = new Mock<IRouteServices>();
-            service.Setup(ms => ms.SaveNewRoute(It.IsAny<RouteMinimal>())).Returns(-1);
+            service.Setup(ms => ms.SaveNewRoute(It.IsAny<RouteMinimal>())).ReturnsAsync(-1);
 
             var controller = new RouteController(service.Object);
 
             var route = new RouteMinimal();
             route.Name = "Route4";
             route.Route = new double[] { 54.6866, 25.288, 54.717755, 25.221089 };
-            var response = controller.SaveNewRoute(route);
+            var response = await controller.SaveNewRoute(route);
             Assert.IsType<Microsoft.AspNetCore.Mvc.BadRequestResult>(response);
         }
 
         [Fact]
-        public void RouteController_SaveNewRoute_ReturnsCorrectResponse()
+        public async void RouteController_SaveNewRoute_ReturnsCorrectResponse()
         {
             var service = new Mock<IRouteServices>();
-            service.Setup(ms => ms.SaveNewRoute(It.IsAny<RouteMinimal>())).Returns(4);
+            service.Setup(ms => ms.SaveNewRoute(It.IsAny<RouteMinimal>())).ReturnsAsync(4);
 
             var controller = new RouteController(service.Object);
 
             var route = new RouteMinimal();
             route.Name = "Route4";
             route.Route = new double[] { 54.6866, 25.288, 54.717755, 25.221089 };
-            var response = controller.SaveNewRoute(route);
+            var response = await controller.SaveNewRoute(route);
 
             var okObjectResult = response as OkObjectResult;
             Assert.NotNull(okObjectResult);

@@ -6,21 +6,36 @@ import 'package:geocoding/geocoding.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:snippet_coder_utils/FormHelper.dart';
+import 'package:walk_and_travel/models/experience_gainer.dart';
 import 'package:walk_and_travel/models/location_marker.dart';
+import 'package:walk_and_travel/models/route_with_id.dart';
+import 'package:walk_and_travel/models/route_with_id.dart';
+import 'package:walk_and_travel/models/route_with_id.dart';
+import 'package:walk_and_travel/models/route_with_id.dart';
+import 'package:walk_and_travel/services/api_service.dart';
+import 'package:walk_and_travel/services/shared_service.dart';
 import 'package:walk_and_travel/widgets/osmmap.dart';
+import '../config.dart';
 import '../models/route.dart' as a;
 import '../models/minimal_route.dart' as b;
 import 'package:http/http.dart' as http;
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
+class MyHomePage2 extends StatefulWidget {
+  const MyHomePage2({Key? key, required this.tokenMain}) : super(key: key);
+  final String tokenMain;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MyHomePage2> createState() => _MyHomePage2State();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePage2State extends State<MyHomePage2> {
+  int userId = 6;
+  String username = "User";
+  String email = "";
+  int level = 0;
+  int exp = 0;
+  int _EndExp = 0;
   final List<LocationMarker> _locations = [];
   final List<a.Route> _routes = [];
   a.Route _currentRoute = a.Route(
@@ -35,12 +50,12 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+    setUserDetails();
     getRoutes();
   }
 
   void _incrementCounter() {
     setState(() {
-
       getRoutes();
     });
   }
@@ -68,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void getRoutes() async {
-    var url = Uri.parse("http://10.0.2.2:5000/route/route");
+    var url = Uri.parse("http://10.0.2.2:5000/route/Author/$userId");
     http.Response response = await http.get(url);
     //print(response.body);
     var value = jsonDecode(response.body);
@@ -96,8 +111,10 @@ class _MyHomePageState extends State<MyHomePage> {
       convCoordinates.add(pos.latitude);
       convCoordinates.add(pos.longitude);
     }
-    b.MinimalRoute newRoute = b.MinimalRoute(route.name, convCoordinates);
-    var url = Uri.parse("http://10.0.2.2:5000/route/SaveNewRoute");
+    print(convCoordinates);
+    RouteWithId newRoute = RouteWithId(route.name, userId, convCoordinates);
+    print(newRoute.coords);
+    var url = Uri.parse("http://10.0.2.2:5000/route/SaveRouteWithId");
     http.Response response = await http.post(
         url,
         headers: <String, String>{
@@ -105,6 +122,20 @@ class _MyHomePageState extends State<MyHomePage> {
           'Content-Type': 'application/json'
         },
         body: jsonEncode(newRoute)
+    );
+    print('Response status: ${response.statusCode}');
+  }
+
+  void sendExp() async {
+    ExperienceGainer experienceGainer = ExperienceGainer(email, 50);
+    var url = Uri.parse("http://10.0.2.2:5000/user/farm");
+    http.Response response = await http.post(
+        url,
+        headers: <String, String>{
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: jsonEncode(experienceGainer)
     );
     print('Response status: ${response.statusCode}');
   }
@@ -425,6 +456,20 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  void setUserDetails(){
+    setState(() {
+      APIService.getUser(widget.tokenMain).then((response) {
+        level = response.level;
+        exp = response.exp;
+        email = response.email;
+        username = response.username;
+        _EndExp = response.level*125;
+        userId = response.id;
+    });
+
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     BorderRadiusGeometry roundingRadius = const BorderRadius.only(
@@ -432,41 +477,102 @@ class _MyHomePageState extends State<MyHomePage> {
       topRight: Radius.circular(24.0),
     );
 
+    final ButtonStyle style =
+    ElevatedButton.styleFrom(fixedSize: const Size(0, 10), textStyle: const TextStyle(fontSize: 20));
+
     return Scaffold(
       appBar: AppBar(
-          title: Text(widget.title),
+          title: Text("User Page"),
           actions: <Widget>[
             IconButton(
-              icon: const Icon(Icons.person),
-              onPressed: (){
-                Navigator.pushNamed(context, "/login");
-              },
-            )
+                onPressed: (){
+                  APIService.logout().then((response) {
+                    if(response.message == "Success"){
+                      SharedService.logout(context);
+                    } else{
+                      FormHelper.showSimpleAlertDialog(
+                        context,
+                        Config.appName,
+                        response.message,
+                        "OK",
+                            (){
+                          Navigator.pop(context);
+                        },
+                      );
+                    }
+                  });
+                },
+                icon: const Icon(
+                  Icons.logout,
+                  color: Colors.black,
+                ))
           ]
       ),
-      body: SlidingUpPanel(
-        borderRadius: roundingRadius,
-        controller: _panelController,
-        maxHeight: 350.0,
-        collapsed: Container(
-          decoration: BoxDecoration(borderRadius: roundingRadius),
-        ),
-        panel: Center(
-
-            child: (!createRouteWindow)
-                ? _browsingWindow()
-                : _creatingRouteWindow()),
-        body: Stack(
-            fit: StackFit.expand,
-            children: [
-              OSMMap(
-                currentRoute: _currentRoute, creationMode: createRouteWindow, callbackRoute: callbackRoute, callbackSaveRoute: callbackSaveRoute, centerPosition: centerPosition,
+      drawer: Drawer(
+        // Add a ListView to the drawer. This ensures the user can scroll
+        // through the options in the drawer if there isn't enough vertical
+        // space to fit everything.
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+                child: Center(
+                  child: Text('$username', style: TextStyle(fontStyle: FontStyle.italic, color: Colors.white, fontSize: 30)),
+                )
+            ),
+            LinearProgressIndicator(
+              //value: controller.progressPercent,
+              backgroundColor: Colors.grey[200],
+            ),
+            Container(
+              child: Center(
+                child: Text('Level $level', style: TextStyle(fontStyle: FontStyle.italic, color: Colors.black, fontSize: 30)),
               ),
-              buildFloatingSearchBar(),
-            ]
+              padding: const EdgeInsets.all(8),
+            ),
+            LinearProgressIndicator(
+              //value: controller.progressPercent,
+              backgroundColor: Colors.grey[200],
+            ),
+            Container(
+              child: Center(
+                child: Text('$exp/$_EndExp exp', style: Theme.of(context).textTheme.headline6,),
+              ),
+              padding: const EdgeInsets.all(8),
+            ),
+            ElevatedButton(
+              style: style,
+              onPressed: () { sendExp(); setUserDetails ;},
+              child: const Text("Get experience"),
+            ),
+          ],
         ),
+      ),
+        body: SlidingUpPanel(
+          borderRadius: roundingRadius,
+          controller: _panelController,
+          maxHeight: 350.0,
+          collapsed: Container(
+            decoration: BoxDecoration(borderRadius: roundingRadius),
+          ),
+          panel: Center(
 
-        // This trailing comma makes auto-formatting nicer for build methods.
+              child: (!createRouteWindow)
+                  ? _browsingWindow()
+                  : _creatingRouteWindow()),
+          body: Stack(
+              fit: StackFit.expand,
+              children: [
+                OSMMap(
+                  currentRoute: _currentRoute, creationMode: createRouteWindow, callbackRoute: callbackRoute, callbackSaveRoute: callbackSaveRoute, centerPosition: centerPosition,
+                ),
+                buildFloatingSearchBar(),
+              ]
+          ),
       ),
       floatingActionButton: (!createRouteWindow)
           ? FloatingActionButton(

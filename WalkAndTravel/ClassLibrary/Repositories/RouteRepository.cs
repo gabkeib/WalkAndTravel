@@ -3,8 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WalkAndTravel.ClassLibrary.DTO;
 using WalkAndTravel.ClassLibrary.Models;
 using WalkAndTravel.DataAccess;
+using WalkAndTravel.Models;
 
 namespace WalkAndTravel.ClassLibrary.Repositories
 {
@@ -104,21 +106,60 @@ namespace WalkAndTravel.ClassLibrary.Repositories
             return routes;
         }
 
-        public int SaveNewRoute(RouteMinimal routes)
+        public async Task<int> SaveNewRoute(SaveDto dto)
         {
-            System.Diagnostics.Debug.WriteLine("here");
-            System.Diagnostics.Debug.WriteLine(routes);
+            if(dto.AuthorId == 0)
+            {
+                var user = await context.Users.FirstOrDefaultAsync();
+                if (user == null)
+                {
+                    Random random = new();
+                    const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                    string randomPass = new string(Enumerable.Repeat(chars, 20)
+                    .Select(s => s[random.Next(s.Length)]).ToArray());
+                
+                    User user1 = new User {
+                        Email = "FirstEmail",
+                        Age = 1,
+                        Surname = "1",
+                        Username = "First",
+                        Level = 1,
+                        Exp = 10,
+                        Password = BCrypt.Net.BCrypt.HashPassword(randomPass)
+                    };
+                    context.Users.Add(user1);
+                    context.SaveChanges();
+                    var userId = await context.Users.FirstOrDefaultAsync(e => e.Email == user1.Email);
+                    dto.AuthorId = userId.Id;
+                }
+                else
+                {
+                    var userId = await context.Users.FirstOrDefaultAsync(e => e.Email == user.Email);
+                    dto.AuthorId = userId.Id;
+                }
+            }
             Route newRoute = new Route();
-            newRoute.Name = routes.Name;
+            newRoute.Name = dto.Name;
             newRoute.Coordinates = new List<double[]>();
             newRoute.Markers = new List<Marker>();
-            for (int i = 0; i < routes.Route.Length; i += 2)
+            double totalLength = 0;
+            for (int i = 0; i < dto.Coords.Length; i += 2)
             {
-                Marker marker = new(latitude: routes.Route[i], longitude: routes.Route[i + 1]);
+
+                var sCoord = new Marker(dto.Coords[i], dto.Coords[i + 1]);
+                if (i + 2 < dto.Coords.Length)
+                {
+                    var eCoord = new Marker(dto.Coords[i + 2], dto.Coords[i + 3]);
+                    totalLength += MarkersCalculator.CalculateDistanceBetweenMarkers(sCoord, eCoord);
+                }
+
+                Marker marker = new(latitude: dto.Coords[i], longitude: dto.Coords[i + 1]);
                 newRoute.Markers.Add(marker);
-                newRoute.Coordinates.Add(new double[] { routes.Route[i], routes.Route[i + 1] });
+                newRoute.Coordinates.Add(new double[] { dto.Coords[i], dto.Coords[i + 1] });
             }
-            newRoute.Length = 2.3;
+
+            newRoute.Length = totalLength;
+            newRoute.AuthorId = dto.AuthorId;
             newRoute.PickLengthType();
             int id = 0;
             context.Routes.Add(newRoute);
@@ -126,7 +167,7 @@ namespace WalkAndTravel.ClassLibrary.Repositories
             {
                 context.SaveChanges();
             }
-            catch (DbUpdateException e)
+            catch (DbUpdateException)
             {
                 return -1;
             }
@@ -214,6 +255,31 @@ namespace WalkAndTravel.ClassLibrary.Repositories
             }
             searchRoute.Coordinates = Route.MarkersListToArray(searchRoute.Markers);
             return searchRoute;
+        }
+
+        public List<Route> SearchRoutesByAuthorID(int Id)
+        {
+            List<Route> routes = new();
+
+            foreach (var route in context.Routes.ToList())
+            {
+                if (route.AuthorId == Id)
+                {
+                    route.Markers = new List<Marker>();
+
+                    foreach (var marker in context.Markers)
+                    {
+                        if (marker.RouteId == route.RouteId)
+                        {
+                            route.Markers.Add(marker);
+                        }
+                    }
+                    route.Coordinates = Route.MarkersListToArray(route.Markers);
+                    routes.Add(route);
+                }
+            }
+
+            return routes;
         }
 
 

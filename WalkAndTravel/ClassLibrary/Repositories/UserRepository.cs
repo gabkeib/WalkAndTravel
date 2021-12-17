@@ -76,5 +76,6 @@ namespace WalkAndTravel.ClassLibrary.Repositories
                 context.SaveChanges();
                 return user;
         }
+
     }
 }

@@ -10,6 +10,7 @@ import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:walk_and_travel/pages/login_page.dart';
 import 'package:walk_and_travel/pages/my_home_page.dart';
+import 'package:walk_and_travel/pages/my_home_page2.dart';
 import 'package:walk_and_travel/pages/registration_page.dart';
 import 'package:walk_and_travel/pages/user_page.dart';
 
@@ -23,12 +24,12 @@ String tokenFromBack = "";
 Widget _defaultHome = const MyHomePage(title: 'Walk And Travel');
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  bool _result = await SharedService.isLoggedIn();
+  /*bool _result = await SharedService.isLoggedIn();
   if(_result){
     _defaultHome = UserPage(tokenMain: tokenFromBack);
   }else{
     _defaultHome = const MyHomePage(title: 'Walk And Travel');
-  }
+  }*/
   runApp(const MyApp());
 }
 
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => _defaultHome,
         '/login' : (context) => LoginPage(callbackToken:callbackToken),
         '/register' : (context) => const RegisterPage(),
-        '/user' : (context) => UserPage(tokenMain: tokenFromBack),
+        '/user' : (context) => MyHomePage2(tokenMain: tokenFromBack),
       },
     );
   }

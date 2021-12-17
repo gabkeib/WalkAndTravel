@@ -105,9 +105,10 @@ namespace WalkAndTravelTests
 			Route route = new();
 			Marker marker = new(54.693899674979086, 25.276343239919967);
 			double[] expected = new double[] { 54.693899674979086, 25.276343239919967 };
+			route.Coordinates = new List<double[]>();
 
 			route.AddCoordinate(marker);
-			var result = route.Coordinates.ElementAt(0);
+			var result = route.Coordinates.FirstOrDefault();
 
 			Assert.Equal(expected, result);
 		}
@@ -117,13 +118,13 @@ namespace WalkAndTravelTests
 		{
 			Route route = new();
 			Marker marker = new(54.693899674979086, 25.276343239919967);
-			List<double[]> coords = new();
-			route.Coordinates = coords;
-			double[] expectedCoord = new double[] { 54.693899674979086, 25.276343239919967 };
+			route.Coordinates = new List<double[]>();
+			route.Markers = new List<Marker>();
+			double[] expectedCoord = new double[] {54.693899674979086, 25.276343239919967};
 
 			route.AddMarker(marker);
-			var resultM = route.Markers.ElementAt(0);
-			var resultC = route.Coordinates.ElementAt(0);
+			var resultM = route.Markers.FirstOrDefault();
+			var resultC = route.Coordinates.FirstOrDefault();
 
 			Assert.Equal(marker, resultM);
 			Assert.Equal(expectedCoord, resultC);

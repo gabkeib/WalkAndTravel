@@ -18,13 +18,14 @@ namespace WalkAndTravel.ClassLibrary
 
         private LengthType _type;
 
+        private int _authorId;
+
         public Route()
         {
-            _coordinates = new List<double[]>();
-            _markers = new List<Marker>();
+
         }
         public Route( double length, List<Marker> markers, List<double[]> coords = null, string name = "None", LengthType type = LengthType.None)
-        { _name = name; _length = length; _markers = markers; _coordinates = coords; _type = type; _coordinates = new List<double[]>(); _markers = new List<Marker>(); }
+        { _name = name; _length = length; _markers = markers; _coordinates = coords; _type = type; }
 
         [Column("Id")]
         public int RouteId { get; set; }
@@ -42,6 +43,13 @@ namespace WalkAndTravel.ClassLibrary
         {
             get { return _length; }
             set { _length = value; }
+        }
+
+        [Column("Author_Id")]
+        public int AuthorId
+        {
+            get { return _authorId; }
+            set { _authorId = value; }
         }
 
         public List<Marker> Markers
