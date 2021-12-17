@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WalkAndTravel.ClassLibrary.DTO;
 using WalkAndTravel.ClassLibrary.Models;
 using WalkAndTravel.ClassLibrary.Repositories;
 
@@ -41,6 +42,7 @@ namespace WalkAndTravel.ClassLibrary.Services
         public async Task<IEnumerable<RoutesCounter>> GetRoutesNumbers()
         {
             var statistics = await _routeRepository.GetRoutesNumbers();
+            statistics.Sort();
             return statistics.ToArray();
         }
 
@@ -49,9 +51,19 @@ namespace WalkAndTravel.ClassLibrary.Services
             return _routeRepository.GetRandomRoute();
         }
 
-        public int SaveNewRoute(RouteMinimal routes)
+        public async Task<int> SaveNewRoute(RouteMinimal route)
         {
-            return _routeRepository.SaveNewRoute(routes);
+            SaveDto dto = new SaveDto
+            {
+                Name = route.Name,
+                Coords = route.Route
+            };
+            return await _routeRepository.SaveNewRoute(dto);
+        }
+
+        public async Task<int> SaveNewRoute(SaveDto route)
+        {
+            return await _routeRepository.SaveNewRoute(route);
         }
 
         public Route DeleteRoute(int id)
@@ -64,9 +76,14 @@ namespace WalkAndTravel.ClassLibrary.Services
             return _routeRepository.SearchRoutes(keyword);
         }
 
-        public Route SearchRouteByID(int Id)
+        public Route SearchRouteByID(int id)
         {
-            return _routeRepository.SearchRouteByID(Id);
+            return _routeRepository.SearchRouteByID(id);
+        }
+
+        public List<Route> SearchRoutesByAuthorID(int Id)
+        {
+            return _routeRepository.SearchRoutesByAuthorID(Id);
         }
 
     }

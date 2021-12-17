@@ -1,0 +1,832 @@
+2021-12-17 00:51:44.585 +02:00 [INF] RouteServices, Method GetRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 3ms and wascalled with these parameters: []and returned value type of: System.Threading.Tasks.Task`1[System.Collections.Generic.IEnumerable`1[WalkAndTravel.ClassLibrary.Route]]
+2021-12-17 00:51:46.188 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 28,2347
+2021-12-17 00:51:46.293 +02:00 [INF] Request type: /route/route, response type: application/json; charset=utf-8. Action Get invoked in controller Route
+2021-12-17 00:52:06.470 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 20,5732
+2021-12-17 00:52:06.484 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 146ms and wascalled with these parameters: ["j"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 00:52:06.486 +02:00 [INF] Request type: /route/Search/j, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 00:52:07.147 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 0,7733
+2021-12-17 00:52:07.147 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 12ms and wascalled with these parameters: [null]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 00:52:07.147 +02:00 [INF] Request type: /route/Search/, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 00:52:29.256 +02:00 [INF] RouteServices, Method SaveNewRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 85ms and wascalled with these parameters: [{"Name":"naujas2","Route":[54.693165765793275,25.28707795467683,54.68899851920987,25.280336447105327,54.68972028683292,25.288061380516233]}]and returned value type of: System.Threading.Tasks.Task`1[System.Int32]
+2021-12-17 00:52:53.095 +02:00 [INF] Command was called: SET NOCOUNT ON;
+INSERT INTO [Routes] ([Length], [Name], [Type])
+VALUES (@p0, @p1, @p2);
+SELECT [Id]
+FROM [Routes]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
+
+ and it took: 2,9085
+2021-12-17 00:52:53.118 +02:00 [INF] Command was called: SET NOCOUNT ON;
+INSERT INTO [Markers] ([Latitude], [Longitude], [RouteId])
+VALUES (@p0, @p1, @p2);
+SELECT [Id]
+FROM [Markers]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
+
+ and it took: 1,8083
+2021-12-17 00:52:53.119 +02:00 [INF] Command was called: SET NOCOUNT ON;
+INSERT INTO [Markers] ([Latitude], [Longitude], [RouteId])
+VALUES (@p0, @p1, @p2);
+SELECT [Id]
+FROM [Markers]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
+
+ and it took: 0,2778
+2021-12-17 00:52:53.120 +02:00 [INF] Command was called: SET NOCOUNT ON;
+INSERT INTO [Markers] ([Latitude], [Longitude], [RouteId])
+VALUES (@p0, @p1, @p2);
+SELECT [Id]
+FROM [Markers]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
+
+ and it took: 0,2221
+2021-12-17 00:52:53.133 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 2,6715
+2021-12-17 00:52:53.139 +02:00 [INF] Request type: /route/SaveNewRoute, response type: application/json; charset=utf-8. Action SaveNewRoute invoked in controller Route
+2021-12-17 00:53:12.230 +02:00 [INF] RouteServices, Method GetRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: System.Threading.Tasks.Task`1[System.Collections.Generic.IEnumerable`1[WalkAndTravel.ClassLibrary.Route]]
+2021-12-17 00:53:12.232 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 1,0341
+2021-12-17 00:53:12.239 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,7578
+2021-12-17 00:53:12.255 +02:00 [INF] Request type: /route/route, response type: application/json; charset=utf-8. Action Get invoked in controller Route
+2021-12-17 00:58:03.917 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 2,2101
+2021-12-17 00:58:03.918 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,7239
+2021-12-17 00:58:03.919 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 9ms and wascalled with these parameters: ["n"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 00:58:03.919 +02:00 [INF] Request type: /route/Search/n, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 00:58:04.369 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,2395
+2021-12-17 00:58:04.370 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,2098
+2021-12-17 00:58:04.370 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 4ms and wascalled with these parameters: ["na"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 00:58:04.370 +02:00 [INF] Request type: /route/Search/na, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 00:58:04.721 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,2656
+2021-12-17 00:58:04.722 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,2143
+2021-12-17 00:58:04.722 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: ["nau"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 00:58:04.723 +02:00 [INF] Request type: /route/Search/nau, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 00:58:05.313 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,2405
+2021-12-17 00:58:05.313 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,1491
+2021-12-17 00:58:05.313 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: ["nauj"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 00:58:05.314 +02:00 [INF] Request type: /route/Search/nauj, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 00:58:05.764 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,3063
+2021-12-17 00:58:05.765 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,2245
+2021-12-17 00:58:05.765 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 2ms and wascalled with these parameters: ["nauja"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 00:58:05.765 +02:00 [INF] Request type: /route/Search/nauja, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 00:58:06.221 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,2713
+2021-12-17 00:58:06.221 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: ["naujaa"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 00:58:06.222 +02:00 [INF] Request type: /route/Search/naujaa, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 00:58:07.354 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,3753
+2021-12-17 00:58:07.355 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 1,1687
+2021-12-17 00:58:07.356 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 3ms and wascalled with these parameters: ["nauja"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 00:58:07.356 +02:00 [INF] Request type: /route/Search/nauja, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 00:58:07.367 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,2701
+2021-12-17 00:58:07.368 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,1695
+2021-12-17 00:58:07.368 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: ["nauja"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 00:58:07.368 +02:00 [INF] Request type: /route/Search/nauja, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 00:58:07.538 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,3329
+2021-12-17 00:58:07.539 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,2372
+2021-12-17 00:58:07.539 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: ["nauj"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 00:58:07.539 +02:00 [INF] Request type: /route/Search/nauj, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 00:58:07.559 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,3255
+2021-12-17 00:58:07.559 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,241
+2021-12-17 00:58:07.559 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: ["nauj"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 00:58:07.560 +02:00 [INF] Request type: /route/Search/nauj, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 00:58:07.847 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,379
+2021-12-17 00:58:07.847 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,159
+2021-12-17 00:58:07.847 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: ["nau"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 00:58:07.848 +02:00 [INF] Request type: /route/Search/nau, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 00:58:07.896 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,3114
+2021-12-17 00:58:07.896 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,3205
+2021-12-17 00:58:07.896 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 2ms and wascalled with these parameters: ["nau"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 00:58:07.897 +02:00 [INF] Request type: /route/Search/nau, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 00:58:07.954 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,2475
+2021-12-17 00:58:07.955 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,2373
+2021-12-17 00:58:07.955 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: ["na"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 00:58:07.955 +02:00 [INF] Request type: /route/Search/na, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 00:58:08.181 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,2528
+2021-12-17 00:58:08.182 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,1738
+2021-12-17 00:58:08.182 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: ["n"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 00:58:08.183 +02:00 [INF] Request type: /route/Search/n, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 00:58:08.187 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,2041
+2021-12-17 00:58:08.187 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,1399
+2021-12-17 00:58:08.188 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: ["n"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 00:58:08.188 +02:00 [INF] Request type: /route/Search/n, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 00:58:08.416 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 0,482
+2021-12-17 00:58:08.417 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,221
+2021-12-17 00:58:08.417 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: [null]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 00:58:08.417 +02:00 [INF] Request type: /route/Search/, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 00:58:20.223 +02:00 [INF] RouteServices, Method GetRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: System.Threading.Tasks.Task`1[System.Collections.Generic.IEnumerable`1[WalkAndTravel.ClassLibrary.Route]]
+2021-12-17 00:58:20.225 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 0,895
+2021-12-17 00:58:20.226 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,9921
+2021-12-17 00:58:20.227 +02:00 [INF] Request type: /route/route, response type: application/json; charset=utf-8. Action Get invoked in controller Route
+2021-12-17 00:59:14.795 +02:00 [INF] RouteServices, Method SaveNewRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: [{"Name":"naujas4","Route":[54.69269697191569,25.288794835143303,54.69217357315554,25.281241692647853,54.68792525840095,25.283286210279407,54.69008995240988,25.293210993227444]}]and returned value type of: System.Threading.Tasks.Task`1[System.Int32]
+2021-12-17 00:59:50.710 +02:00 [INF] Command was called: SET NOCOUNT ON;
+INSERT INTO [Routes] ([Length], [Name], [Type])
+VALUES (@p0, @p1, @p2);
+SELECT [Id]
+FROM [Routes]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
+
+ and it took: 1,4871
+2021-12-17 00:59:50.764 +02:00 [INF] Command was called: SET NOCOUNT ON;
+DECLARE @inserted0 TABLE ([Id] int, [_Position] [int]);
+MERGE [Markers] USING (
+VALUES (@p3, @p4, @p5, 0),
+(@p6, @p7, @p8, 1),
+(@p9, @p10, @p11, 2),
+(@p12, @p13, @p14, 3)) AS i ([Latitude], [Longitude], [RouteId], _Position) ON 1=0
+WHEN NOT MATCHED THEN
+INSERT ([Latitude], [Longitude], [RouteId])
+VALUES (i.[Latitude], i.[Longitude], i.[RouteId])
+OUTPUT INSERTED.[Id], i._Position
+INTO @inserted0;
+
+SELECT [t].[Id] FROM [Markers] t
+INNER JOIN @inserted0 i ON ([t].[Id] = [i].[Id])
+ORDER BY [i].[_Position];
+
+ and it took: 47,7679
+2021-12-17 00:59:50.766 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 0,5461
+2021-12-17 00:59:50.766 +02:00 [INF] Request type: /route/SaveNewRoute, response type: application/json; charset=utf-8. Action SaveNewRoute invoked in controller Route
+2021-12-17 01:00:08.244 +02:00 [INF] RouteServices, Method GetRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: System.Threading.Tasks.Task`1[System.Collections.Generic.IEnumerable`1[WalkAndTravel.ClassLibrary.Route]]
+2021-12-17 01:00:08.246 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 0,9967
+2021-12-17 01:00:08.246 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,4485
+2021-12-17 01:00:08.247 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,1807
+2021-12-17 01:00:08.248 +02:00 [INF] Request type: /route/route, response type: application/json; charset=utf-8. Action Get invoked in controller Route
+2021-12-17 01:00:28.363 +02:00 [INF] RouteServices, Method SaveNewRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: [{"Name":"naujas","Route":[54.69290407028043,25.290136758791267,54.68988283968307,25.279166314372777]}]and returned value type of: System.Threading.Tasks.Task`1[System.Int32]
+2021-12-17 01:00:31.111 +02:00 [INF] Command was called: SET NOCOUNT ON;
+INSERT INTO [Routes] ([Length], [Name], [Type])
+VALUES (@p0, @p1, @p2);
+SELECT [Id]
+FROM [Routes]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
+
+ and it took: 2,4091
+2021-12-17 01:00:31.113 +02:00 [INF] Command was called: SET NOCOUNT ON;
+INSERT INTO [Markers] ([Latitude], [Longitude], [RouteId])
+VALUES (@p0, @p1, @p2);
+SELECT [Id]
+FROM [Markers]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
+
+ and it took: 2,2898
+2021-12-17 01:00:31.114 +02:00 [INF] Command was called: SET NOCOUNT ON;
+INSERT INTO [Markers] ([Latitude], [Longitude], [RouteId])
+VALUES (@p0, @p1, @p2);
+SELECT [Id]
+FROM [Markers]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
+
+ and it took: 0,179
+2021-12-17 01:00:31.115 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 0,5656
+2021-12-17 01:00:31.115 +02:00 [INF] Request type: /route/SaveNewRoute, response type: application/json; charset=utf-8. Action SaveNewRoute invoked in controller Route
+2021-12-17 01:00:41.136 +02:00 [INF] RouteServices, Method GetRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: System.Threading.Tasks.Task`1[System.Collections.Generic.IEnumerable`1[WalkAndTravel.ClassLibrary.Route]]
+2021-12-17 01:00:41.140 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 2,913
+2021-12-17 01:00:41.142 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,6049
+2021-12-17 01:00:41.143 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,1632
+2021-12-17 01:00:41.143 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,1095
+2021-12-17 01:00:41.144 +02:00 [INF] Request type: /route/route, response type: application/json; charset=utf-8. Action Get invoked in controller Route
+2021-12-17 01:01:12.584 +02:00 [INF] RouteServices, Method SaveNewRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: [{"Name":"tralele","Route":[54.69308480980771,25.29249296892215,54.69321973636058,25.280835875185897,54.689125300191265,25.290729797490457]}]and returned value type of: System.Threading.Tasks.Task`1[System.Int32]
+2021-12-17 01:01:15.223 +02:00 [INF] Command was called: SET NOCOUNT ON;
+INSERT INTO [Routes] ([Length], [Name], [Type])
+VALUES (@p0, @p1, @p2);
+SELECT [Id]
+FROM [Routes]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
+
+ and it took: 1,4602
+2021-12-17 01:01:15.225 +02:00 [INF] Command was called: SET NOCOUNT ON;
+INSERT INTO [Markers] ([Latitude], [Longitude], [RouteId])
+VALUES (@p0, @p1, @p2);
+SELECT [Id]
+FROM [Markers]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
+
+ and it took: 1,4144
+2021-12-17 01:01:15.225 +02:00 [INF] Command was called: SET NOCOUNT ON;
+INSERT INTO [Markers] ([Latitude], [Longitude], [RouteId])
+VALUES (@p0, @p1, @p2);
+SELECT [Id]
+FROM [Markers]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
+
+ and it took: 0,3122
+2021-12-17 01:01:15.226 +02:00 [INF] Command was called: SET NOCOUNT ON;
+INSERT INTO [Markers] ([Latitude], [Longitude], [RouteId])
+VALUES (@p0, @p1, @p2);
+SELECT [Id]
+FROM [Markers]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
+
+ and it took: 0,2796
+2021-12-17 01:01:15.227 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 0,5267
+2021-12-17 01:01:15.228 +02:00 [INF] Request type: /route/SaveNewRoute, response type: application/json; charset=utf-8. Action SaveNewRoute invoked in controller Route
+2021-12-17 01:04:58.576 +02:00 [INF] RouteServices, Method GetRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 2ms and wascalled with these parameters: []and returned value type of: System.Threading.Tasks.Task`1[System.Collections.Generic.IEnumerable`1[WalkAndTravel.ClassLibrary.Route]]
+2021-12-17 01:04:59.647 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 20,3601
+2021-12-17 01:04:59.706 +02:00 [INF] Request type: /route/route, response type: application/json; charset=utf-8. Action Get invoked in controller Route
+2021-12-17 01:05:39.674 +02:00 [INF] RouteServices, Method GetRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: System.Threading.Tasks.Task`1[System.Collections.Generic.IEnumerable`1[WalkAndTravel.ClassLibrary.Route]]
+2021-12-17 01:05:39.718 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 2,5641
+2021-12-17 01:05:39.719 +02:00 [INF] Request type: /route/route, response type: application/json; charset=utf-8. Action Get invoked in controller Route
+2021-12-17 01:06:19.516 +02:00 [INF] RouteServices, Method SaveNewRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 137ms and wascalled with these parameters: [{"Name":"daug","Route":[54.69290407028043,25.28675031751175,54.68894454302829,25.28078906987659,54.690035977679884,25.29113561495241,54.69235368835887,25.290464395956384]}]and returned value type of: System.Threading.Tasks.Task`1[System.Int32]
+2021-12-17 01:06:33.525 +02:00 [INF] Command was called: SET NOCOUNT ON;
+INSERT INTO [Routes] ([Author_Id], [Length], [Name], [Type])
+VALUES (@p0, @p1, @p2, @p3);
+SELECT [Id]
+FROM [Routes]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
+
+ and it took: 3,0692
+2021-12-17 01:06:33.581 +02:00 [INF] Command was called: SET NOCOUNT ON;
+DECLARE @inserted0 TABLE ([Id] int, [_Position] [int]);
+MERGE [Markers] USING (
+VALUES (@p4, @p5, @p6, 0),
+(@p7, @p8, @p9, 1),
+(@p10, @p11, @p12, 2),
+(@p13, @p14, @p15, 3)) AS i ([Latitude], [Longitude], [RouteId], _Position) ON 1=0
+WHEN NOT MATCHED THEN
+INSERT ([Latitude], [Longitude], [RouteId])
+VALUES (i.[Latitude], i.[Longitude], i.[RouteId])
+OUTPUT INSERTED.[Id], i._Position
+INTO @inserted0;
+
+SELECT [t].[Id] FROM [Markers] t
+INNER JOIN @inserted0 i ON ([t].[Id] = [i].[Id])
+ORDER BY [i].[_Position];
+
+ and it took: 25,242
+2021-12-17 01:06:33.605 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 0,889
+2021-12-17 01:06:33.613 +02:00 [INF] Request type: /route/SaveNewRoute, response type: application/json; charset=utf-8. Action SaveNewRoute invoked in controller Route
+2021-12-17 01:07:11.580 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 1,4272
+2021-12-17 01:07:11.584 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,6101
+2021-12-17 01:07:11.586 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 45ms and wascalled with these parameters: ["d"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:07:11.596 +02:00 [INF] Request type: /route/Search/d, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:07:12.612 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,2864
+2021-12-17 01:07:12.613 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,2087
+2021-12-17 01:07:12.613 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 3ms and wascalled with these parameters: ["da"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:07:12.614 +02:00 [INF] Request type: /route/Search/da, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:07:12.807 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,3169
+2021-12-17 01:07:12.807 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: ["daa"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:07:12.808 +02:00 [INF] Request type: /route/Search/daa, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:07:14.377 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,3775
+2021-12-17 01:07:14.377 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,2074
+2021-12-17 01:07:14.378 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 3ms and wascalled with these parameters: ["da"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:07:14.378 +02:00 [INF] Request type: /route/Search/da, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:07:14.434 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,451
+2021-12-17 01:07:14.435 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,2225
+2021-12-17 01:07:14.436 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 2ms and wascalled with these parameters: ["da"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:07:14.436 +02:00 [INF] Request type: /route/Search/da, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:07:15.135 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,3192
+2021-12-17 01:07:15.135 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: ["daa"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:07:15.135 +02:00 [INF] Request type: /route/Search/daa, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:07:15.370 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,353
+2021-12-17 01:07:15.370 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: ["daaa"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:07:15.370 +02:00 [INF] Request type: /route/Search/daaa, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:07:15.603 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,2486
+2021-12-17 01:07:15.603 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: ["daaaa"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:07:15.603 +02:00 [INF] Request type: /route/Search/daaaa, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:07:15.826 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,2953
+2021-12-17 01:07:15.826 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: ["daaa"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:07:15.827 +02:00 [INF] Request type: /route/Search/daaa, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:07:15.889 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,3538
+2021-12-17 01:07:15.889 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: ["daaa"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:07:15.889 +02:00 [INF] Request type: /route/Search/daaa, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:07:16.038 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,2414
+2021-12-17 01:07:16.038 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: ["daa"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:07:16.038 +02:00 [INF] Request type: /route/Search/daa, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:07:16.092 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,3401
+2021-12-17 01:07:16.092 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: ["daa"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:07:16.092 +02:00 [INF] Request type: /route/Search/daa, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:07:16.278 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,3129
+2021-12-17 01:07:16.279 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,3299
+2021-12-17 01:07:16.279 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 2ms and wascalled with these parameters: ["da"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:07:16.280 +02:00 [INF] Request type: /route/Search/da, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:07:16.332 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,2794
+2021-12-17 01:07:16.332 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,2542
+2021-12-17 01:07:16.332 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: ["da"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:07:16.333 +02:00 [INF] Request type: /route/Search/da, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:07:16.414 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,2717
+2021-12-17 01:07:16.415 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,2489
+2021-12-17 01:07:16.415 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: ["d"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:07:16.415 +02:00 [INF] Request type: /route/Search/d, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:07:16.466 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,2875
+2021-12-17 01:07:16.467 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,1927
+2021-12-17 01:07:16.467 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 2ms and wascalled with these parameters: ["d"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:07:16.467 +02:00 [INF] Request type: /route/Search/d, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:07:16.596 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 0,7132
+2021-12-17 01:07:16.596 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,172
+2021-12-17 01:07:16.596 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: [null]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:07:16.597 +02:00 [INF] Request type: /route/Search/, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:07:43.993 +02:00 [INF] RouteServices, Method GetRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: System.Threading.Tasks.Task`1[System.Collections.Generic.IEnumerable`1[WalkAndTravel.ClassLibrary.Route]]
+2021-12-17 01:07:43.996 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 1,322
+2021-12-17 01:07:43.996 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,5865
+2021-12-17 01:07:43.997 +02:00 [INF] Request type: /route/route, response type: application/json; charset=utf-8. Action Get invoked in controller Route
+2021-12-17 01:08:03.879 +02:00 [INF] RouteServices, Method SaveNewRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: [{"Name":"du","Route":[54.693066610377976,25.277044130788433,54.688998519209996,25.28125763731364]}]and returned value type of: System.Threading.Tasks.Task`1[System.Int32]
+2021-12-17 01:08:08.985 +02:00 [INF] Command was called: SET NOCOUNT ON;
+INSERT INTO [Routes] ([Author_Id], [Length], [Name], [Type])
+VALUES (@p0, @p1, @p2, @p3);
+SELECT [Id]
+FROM [Routes]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
+
+ and it took: 2,0594
+2021-12-17 01:08:08.988 +02:00 [INF] Command was called: SET NOCOUNT ON;
+INSERT INTO [Markers] ([Latitude], [Longitude], [RouteId])
+VALUES (@p0, @p1, @p2);
+SELECT [Id]
+FROM [Markers]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
+
+ and it took: 1,427
+2021-12-17 01:08:08.989 +02:00 [INF] Command was called: SET NOCOUNT ON;
+INSERT INTO [Markers] ([Latitude], [Longitude], [RouteId])
+VALUES (@p0, @p1, @p2);
+SELECT [Id]
+FROM [Markers]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
+
+ and it took: 0,2252
+2021-12-17 01:08:08.990 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 0,1868
+2021-12-17 01:08:08.990 +02:00 [INF] Request type: /route/SaveNewRoute, response type: application/json; charset=utf-8. Action SaveNewRoute invoked in controller Route
+2021-12-17 01:08:24.886 +02:00 [INF] RouteServices, Method GetRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: System.Threading.Tasks.Task`1[System.Collections.Generic.IEnumerable`1[WalkAndTravel.ClassLibrary.Route]]
+2021-12-17 01:08:24.887 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 0,8189
+2021-12-17 01:08:24.888 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,5239
+2021-12-17 01:08:24.889 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,1971
+2021-12-17 01:08:24.890 +02:00 [INF] Request type: /route/route, response type: application/json; charset=utf-8. Action Get invoked in controller Route
+2021-12-17 01:08:37.205 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 1,5334
+2021-12-17 01:08:37.206 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,354
+2021-12-17 01:08:37.206 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,1571
+2021-12-17 01:08:37.206 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 3ms and wascalled with these parameters: ["d"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:08:37.206 +02:00 [INF] Request type: /route/Search/d, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:08:37.332 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,2786
+2021-12-17 01:08:37.333 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,1978
+2021-12-17 01:08:37.333 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: ["da"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:08:37.333 +02:00 [INF] Request type: /route/Search/da, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:08:37.617 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 1,2148
+2021-12-17 01:08:37.617 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 3ms and wascalled with these parameters: ["daj"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:08:37.617 +02:00 [INF] Request type: /route/Search/daj, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:08:38.312 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,2635
+2021-12-17 01:08:38.312 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: ["daj\\"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:08:38.313 +02:00 [INF] Request type: /route/Search/daj%5C, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:08:38.792 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,2936
+2021-12-17 01:08:38.792 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: ["daj"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:08:38.792 +02:00 [INF] Request type: /route/Search/daj, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:08:39.022 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,3008
+2021-12-17 01:08:39.022 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,1254
+2021-12-17 01:08:39.022 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: ["da"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:08:39.022 +02:00 [INF] Request type: /route/Search/da, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:08:39.038 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,343
+2021-12-17 01:08:39.038 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,322
+2021-12-17 01:08:39.039 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 2ms and wascalled with these parameters: ["da"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:08:39.039 +02:00 [INF] Request type: /route/Search/da, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:08:40.054 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,2546
+2021-12-17 01:08:40.054 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,1712
+2021-12-17 01:08:40.055 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,2774
+2021-12-17 01:08:40.056 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 3ms and wascalled with these parameters: ["d"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:08:40.056 +02:00 [INF] Request type: /route/Search/d, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:08:40.058 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,2788
+2021-12-17 01:08:40.058 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,1251
+2021-12-17 01:08:40.059 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,1777
+2021-12-17 01:08:40.059 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: ["d"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:08:40.059 +02:00 [INF] Request type: /route/Search/d, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:08:40.377 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,268
+2021-12-17 01:08:40.378 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,1941
+2021-12-17 01:08:40.378 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: ["du"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:08:40.378 +02:00 [INF] Request type: /route/Search/du, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:08:43.537 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 2,8776
+2021-12-17 01:08:43.539 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 1,0118
+2021-12-17 01:08:43.539 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,146
+2021-12-17 01:08:43.539 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 5ms and wascalled with these parameters: ["d"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:08:43.540 +02:00 [INF] Request type: /route/Search/d, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:08:43.579 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 1,6564
+2021-12-17 01:08:43.579 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,4856
+2021-12-17 01:08:43.580 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,151
+2021-12-17 01:08:43.580 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 3ms and wascalled with these parameters: ["d"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:08:43.580 +02:00 [INF] Request type: /route/Search/d, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:08:44.371 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 0,9845
+2021-12-17 01:08:44.372 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,5183
+2021-12-17 01:08:44.372 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,1482
+2021-12-17 01:08:44.372 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 2ms and wascalled with these parameters: [null]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:08:44.372 +02:00 [INF] Request type: /route/Search/, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:08:49.811 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 1,2675
+2021-12-17 01:08:49.811 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,4319
+2021-12-17 01:08:49.811 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,1672
+2021-12-17 01:08:49.812 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 2ms and wascalled with these parameters: ["d"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:08:49.812 +02:00 [INF] Request type: /route/Search/d, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:08:50.167 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,2331
+2021-12-17 01:08:50.167 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,194
+2021-12-17 01:08:50.167 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: ["du"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:08:50.168 +02:00 [INF] Request type: /route/Search/du, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:09:04.332 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,302
+2021-12-17 01:09:04.333 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: ["dud"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:09:04.333 +02:00 [INF] Request type: /route/Search/dud, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:09:04.922 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,3331
+2021-12-17 01:09:04.923 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,2001
+2021-12-17 01:09:04.923 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: ["du"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:09:04.923 +02:00 [INF] Request type: /route/Search/du, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:09:04.926 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,159
+2021-12-17 01:09:04.927 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,1136
+2021-12-17 01:09:04.927 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 5ms and wascalled with these parameters: ["du"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:09:04.927 +02:00 [INF] Request type: /route/Search/du, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:09:05.292 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,2337
+2021-12-17 01:09:05.292 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r]
+WHERE (@__Trim_0 LIKE N'') OR (CHARINDEX(@__Trim_0, LTRIM(RTRIM(LOWER([r].[Name])))) > 0) and it took: 0,2624
+2021-12-17 01:09:05.292 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,1215
+2021-12-17 01:09:05.292 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,1287
+2021-12-17 01:09:05.293 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,1444
+2021-12-17 01:09:05.293 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,1519
+2021-12-17 01:09:05.293 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: ["d"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:09:05.293 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: ["d"]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:09:05.293 +02:00 [INF] Request type: /route/Search/d, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:09:05.293 +02:00 [INF] Request type: /route/Search/d, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 01:09:05.839 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 0,581
+2021-12-17 01:09:05.839 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,1762
+2021-12-17 01:09:05.840 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,1378
+2021-12-17 01:09:05.840 +02:00 [INF] RouteServices, Method SearchRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: [null]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 01:09:05.840 +02:00 [INF] Request type: /route/Search/, response type: application/json; charset=utf-8. Action GetByKeyword invoked in controller Route
+2021-12-17 02:20:04.961 +02:00 [INF] RouteServices, Method GetRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 2ms and wascalled with these parameters: []and returned value type of: System.Threading.Tasks.Task`1[System.Collections.Generic.IEnumerable`1[WalkAndTravel.ClassLibrary.Route]]
+2021-12-17 02:20:06.130 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 27,314
+2021-12-17 02:20:06.212 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 2,9171
+2021-12-17 02:20:06.234 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 1,0694
+2021-12-17 02:20:06.314 +02:00 [INF] Request type: /route/route, response type: application/json; charset=utf-8. Action Get invoked in controller Route
+2021-12-17 02:21:26.689 +02:00 [INF] UserServices, Method GetByEmail Which is declared in WalkAndTravel.ClassLibrary.Services.IUserServices, took 196ms and wascalled with these parameters: ["test"]and returned value type of: System.Threading.Tasks.Task`1[WalkAndTravel.Models.User]
+2021-12-17 02:21:27.156 +02:00 [INF] Command was called: SET NOCOUNT ON;
+INSERT INTO [Users] ([Age], [Email], [Exp], [Level], [Name], [Password], [Surname], [Username])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [Id]
+FROM [Users]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
+
+ and it took: 16,2944
+2021-12-17 02:21:27.197 +02:00 [INF] Command was called: SELECT [u].[Id], [u].[Age], [u].[Email], [u].[Exp], [u].[Level], [u].[Name], [u].[Password], [u].[Surname], [u].[Username]
+FROM [Users] AS [u] and it took: 1,3934
+2021-12-17 02:21:27.223 +02:00 [INF] UserServices, Method CreateNewUser Which is declared in WalkAndTravel.ClassLibrary.Services.IUserServices, took 195ms and wascalled with these parameters: [{"Id":6,"Name":"","Surname":"","Username":"test","Email":"test","Password":"$2a$11$/PtvatzYxCI3Bxmg4nyhHemIqEtLLDCw4vcF1XHsHpyEDASX3qJ6a","Level":0,"Exp":0,"Age":0}]and returned value type of: System.Int32
+2021-12-17 02:21:27.225 +02:00 [INF] Request type: /user/register, response type: application/json; charset=utf-8. Action Register invoked in controller User
+2021-12-17 02:21:40.002 +02:00 [INF] UserServices, Method GetByEmail Which is declared in WalkAndTravel.ClassLibrary.Services.IUserServices, took 9ms and wascalled with these parameters: ["test"]and returned value type of: System.Threading.Tasks.Task`1[WalkAndTravel.Models.User]
+2021-12-17 02:21:40.841 +02:00 [INF] Request type: /user/login, response type: application/json; charset=utf-8. Action Login invoked in controller User
+2021-12-17 02:21:41.142 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 12,0176
+2021-12-17 02:21:41.143 +02:00 [INF] RouteServices, Method SearchRoutesByAuthorID Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 13ms and wascalled with these parameters: [0]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 02:21:41.144 +02:00 [INF] Request type: /route/Author/0, response type: application/json; charset=utf-8. Action SearchRoutesByAuthorID invoked in controller Route
+2021-12-17 02:21:41.217 +02:00 [INF] UserServices, Method GetById Which is declared in WalkAndTravel.ClassLibrary.Services.IUserServices, took 7ms and wascalled with these parameters: [6]and returned value type of: System.Threading.Tasks.Task`1[WalkAndTravel.Models.User]
+2021-12-17 02:21:41.222 +02:00 [INF] Request type: /user/user/eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Mzk3Nzg0MDAsImlzcyI6IjYifQ.htGqq41GFgobyuwdj1n4CKOAnyJ3NmBiitqzOMPRfdQ, response type: application/json; charset=utf-8. Action User invoked in controller User
+2021-12-17 02:38:06.517 +02:00 [INF] RouteServices, Method GetRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: System.Threading.Tasks.Task`1[System.Collections.Generic.IEnumerable`1[WalkAndTravel.ClassLibrary.Route]]
+2021-12-17 02:38:06.661 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 57,6305
+2021-12-17 02:38:06.675 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 13,0186
+2021-12-17 02:38:06.675 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,2591
+2021-12-17 02:38:06.676 +02:00 [INF] Request type: /route/route, response type: application/json; charset=utf-8. Action Get invoked in controller Route
+2021-12-17 02:38:27.459 +02:00 [INF] UserServices, Method GetByEmail Which is declared in WalkAndTravel.ClassLibrary.Services.IUserServices, took 1ms and wascalled with these parameters: ["test"]and returned value type of: System.Threading.Tasks.Task`1[WalkAndTravel.Models.User]
+2021-12-17 02:38:27.800 +02:00 [INF] Request type: /user/login, response type: application/json; charset=utf-8. Action Login invoked in controller User
+2021-12-17 02:38:37.957 +02:00 [INF] UserServices, Method GetById Which is declared in WalkAndTravel.ClassLibrary.Services.IUserServices, took 6ms and wascalled with these parameters: [6]and returned value type of: System.Threading.Tasks.Task`1[WalkAndTravel.Models.User]
+2021-12-17 02:38:38.006 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 56,8035
+2021-12-17 02:38:38.006 +02:00 [INF] RouteServices, Method SearchRoutesByAuthorID Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 57ms and wascalled with these parameters: [0]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 02:38:38.006 +02:00 [INF] Request type: /route/Author/0, response type: application/json; charset=utf-8. Action SearchRoutesByAuthorID invoked in controller Route
+2021-12-17 02:38:38.066 +02:00 [INF] Request type: /user/user/eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Mzk3Nzg0MDAsImlzcyI6IjYifQ.htGqq41GFgobyuwdj1n4CKOAnyJ3NmBiitqzOMPRfdQ, response type: application/json; charset=utf-8. Action User invoked in controller User
+2021-12-17 02:41:25.458 +02:00 [INF] RouteServices, Method GetRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: System.Threading.Tasks.Task`1[System.Collections.Generic.IEnumerable`1[WalkAndTravel.ClassLibrary.Route]]
+2021-12-17 02:41:25.483 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 23,4087
+2021-12-17 02:41:25.495 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 11,3942
+2021-12-17 02:41:25.496 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,2213
+2021-12-17 02:41:25.497 +02:00 [INF] Request type: /route/route, response type: application/json; charset=utf-8. Action Get invoked in controller Route
+2021-12-17 02:41:48.338 +02:00 [INF] UserServices, Method GetByEmail Which is declared in WalkAndTravel.ClassLibrary.Services.IUserServices, took 1ms and wascalled with these parameters: ["test"]and returned value type of: System.Threading.Tasks.Task`1[WalkAndTravel.Models.User]
+2021-12-17 02:41:48.622 +02:00 [INF] Request type: /user/login, response type: application/json; charset=utf-8. Action Login invoked in controller User
+2021-12-17 02:42:09.644 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 3,4119
+2021-12-17 02:42:09.645 +02:00 [INF] UserServices, Method GetById Which is declared in WalkAndTravel.ClassLibrary.Services.IUserServices, took 8ms and wascalled with these parameters: [6]and returned value type of: System.Threading.Tasks.Task`1[WalkAndTravel.Models.User]
+2021-12-17 02:42:09.645 +02:00 [INF] RouteServices, Method SearchRoutesByAuthorID Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 8ms and wascalled with these parameters: [0]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 02:42:09.645 +02:00 [INF] Request type: /route/Author/0, response type: application/json; charset=utf-8. Action SearchRoutesByAuthorID invoked in controller Route
+2021-12-17 02:42:09.645 +02:00 [INF] Request type: /user/user/eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Mzk3Nzg0MDAsImlzcyI6IjYifQ.htGqq41GFgobyuwdj1n4CKOAnyJ3NmBiitqzOMPRfdQ, response type: application/json; charset=utf-8. Action User invoked in controller User
+2021-12-17 02:42:26.169 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:42:26.173 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:42:27.532 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:42:27.532 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:42:28.494 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:42:28.494 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:42:29.316 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:42:29.316 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:42:34.241 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:42:34.241 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:42:34.987 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:42:34.987 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:42:35.580 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:42:35.581 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:42:36.108 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:42:36.109 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:42:36.538 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:42:36.538 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:42:36.898 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:42:36.898 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:42:37.187 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:42:37.188 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:42:37.453 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:42:37.454 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:42:37.675 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:42:37.675 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:42:37.871 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:42:37.871 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:42:38.085 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:42:38.085 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:42:38.318 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:42:38.318 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:42:38.533 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:42:38.533 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:42:38.711 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:42:38.711 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:42:38.866 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:42:38.866 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:42:39.029 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:42:39.029 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:42:39.219 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:42:39.219 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:42:39.403 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:42:39.403 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:42:39.588 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:42:39.588 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:42:39.780 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:42:39.780 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:42:40.003 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:42:40.003 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:42:40.188 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:42:40.190 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:42:40.393 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:42:40.393 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:43:13.192 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:43:13.193 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:43:13.205 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:43:13.206 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:43:13.213 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:43:13.214 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:43:13.217 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:43:13.218 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:43:13.229 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:43:13.229 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:43:13.252 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:43:13.253 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route
+2021-12-17 02:43:13.305 +02:00 [INF] Request type: /user/logout, response type: application/json; charset=utf-8. Action Logout invoked in controller User
+2021-12-17 02:43:13.312 +02:00 [INF] Request type: /user/logout, response type: application/json; charset=utf-8. Action Logout invoked in controller User
+2021-12-17 02:43:13.319 +02:00 [INF] Request type: /user/logout, response type: application/json; charset=utf-8. Action Logout invoked in controller User
+2021-12-17 02:43:13.330 +02:00 [INF] Request type: /user/logout, response type: application/json; charset=utf-8. Action Logout invoked in controller User
+2021-12-17 02:43:13.402 +02:00 [INF] Request type: /user/logout, response type: application/json; charset=utf-8. Action Logout invoked in controller User
+2021-12-17 02:43:13.411 +02:00 [INF] Request type: /user/logout, response type: application/json; charset=utf-8. Action Logout invoked in controller User
+2021-12-17 02:43:13.411 +02:00 [INF] Request type: /user/logout, response type: application/json; charset=utf-8. Action Logout invoked in controller User
+2021-12-17 02:43:13.420 +02:00 [INF] Request type: /user/logout, response type: application/json; charset=utf-8. Action Logout invoked in controller User
+2021-12-17 02:43:13.423 +02:00 [INF] Request type: /user/logout, response type: application/json; charset=utf-8. Action Logout invoked in controller User
+2021-12-17 02:43:13.431 +02:00 [INF] Request type: /user/logout, response type: application/json; charset=utf-8. Action Logout invoked in controller User
+2021-12-17 02:43:13.432 +02:00 [INF] Request type: /user/logout, response type: application/json; charset=utf-8. Action Logout invoked in controller User
+2021-12-17 02:43:13.438 +02:00 [INF] Request type: /user/logout, response type: application/json; charset=utf-8. Action Logout invoked in controller User
+2021-12-17 02:43:13.461 +02:00 [INF] Request type: /user/logout, response type: application/json; charset=utf-8. Action Logout invoked in controller User
+2021-12-17 02:43:13.465 +02:00 [INF] Request type: /user/logout, response type: application/json; charset=utf-8. Action Logout invoked in controller User
+2021-12-17 02:43:13.470 +02:00 [INF] Request type: /user/logout, response type: application/json; charset=utf-8. Action Logout invoked in controller User
+2021-12-17 02:44:39.832 +02:00 [INF] Request type: /user/logout, response type: application/json; charset=utf-8. Action Logout invoked in controller User
+2021-12-17 02:44:47.153 +02:00 [INF] RouteServices, Method GetRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: System.Threading.Tasks.Task`1[System.Collections.Generic.IEnumerable`1[WalkAndTravel.ClassLibrary.Route]]
+2021-12-17 02:44:47.156 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 1,0853
+2021-12-17 02:44:47.167 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 11,1513
+2021-12-17 02:44:47.168 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,5537
+2021-12-17 02:44:47.169 +02:00 [INF] Request type: /route/route, response type: application/json; charset=utf-8. Action Get invoked in controller Route
+2021-12-17 02:44:47.172 +02:00 [INF] RouteServices, Method GetRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: System.Threading.Tasks.Task`1[System.Collections.Generic.IEnumerable`1[WalkAndTravel.ClassLibrary.Route]]
+2021-12-17 02:44:47.174 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 0,8785
+2021-12-17 02:44:47.174 +02:00 [INF] RouteServices, Method GetRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: System.Threading.Tasks.Task`1[System.Collections.Generic.IEnumerable`1[WalkAndTravel.ClassLibrary.Route]]
+2021-12-17 02:44:47.176 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 1,1442
+2021-12-17 02:44:47.176 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,1736
+2021-12-17 02:44:47.177 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 0,7641
+2021-12-17 02:44:47.177 +02:00 [INF] Request type: /route/route, response type: application/json; charset=utf-8. Action Get invoked in controller Route
+2021-12-17 02:44:47.177 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,1842
+2021-12-17 02:44:47.178 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,279
+2021-12-17 02:44:47.178 +02:00 [INF] Request type: /route/route, response type: application/json; charset=utf-8. Action Get invoked in controller Route
+2021-12-17 02:44:49.002 +02:00 [INF] RouteServices, Method GetRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: System.Threading.Tasks.Task`1[System.Collections.Generic.IEnumerable`1[WalkAndTravel.ClassLibrary.Route]]
+2021-12-17 02:44:49.004 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 0,7611
+2021-12-17 02:44:49.005 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,746
+2021-12-17 02:44:49.006 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,2115
+2021-12-17 02:44:49.006 +02:00 [INF] Request type: /route/route, response type: application/json; charset=utf-8. Action Get invoked in controller Route
+2021-12-17 02:45:19.467 +02:00 [INF] RouteServices, Method GetRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: System.Threading.Tasks.Task`1[System.Collections.Generic.IEnumerable`1[WalkAndTravel.ClassLibrary.Route]]
+2021-12-17 02:45:19.468 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 0,8577
+2021-12-17 02:45:19.469 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,3869
+2021-12-17 02:45:19.469 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,1475
+2021-12-17 02:45:19.470 +02:00 [INF] Request type: /route/route, response type: application/json; charset=utf-8. Action Get invoked in controller Route
+2021-12-17 02:45:21.275 +02:00 [INF] RouteServices, Method GetRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: System.Threading.Tasks.Task`1[System.Collections.Generic.IEnumerable`1[WalkAndTravel.ClassLibrary.Route]]
+2021-12-17 02:45:21.277 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 0,6086
+2021-12-17 02:45:21.278 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,4664
+2021-12-17 02:45:21.278 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,1505
+2021-12-17 02:45:21.279 +02:00 [INF] Request type: /route/route, response type: application/json; charset=utf-8. Action Get invoked in controller Route
+2021-12-17 02:45:26.769 +02:00 [INF] RouteServices, Method GetRoutes Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: System.Threading.Tasks.Task`1[System.Collections.Generic.IEnumerable`1[WalkAndTravel.ClassLibrary.Route]]
+2021-12-17 02:45:26.775 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 4,0585
+2021-12-17 02:45:26.776 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 1,0511
+2021-12-17 02:45:26.777 +02:00 [INF] Command was called: SELECT [m].[Id], [m].[Latitude], [m].[Longitude], [m].[RouteId]
+FROM [Markers] AS [m] and it took: 0,3287
+2021-12-17 02:45:26.778 +02:00 [INF] Request type: /route/route, response type: application/json; charset=utf-8. Action Get invoked in controller Route
+2021-12-17 02:45:30.043 +02:00 [INF] UserServices, Method GetByEmail Which is declared in WalkAndTravel.ClassLibrary.Services.IUserServices, took 2ms and wascalled with these parameters: ["xx"]and returned value type of: System.Threading.Tasks.Task`1[WalkAndTravel.Models.User]
+2021-12-17 02:45:30.318 +02:00 [INF] Request type: /user/login, response type: application/json; charset=utf-8. Action Login invoked in controller User
+2021-12-17 02:46:47.702 +02:00 [INF] UserServices, Method GetByEmail Which is declared in WalkAndTravel.ClassLibrary.Services.IUserServices, took 1ms and wascalled with these parameters: ["xx"]and returned value type of: System.Threading.Tasks.Task`1[WalkAndTravel.Models.User]
+2021-12-17 02:46:47.937 +02:00 [INF] Request type: /user/login, response type: application/json; charset=utf-8. Action Login invoked in controller User
+2021-12-17 02:46:54.451 +02:00 [INF] UserServices, Method GetById Which is declared in WalkAndTravel.ClassLibrary.Services.IUserServices, took 4ms and wascalled with these parameters: [3]and returned value type of: System.Threading.Tasks.Task`1[WalkAndTravel.Models.User]
+2021-12-17 02:46:54.453 +02:00 [INF] Request type: /user/user/eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Mzk3Nzg0MDAsImlzcyI6IjMifQ.ZUetDwQXlAN97_Z2hiPK-hFVm9f_9XlDmJhaTgNcs-o, response type: application/json; charset=utf-8. Action User invoked in controller User
+2021-12-17 02:46:54.459 +02:00 [INF] Command was called: SELECT [r].[Id], [r].[Author_Id], [r].[Length], [r].[Name], [r].[Type]
+FROM [Routes] AS [r] and it took: 0,7271
+2021-12-17 02:46:54.460 +02:00 [INF] RouteServices, Method SearchRoutesByAuthorID Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 1ms and wascalled with these parameters: [0]and returned value type of: System.Collections.Generic.List`1[WalkAndTravel.ClassLibrary.Route]
+2021-12-17 02:46:54.460 +02:00 [INF] Request type: /route/Author/0, response type: application/json; charset=utf-8. Action SearchRoutesByAuthorID invoked in controller Route
+2021-12-17 02:47:18.883 +02:00 [INF] RouteServices, Method GetRandomRoute Which is declared in WalkAndTravel.ClassLibrary.Services.IRouteServices, took 0ms and wascalled with these parameters: []and returned value type of: WalkAndTravel.ClassLibrary.Route
+2021-12-17 02:47:18.883 +02:00 [INF] Request type: /route/randomroute, response type: application/json; charset=utf-8. Action GetRoutes invoked in controller Route

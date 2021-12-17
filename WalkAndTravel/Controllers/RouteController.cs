@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WalkAndTravel.ClassLibrary;
+using WalkAndTravel.ClassLibrary.DTO;
 using WalkAndTravel.ClassLibrary.Models;
 using WalkAndTravel.ClassLibrary.Repositories;
 using WalkAndTravel.ClassLibrary.Services;
@@ -27,9 +28,20 @@ namespace WalkAndTravel.Controllers
         }
 
         [HttpPost("SaveNewRoute")]
-        public IActionResult SaveNewRoute([FromBody] RouteMinimal routes)
+        public async Task<IActionResult> SaveNewRoute([FromBody] RouteMinimal routes)
         {
-            var route = _routeServices.SaveNewRoute(routes);
+            var route = await _routeServices.SaveNewRoute(routes);
+            if (route == -1)
+            {
+                return BadRequest();
+            }
+            return Ok(route);
+        }
+
+        [HttpPost("SaveRouteWithId")]
+        public async Task<IActionResult> SaveRouteWithId([FromBody] SaveDto dto)
+        {
+            var route = await _routeServices.SaveNewRoute(dto);
             if (route == -1)
             {
                 return BadRequest();
@@ -83,6 +95,12 @@ namespace WalkAndTravel.Controllers
         public Route GetById(int Id)
         {
             return _routeServices.SearchRouteByID(Id);
+        }
+
+        [HttpGet("Author/{id}")]
+        public List<Route> SearchRoutesByAuthorID(int Id)
+        {
+            return _routeServices.SearchRoutesByAuthorID(Id);
         }
     }
 }

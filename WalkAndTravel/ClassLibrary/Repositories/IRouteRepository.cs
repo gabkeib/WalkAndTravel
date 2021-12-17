@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WalkAndTravel.ClassLibrary.DTO;
 using WalkAndTravel.ClassLibrary.Models;
 
 namespace WalkAndTravel.ClassLibrary.Repositories
@@ -18,12 +19,14 @@ namespace WalkAndTravel.ClassLibrary.Repositories
 
         Route GetRandomPOIRoute();
 
-        int SaveNewRoute(RouteMinimal routes);
+        Task<int> SaveNewRoute(SaveDto dto);
 
         Route DeleteRoute(int id);
 
         List<Route> SearchRoutes(string keyword);
 
         public Route SearchRouteByID(int Id);
+
+        public List<Route> SearchRoutesByAuthorID(int Id);
     }
 }
