@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WalkAndTravel.ClassLibrary;
+using WalkAndTravel.ClassLibrary.DTO;
 using WalkAndTravel.ClassLibrary.Repositories;
 using WalkAndTravel.DataAccess;
 using Xunit;
@@ -75,7 +76,7 @@ namespace WalkAndTravelTests.Controllers
             }
         }
 
-        public void RouteRepository_SaveNewRoute_InsertsUserCorrectly()
+        public async Task RouteRepository_SaveNewRoute_InsertsUserCorrectly()
         {
             using (var context = new DataContext(ContextOptions))
             {
@@ -83,10 +84,10 @@ namespace WalkAndTravelTests.Controllers
 
                 List<Marker> markers = new List<Marker> { new Marker(54.6866, 25.288), new Marker(54.717755, 25.221089) };
                 double[] markersC = new double[] { 54.6866, 25.288, 54.717755, 25.221089 };
-                var route4 = new RouteMinimal();
+                var route4 = new SaveDto();
                 route4.Name = "Route4";
-                route4.Route = markersC;
-                int result = repository.SaveNewRoute(route4);
+                route4.Coords = markersC;
+                int result = await repository.SaveNewRoute(route4);
 
                 Assert.NotEqual(-1, result);
             }
