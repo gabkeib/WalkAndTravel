@@ -9,6 +9,7 @@ using WalkAndTravel.ClassLibrary.Repositories;
 using WalkAndTravel.ClassLibrary.Services;
 using WalkAndTravel.ClassLibrary;
 using WalkAndTravel.ClassLibrary.Models;
+using WalkAndTravel.ClassLibrary.DTO;
 
 namespace WalkAndTravelTests.Services
 {
@@ -124,17 +125,17 @@ namespace WalkAndTravelTests.Services
 
         }
         [Fact]
-        public void RouteService_SaveNewRoute_ReturnsNumber()
+        public async void RouteService_SaveNewRoute_ReturnsNumber()
         {
             List<Marker> markers = new List<Marker> { new Marker(54.6866, 25.288), new Marker(54.717755, 25.221089) };
             double[] markersC = new double[] { 54.6866, 25.288, 54.717755, 25.221089 };
             var route4 = new RouteMinimal();
 
             var repository = new Mock<IRouteRepository>();
-            repository.Setup(mr => mr.SaveNewRoute(It.IsAny<RouteMinimal>())).Returns(1);
+            repository.Setup(mr => mr.SaveNewRoute(It.IsAny<SaveDto>())).ReturnsAsync(1);
             
             var service = new RouteServices(repository.Object);
-            var response = service.SaveNewRoute(route4);
+            var response = await service.SaveNewRoute(route4);
 
             Assert.Equal(1, response);
 
